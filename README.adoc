@@ -1,12 +1,15 @@
 = Raider Robotics Coding Guide
 4698 Code Team
+:source-highlighter: highlight.js
+:xrefstyle: short
+:sectnums:
 :toc:
 
 Coding Resources for Raider Robotics (Team 4698)
 
 == Getting Started
 
-Team 4698 competes in the FIRST Robotics Competition (FRC).  FRC provides many software tools and programming libraries that are used to create the program that runs on the robot's controller. It is possible to program using LabVIEW, Java, or *pass:[C++]*.  Our team writes the robot program in the *pass:[C++]* programming language.  As a first starting point, a basic understanding of *pass:[C++]* is necessary.  There are good resources online for learning *pass:[C++]* such as https://learncpp.com/[`learncpp.com`].  Chapters 0-8 and 13-18 will cover most all of what you will need for Robot programming.  It will be very helpful to have a Windows computer (preferably a laptop) that you can install a *pass:[C++]* compiler on to run your code as you learn programming.  
+Team 4698 competes in the FIRST Robotics Competition (FRC).  FRC provides many software tools and programming libraries that are used to create the program that runs on the robot's controller. It is possible to program using LabVIEW, Java, or *pass:[C++]*.  Our team writes the robot program in the *pass:[C++]* programming language.  As a first starting point, a basic understanding of *pass:[C++]* is necessary.  There are good resources online for learning *pass:[C++]* such as https://learncpp.com/[`learncpp.com`^].  Chapters 0-8 and 13-18 will cover most all of what you will need for Robot programming.  It will be very helpful to have a Windows computer (preferably a laptop) that you can install a *pass:[C++]* compiler on to run your code as you learn programming.  
 
 Coding tips:
 
@@ -20,13 +23,62 @@ The FRC Game tools are the programs that handle the communication between the la
 
 The main application is the `Driver Station`.  It connects to the RoboRIO and can enable and disable the robot.  It also handles the joystick inputs to the robot and displays statistics and logging information about the robot's status.
 
-The FRC Games Tools need to be installed before other components and libraries are installed.  The directions for installing are: https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/frc-game-tools.html[Installation instructions for the FRC Game Tools]. You do not need to install anything for LabVIEW or Java since we do not use those programming languages.
+The FRC Games Tools need to be installed before other components and libraries are installed.  The directions for installing are: https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/frc-game-tools.html[Installation instructions for the FRC Game Tools^]. You do not need to install anything for LabVIEW or Java since we do not use those programming languages.
 
 === WPILib Library Install
 
-The software library that FRC uses in called WPILib.  WPILib is very large and contains many elements including hardware interfacing, control systems, networking, and vision processing.  The Microsoft VSCode compiler and Integrated Development Environment (IDE) are installed when the WPILib software is installed.  This should be installed after the FRC Game Tools.  https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html[Installation Instructions]
+The software library that FRC uses in called WPILib.  WPILib is very large and contains many elements including hardware interfacing, control systems, networking, and vision processing.  The Microsoft VSCode compiler and Integrated Development Environment (IDE) are installed when the WPILib software is installed.  This should be installed after the FRC Game Tools.  https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html[Installation Instructions^]
 
-Some of the motors and motor controllers require software libraries that don't come in the WPILib libraries.  We use hardware that require the Rev Robotics REVLib library and the CTRE Phoenix Framework.  https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html[Information on installing these libraries].
+Some of the motors and motor controllers require software libraries that don't come in the WPILib libraries.  We use hardware that require the Rev Robotics REVLib library and the CTRE Phoenix Framework.  https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html[Information on installing these libraries^].
+
+== WPILib Coding
+
+[#units]
+=== Units Library
+The Units Library is very powerful and useful for robot programming.  It is a bit difficult to learn and understand initially but it will help keep your code's units consistent. Read the https://docs.wpilib.org/en/stable/docs/software/basic-programming/cpp-units.html[FRC Units Library Documentation^] to get an overview.
+
+One of the more useful aspects of using the Units Library is being able to define custom units that pertain to your robot code.  For example, using the *TalonFX* smart motor controller library's `Set()` function requires the position or velocity inputs in very awkward units (See <<talon_pid_table>>). The position should be in "encoder tics" and the velocity should be in "encoder tics" per 100 milliseconds. There are 2048 encoder tics per rotation for the *TalonFX* built-in encoder. Custom units can help with converting from these strange units to more physically meaningful units. You could define a custom angular position unit that is ("tics") and a custom angular velocity unit that is ("tics" / 100_ms).
+
+[source,C++]
+----
+        // Create a unit called "tics" that represents 1/2048th of a revolution
+        // and make a type qualifier called "tics_t"
+    typedef units::unit<std::ratio<1,2048>, units::turns> tics;
+    typedef units::unit_t<tics> tics_t;
+
+        // Create a unit called "tics_per_100ms" that represents (tics / 0.1 seconds)
+        // and make a type qualifier called "tics_per_100ms_t"
+    typedef units::compound_unit<tics, units::inverse<units::deciseconds>> tics_per_100ms;
+    typedef units::unit_t<tics_per_100ms> tics_per_100ms_t;
+
+        // Alternatively "tics_per_100ms" could be defined as:
+        // typedef units::compound_unit<tics, units::inverse<
+        //         units::unit<std::ratio<1,10>, units::seconds>>> tics_per_100ms;
+----
+
+Once these types are defined then the programmer doesn't need to worry about converting from RPM to the `tics_per_100ms` units that the Phoenix Library uses.  The code below shows how to use these types.
+
+[source,C++]
+----
+    tics_t talon_position;
+    tics_per_100ms_t talon_velocity;
+    ctre::phoenix::motorcontrol::can::TalonFX talon{2};
+
+        // This automatically converts from degrees to tics
+    talon_position = 240_deg;
+
+        // value() returns the position in tics as a double
+    talon.Set( ctre::phoenix::motorcontrol::ControlMode::Position,
+               talon_position.value() );
+
+        // This automatically converts from RPM to tics_per_100ms.
+    talon_velocity = 2000_rpm;
+
+        // value() returns the position in tics_per_100ms as a double
+    talon.Set( ctre::phoenix::motorcontrol::ControlMode::Velocity,
+               talon_velocity.value() );
+
+----
 
 == Hardware Overview
 
@@ -47,6 +99,55 @@ https://www.youtube.com/watch?v=Z24fSBVJeGs[0 to Autonomous Video, Part 2]
 
 image::https://docs.wpilib.org/en/stable/_images/introduction-to-pid-pid-controller-block.webp[PID,500,500]
 
+[#pid_kv]
+=== Software PID Units and `kV` Values
+
+Each software vendor uses different units for their PID Control configuration.  The table below summarizes the differences between the different vendor libraries in one place.
+
+[cols="1,1,2"]
+.WPILib PIDController Units
+|===
+| Control Type | Units | Configurable
+
+| Percent | [-1,1] | 
+
+|===
+
+[cols="1,1,2"]
+.Rev Robotics *SparkMAX* Onboard Controller Units
+|===
+| Control Type | Units | Configurable
+
+| Duty Cycle | [-1,1] | 
+| Voltage | [0,12] volts | 
+| Position | rotations | setPositionConversionFactor()
+| Velocity | RPM | setVelocityConversionFactor()
+| Current | Amps | 
+3+| *SparkMAX* feed forward `kFF` works the same as `kV` in WPILib
+|===
+
+[cols="2,3,4"]
+.CTRE Phoenix *TalonFX* Onboard Controller Units
+[[talon_pid_table]]
+|===
+| Control Type | Units | Conversion (2048 units/rev)
+
+| Position | "units" (encoder tics)^[1]^ | divide by 2048 for rotations
+| Velocity | "units" (tics) per 100ms^[1]^ | multiply by 600/2048 for RPM
+| Current | Amps | 
+3+| *TalonFX* feed forward `kFF` works the same as `kV` in WPILib. There is also an Arbitrary feed forward mechanism that is similar to `kS` in WPILib or can be customized (e.g. to vary with arm angle to compensate for varying gravity effect).  NOTE [1]: See <<units>> and Phoenix API in <<_resources>>.
+|===
+
+[cols="1,1,1,1"]
+.Common Motor *kV* Values
+|===
+| Motor | Max Speed (rpm) | `kV` (Volts/RPM) | `kV` (2048/100ms)
+
+| Rev Robotics NEO | 5676 rpm | 473 v/rpm | 1615 V/upms
+
+|===
+
+
 == Network Tables
 
 Can change values while robot code is running.
@@ -64,8 +165,12 @@ Raspberry Pi
 
 == Resources
 
-* https://docs.wpilib.org/en/stable/index.html[WPILib Documentation]
-* https://first.wpi.edu/wpilib/allwpilib/docs/release/cpp/index.html[WPILib *pass:[C++]* API] (https://first.wpi.edu/wpilib/allwpilib/docs/release/cpp/namespacefrc.html[frc::])
-* https://docs.revrobotics.com/sparkmax/software-resources/spark-max-api-information[Rev Robotics REVLib Docs] (https://codedocs.revrobotics.com/cpp/namespacerev.html[API])
+* https://docs.wpilib.org/en/stable/index.html[WPILib Documentation^] 
+(https://github.com/wpilibsuite/frc-docs[GitHub^])
+* https://first.wpi.edu/wpilib/allwpilib/docs/release/cpp/index.html[WPILib *pass:[C++]* API^] 
+(https://first.wpi.edu/wpilib/allwpilib/docs/release/cpp/namespacefrc.html[frc::^])
+* https://docs.revrobotics.com/sparkmax/software-resources/spark-max-api-information[Rev Robotics REVLib Docs^] 
+(https://codedocs.revrobotics.com/cpp/namespacerev.html[API^])
 
-* https://docs.ctre-phoenix.com/en/stable/[CTRE Phoenix Framework Docs] (https://api.ctr-electronics.com/phoenix/release/cpp/namespaces.html[API])
+* https://docs.ctre-phoenix.com/en/stable/[CTRE Phoenix Framework Docs^] 
+(https://api.ctr-electronics.com/phoenix/release/cpp/namespaces.html[API^])
