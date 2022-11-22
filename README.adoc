@@ -66,7 +66,19 @@ Pulse Width Modulation (PWM) is a way to send a varying signal (like an absolute
 
 It is also possible to read (or output) an analog signal.  An analog signal is one that can vary from 0V - 12V.
 
-== WPILib Coding
+== Robot Program
+
+The Driver Station controls what part of the robot program is allowed to run and whether the motor can be activated.  During a competition, control of the Driver Station is taken over by the competition system and they control what the robot can do.
+
+There are three modes that the robot can be in: "TeleOperated", "Autonomous", and "Test".  TeleOperated mode is when the driver can control all functions of the robot.  Autonomous mode is when the robot code can run but it cannot take input from the Driver Station controllers. Test mode is for testing motors and sensors during setup and practice. A typical competition round will consist of some amount of time in Autonomous mode and then switch to TeleOperated mode for the rest of the round.
+
+=== Robot Program Structure
+
+When you write a program to control the robot you are actually just writing some subset of the program that is actually running on the RoboRIO.  The WPILib is actually controlling the control flow of the program and calls your code at certain times during its execution.  It basically gives you control every so often and you must do something while you have control and return control back without taking too much time.
+
+WPILib provides two main ways to structure a robot program. One is called "TimedRobot" based and the other is "Command" based.  Both program structures have methods that are called by the WPILib scheduler but when and how those methods are called differ between the two program structures.
+
+
 
 [#units]
 === Units Library
@@ -95,26 +107,31 @@ Once these types are defined then the programmer doesn't need to worry about con
 
 [source,C++]
 ----
-    tics_t talon_position;
-    tics_per_100ms_t talon_velocity;
-    ctre::phoenix::motorcontrol::can::TalonFX talon{2};
+tics_t talon_position;
+tics_per_100ms_t talon_velocity;
+ctre::phoenix::motorcontrol::can::TalonFX talon{2};
 
-        // This automatically converts from degrees to tics
-    talon_position = 45_deg;
+    // This automatically converts from degrees to tics
+talon_position = 45_deg;
 
-        // value() returns the position in tics as a double
-        // which is 256 tics ( 45 * 2048 / 360 )
-    talon.Set( ctre::phoenix::motorcontrol::ControlMode::Position,
-               talon_position.value() );
+    // value() returns the position in tics as a double
+    // which is 256 tics ( 45 * 2048 / 360 )
+talon.Set( ctre::phoenix::motorcontrol::ControlMode::Position,
+            talon_position.value() );
 
-        // This automatically converts from RPM to tics_per_100ms.
-    talon_velocity = 2400_rpm;
+    // This automatically converts from RPM to tics_per_100ms.
+talon_velocity = 2400_rpm;
 
-        // value() returns the position in tics_per_100ms as a double
-        // which is 8192 tics_per_100ms ( 2400 * 2048 / 600 )
-    talon.Set( ctre::phoenix::motorcontrol::ControlMode::Velocity,
-               talon_velocity.value() );
+    // value() returns the velocity in tics_per_100ms as a double
+    // which is 8192 tics_per_100ms ( 2400 * 2048 / 600 )
+talon.Set( ctre::phoenix::motorcontrol::ControlMode::Velocity,
+            talon_velocity.value() );
 
+    // If you need to convert a variable in one unit to another
+    // without creating a variable you can use:
+printf( "Talon Velocity = %7.2f rpm\n", 
+        units::revolutions_per_minute_t(talon_velocity).value() );
+    // This will print "Talon Velocity = 2000.00 rpm"
 ----
 
 == Motion Control
