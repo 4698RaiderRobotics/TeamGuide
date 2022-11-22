@@ -1,11 +1,9 @@
 = Raider Robotics Coding Guide
-4698 Code Team
+Coding Resources for Raider Robotics (Team 4698)
 :source-highlighter: highlight.js
 :xrefstyle: short
 :sectnums:
 :toc:
-
-Coding Resources for Raider Robotics (Team 4698)
 
 == Getting Started
 
@@ -121,8 +119,9 @@ Once these types are defined then the programmer doesn't need to worry about con
 
 == Motion Control
 
+Supose you want to control a flywheel that will be used to shoot a ball towards a target.  Suppose also that you need the ball to be going just the right speed so that it hits the target correctly.  The simplest thing that you could do is to put a certain voltage on the motor so the flywheel so it is going just the right speed to work.  This method is called "open-loop control" because you actually don't know how fast the motor is spinning but you adjusted the voltage so it "just works".  The problem with this method is that if the motor heats up or the battery drains or the temperature outside changes then the speed of the flywheel will change.  The only way to make it shoot correctly is to change the voltage that is sent to the motor.  It will always need to be tweaked to work.
 
-
+A better technique is to use motion control.  The basic idea is to use a motor to move something and use some kind of sensor to control that movement in some way.  In the shooter example above we would have a sensor (encoder in this case) that could measure the RPMs of the flywheel. We then need to determine what RPM the shooter flywheel needs to spin to have the ball hit the target correctly.  Then we need to "make sure" that the flywheel is going the correct RPM when we want to shoot the ball.
 
 === PID Control Overview
 
@@ -146,10 +145,6 @@ https://www.youtube.com/watch?v=Z24fSBVJeGs[0 to Autonomous Video, Part 2]
 === Software PID Units and `kV` Values
 
 The WPILib `frc2::PIDController` class can use what units the programmer decides to use since the measurement values are passed into the `Calculate()` method.  Therefore the units of the PID constants will vary depending on the units used in the code. 
-
-* https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-pid-controller.html?highlight=PID[Tuning a PID Controller^]
-
-* 
 
 Each software vendor uses different units for their PID Controllers.  The table below summarizes the differences between the different vendor libraries in one place.
 
@@ -178,12 +173,15 @@ Each software vendor uses different units for their PID Controllers.  The table 
 3+| *TalonFX* feed forward `kFF` works the same as `kV` in WPILib. There is also an Arbitrary feed forward mechanism that is similar to `kS` in WPILib or can be customized (e.g. to vary with arm angle to compensate for varying gravity effect).  NOTE [1]: See <<units>> and Phoenix API in <<_resources>>.
 |===
 
-[cols="1,1,1,1"]
-.Common Motor *kV* Values
+[cols="2,2,2,2,2,1"]
+.Common Motor Specs and *kV* Values
 |===
-| Motor | Max Speed (rpm) | `kV` (Volts/RPM) | `kV` (2048/100ms)
+| Motor | Max Speed (rpm) | Power (W) | `kV` (Volts/RPM) | Encoder tics | Link
 
-| Rev Robotics NEO | 5676 rpm | 473 v/rpm | 1615 V/upms
+| Rev 775 | 18,500 rpm | 347 W | 1542 V/rpm | Brushed | https://www.vexrobotics.com/catalogsearch/result/?q=775[Vex^]
+| Rev NEO | 5676 rpm | 540 W | 473 V/rpm | 42 | https://www.revrobotics.com/search.php?search_query=NEO[Rev^]
+| Rev NEO 550 | 11,000 rpm | 279 W | 917 V/rpm | 42 | https://www.revrobotics.com/search.php?search_query=NEO[Rev^]
+| Falcon 500 | 6380 rpm | 783 W | 532 V/rpm | 2048 | https://www.vexrobotics.com/catalogsearch/result/?q=Falcon[Vex^]
 
 |===
 
