@@ -1,0 +1,68 @@
+= C++ Lessons
+:source-highlighter: highlight.js
+:xrefstyle: short
+:sectnums:
+:CPP: C++
+:toc:
+
+This attempts to highlight the parts of the C++ language that are most helpful for FRC robotics.  Although some of the examples are oriented towards robotics, these lessons do not require any of the FRC software to be installed.
+
+Although there are simpler languages that could be used for robot programming, if you take the time to learn *{CPP}* it will be worth the effort.  https://www.evanmiller.org/you-cant-dig-upwards.html[See this blogpost] for an excellent argument for learning a lower-level language.
+
+== Integrated Development Environment (IDE)
+
+An IDE is a system to write, compile, link, debug, and execute code.  These tasks (which you probably do not understand yet) are all done from a common application (the IDE).  FRC/WPILib uses Microsoft's Visual Studio IDE.  You should install the IDE on a laptop or desktop computer that you will use to learn *{CPP}*.  Follow the directions https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio[Visual Studio Community Install] and choose the Workload "Desktop Development with C++".
+
+=== Hello World
+
+The ubiquitous first program of any programming language is the Hello World program.  So ubiquitous in fact that Visual Studio creates the code to output "Hello World" by default when you create a Console Application project.
+
+. Launch Visual Studio and select "Create a new project"
+. Choose a "Console App"
+. Give it the name `HelloWorld`, optionally choose a different location, and check the "Place Solution and Project in the same directory" checkbox
+
+The HelloWorld project is created and the `HelloWorld.cpp` is opened in an editor window.  All of the lines that begin with double slashes (`\\`) are comments.  The contents of the file with the comments removed is:
+
+[source,C++]
+----
+#include <iostream>
+
+int main()
+{
+    std::cout << "Hello World!\n";
+}
+----
+
+Choose Debug -> Start Debugging to run the program.  You should see the following output: 
+
+----
+Hello World!
+
+C:\Users\mylogin\source\repos\HelloWorld\x64\Debug\HelloWorld.exe (process 3356) exited with code 0.
+To automatically close the console when debugging stops, enable Tools->Options->Debugging->Automatically close the console when debugging stops.
+Press any key to close this window . . .
+----
+
+If all of the above goes correctly then you now have a working *{CPP}* compiler and can start writing code!  If you cannot get this to work, ask for help because this should just work.
+
+== *{CPP}* Syntax, Functions, Data Types
+
+There are several good websites for learning *{CPP}* online.  I will point you in the direction of https://www.learncpp.com/[LearnCPP] for a lot of these lessons.  If you prefer to learn from a book then you can get "Programming: Principles and Practice Using C++", by Bjarne Stroustrup although it is a bit expensive.
+
+* Read Chapter 1: https://www.learncpp.com/cpp-tutorial/statements-and-the-structure-of-a-program/[Basic Program Structure]
+* Read Chapter 2: https://www.learncpp.com/cpp-tutorial/introduction-to-functions/[Functions and Files]
+* Read Chapter 4: https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/[Data Types]
+* Read Chapter 5: https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/[Operators]
+* Read Chapters 7.1 - 7.10: https://www.learncpp.com/cpp-tutorial/control-flow-introduction/[Control Flow]
+
+Exercises: 
+
+Some https://en.wikibooks.org/wiki/C%2B%2B_Programming/Exercises/Variables_and_types[Basic Exercises Here]
+
+FRC specific exercises: 
+
+. Write a program to convert RPM to radians per second with a function `RPMtoRadPerSec()`. Printout the results something like: `2000.0000 RPM is 209.43951 rad/s` for several different RPMs.
+
+== 
+
+
