@@ -63,6 +63,12 @@ FRC specific exercises:
 
 . Write a program to convert RPM to radians per second with a function `RPMtoRadPerSec()`. Printout the results something like: `2000.0000 RPM is 209.43951 rad/s` for several different RPMs.
 
-== 
+== Object Orientation
+
+The real power of *{CPP}* is that it is an object oriented language.  The techniques of Object Oriented Programming (OOP) help organize a program by spliting tasks into logical pieces.  OOP turns out to be a very powerful way of organizing complex software.
+
+* Read Chapter 13: https://www.learncpp.com/cpp-tutorial/welcome-to-object-oriented-programming/[Welcome to OOP]
+* Read Chapter 16: https://www.learncpp.com/cpp-tutorial/object-relationships/[Object Relationships]
+* Read Chapter 17: https://www.learncpp.com/cpp-tutorial/introduction-to-inheritance/[Inheritance] 
 
 

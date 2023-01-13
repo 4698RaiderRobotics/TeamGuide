@@ -31,11 +31,11 @@ The software library that FRC uses in called WPILib.  WPILib is very large and c
 
 Some of the motors and motor controllers require software libraries that don't come in the WPILib libraries.  We use hardware that require the Rev Robotics REVLib library and the CTRE Phoenix Framework.  https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html[Information on installing these libraries^].
 
-IF you are using your own computer then you can run the robot program in simulation mode without having access to the robot.  See {url-wpilibdocs}docs/zero-to-robot/step-2/wpilib-setup.html#additional-c-installation-for-simulation[Simulator Installation]
+If you are using your own computer then you can run the robot program in simulation mode without having access to the robot.  See {url-wpilibdocs}docs/zero-to-robot/step-2/wpilib-setup.html#additional-c-installation-for-simulation[Simulator Installation]
 
 == Hardware Overview
 
-Read the WPILib sections on {url-wpilibdocs}docs/hardware/hardware-basics/index.html[Hardware-Basics] and {url-wpilibdocs}docs/hardware/sensors/index.html[Sensors], also check out the {url-wpilibdocs}docs/hardware/hardware-tutorials/index.html[hardware Tutorials]
+Read the WPILib sections on {url-wpilibdocs}docs/hardware/hardware-basics/index.html[Hardware-Basics] and {url-wpilibdocs}docs/hardware/sensors/index.html[Sensors], also check out the {url-wpilibdocs}docs/hardware/hardware-tutorials/index.html[Hardware Tutorials]
 
 === roboRIO
 
@@ -47,7 +47,7 @@ There are two types of motors used in FRC, https://en.wikipedia.org/wiki/Brushed
 
 Brushed motors are very simple electrically and inexpensive but have "brushes" than slide on  the rotation shaft of the motor and can wear faster than a brushless motor.  They have much lower power-to-weight ratios than brushless motors as well.  Brushed motors only have two wires, usually red and black.  Reversing the polarity of the wires reverses the direction of the motor.
 
-Brushless motors are much more electrically complex but mechanically simpler.  Brushless motors have three wires that cannot be connected directly to a battery.  Due to the complicated control needed for brushless motors they must have an encoder built into them to function correctly (See <<encoders>>) and they must be connected to a brushless motor controller (sometimes called a "Smart Controller").  Having a built-in encoder makes brushless motors work with complex motion control without having to add an external encoder. The *Falcon* motor from CTRE has the controller built into the motor in addition to the encoder.  It is a complete control system module.
+Brushless motors are much more electrically complex but mechanically simpler.  Brushless motors have three wires that cannot be connected directly to a battery.  Due to the complicated control needed for brushless motors they must have an encoder built into them to function correctly (See <<encoders>>) and they must be connected to a brushless motor controller (sometimes called a "Smart Controller").  Having a built-in encoder makes brushless motors work with complex motion control without having to add an external encoder. The *Falcon* motor from CTRE has the controller and the encoder built into the motor.  It is a complete control system module.
 
 [cols="4,4,3,4,4"]
 .Common Motor Specs and *kV* Values
@@ -78,7 +78,7 @@ Brushless motors are much more electrically complex but mechanically simpler.  B
 
 === Motor Controllers
 
-Motor controllers received commands from the robot program and talk directly to the motors.  Team 4698 uses *TalonFX*, *TalonSRX*, and *SparkMAX* motor controllers. The *TalonSRX* can only control brushed motors while the *TalonFX* and *SparkMAX* can control brushed or brushless.  The *TalonSRX* must use an external encoder whereas the *TalonFX* and *SparkMAX* can use a brushless motor's built-in encoder or an external encoder.  All three controllers have built-in PID control (see <<smart_pid>>).
+Motor controllers receive commands from the robot program and talk directly to the motors.  Team 4698 uses *TalonFX*, *TalonSRX*, and *SparkMAX* motor controllers mainly. The *TalonSRX* can only control brushed motors while the *TalonFX* and *SparkMAX* can control brushed or brushless.  The *TalonSRX* must use an external encoder whereas the *TalonFX* and *SparkMAX* can use a brushless motor's built-in encoder or an external encoder.  All three controllers have built-in PID control (see <<smart_pid>>).
 
 [#encoders]
 === Encoders
@@ -93,7 +93,7 @@ Gyros measure the rotation around an axis by sensing inertial movement.  They es
 
 === Switches
 
-Typical application of switches in robotics are limit switches.  They are triggered when a moving part of the robot get to the end point of it's travel.
+Typical application of switches in robotics are limit switches.  They are triggered when a moving part of the robot gets to the end point of it's travel.
 
 === PWM
 
@@ -305,13 +305,15 @@ Raspberry Pi
 
 == Resources
 
-* {url-wpilibdocs}[WPILib Documentation] (https://github.wpilib.org/allwpilib/docs/release/cpp/index.html[*pass:[C++]* API^])
+* {url-wpilibdocs}[WPILib Documentation] (https://github.wpilib.org/allwpilib/docs/release/cpp/index.html[*{CPP}* API^]) (https://github.com/wpilibsuite/allwpilib/tree/main/wpilibcExamples/src/main/cpp/examples[Example Code^])
 
 * https://docs.revrobotics.com/sparkmax/software-resources/spark-max-api-information[Rev Robotics REVLib Docs^] 
-(https://codedocs.revrobotics.com/cpp/namespacerev.html[*pass:[C++]* API^])
+(https://codedocs.revrobotics.com/cpp/namespacerev.html[*{CPP}* API^]) (https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/C%2B%2B[Example Code^])
 
 * https://docs.ctre-phoenix.com/en/stable/[CTRE Phoenix Framework Docs^] 
-(https://api.ctr-electronics.com/phoenix/release/cpp/namespaces.html[*pass:[C++]* API^])
+(https://api.ctr-electronics.com/phoenix/release/cpp/namespaces.html[*{CPP}* API^]) (https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages[Example Code^])
+
+* https://git-scm.com/[Git Home Page] (https://git-scm.com/book[Pro Git Book]) (https://ndpsoftware.com/git-cheatsheet.html[Cheat Sheet])
 
 * https://www.reca.lc/[ReCalc]
 
