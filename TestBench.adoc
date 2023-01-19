@@ -1,0 +1,24 @@
+= Test Bench Examples
+:source-highlighter: highlight.js
+:xrefstyle: short
+:sectnums:
+:CPP: C++
+:toc:
+
+== Test Bench Description
+
+The Test Bench was created to allow students wanting to learn FRC robot programming a way to do example problems without needing access to a functioning robot.  As you read these examples they will refer to terms and/or concepts that will not be familiar to you.  Stop and lookup what these unfamiliar terms/concepts mean as you go along.  
+
+The test bench uses a https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[RoboRIO 1] and a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#ctre-power-distribution-panel[CTRE Power Distribution Panel].  It has two simple brushed motors (a https://www.andymark.com/products/neverest-classic-40-gearmotor[NeveRest with 40:1 gearbox] and a unknown motor) connected to two different motor controllers (a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] and a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#victor-sp[Victor SP]).  Both motor controllers are controlled with PWM. The "Position Control" motor is the NeveRest motor that is connected to a large disc.  The "Velocity Control" motor is the other small generic motor.
+
+The "Velocity Control" motor is connected to the https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#victor-sp[Victor SP] motor controller which is wired into the roboRIO PWM channel 0.  It has a https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder] attached to its output shaft.  The SRX is wired into the roboRIO DIO channels 0, 1, and 2.  Channels 0 & 1 are the Quadrature A and B inputs and channel 2 is the absolute PWM signal.
+
+The "Position Control" motor is connected to the https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] motor controller which is wired into the roboRIO PWM channel 1.  It also has a https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder] attached to its output shaft.  The SRX is wired into the roboRIO DIO channels 3, 4, and 5. Channels 3 & 4 are the Quadrature A and B inputs and channel 5 is the absolute PWM signal.
+
+The Test Bench does not have a WiFi radio so the coding computer must be connected to the roboRIO with a USB cable (USB A to USB B).  The Test Bench must also be powered by a robot battery.
+
+== Percent Output
+
+In this example we will be creating a "Timed Robot" program to set the velocity motor's percent output based on the position of a joystick.
+
+Launch "202x WPILib VS Code" from the desktop.  This runs VS Code with the WPILib libraries and tools enabled. https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-4/creating-benchtop-test-program-cpp-java.html[Follow these directions to create a project from the Timed Robot template] (the link has you create an Example project).
