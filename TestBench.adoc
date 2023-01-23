@@ -17,8 +17,50 @@ The "Position Control" motor is connected to the https://docs.wpilib.org/en/stab
 
 The Test Bench does not have a WiFi radio so the coding computer must be connected to the roboRIO with a USB cable (USB A to USB B).  The Test Bench must also be powered by a robot battery.
 
+.The Test Bench
+image::img/TestBench.jpg[Test Bench, align="center"]
+
 == Percent Output
 
 In this example we will be creating a "Timed Robot" program to set the velocity motor's percent output based on the position of a joystick.
 
-Launch "202x WPILib VS Code" from the desktop.  This runs VS Code with the WPILib libraries and tools enabled. https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-4/creating-benchtop-test-program-cpp-java.html[Follow these directions to create a project from the Timed Robot template] (the link has you create an Example project).
+Launch "WPILib VS Code" from the desktop.  This runs VS Code with the WPILib libraries and tools enabled. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html[Follow these directions to create a blank project from the "Timed Skeleton (Advanced)" template].
+
+You should now have an empty project.  The two files that we will be working with are `src/main/include/Robot.h` and `src/main/cpp/Robot.cpp`.  Find those files in the Explorer on the left sidebar of VS Code and open `Robot.h`.  It contains the `Robot` class which declares (See https://www.learncpp.com/cpp-tutorial/forward-declarations/[Forward Declarations and Definitions]) the `Robot-`, `Autonomous-`, `Teleop-`, `Disabled-`, `Test-`, and `Simulation-` Init() and Periodic() functions.
+
+.Contents of Generated Robot.h
+[source,C++]
+----
+include::src/Robot.h[]
+----
+
+For this simple example we won't need most of the Init() and Periodic() functions so delete all the declared functions except `TeleopInit()` and `TeleopPeriodic()`.  `TeleopInit()` runs once when the Driver Station is switched into Teleop Mode and `TeleopPeriodic()` runs every 20 milliseconds while in Teleop Mode.
+
+We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the velocity motor is a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#victor-sp[Victor SP] controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_victor_s_p.html[`frc::VictorSP`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_victor_s_p.html[`frc::VictorSP` class API documentation] which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_victor_s_p.html[`frc::VictorSP`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_victor_s_p.html[`frc::VictorSP`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of `frc::VictorSP` (See xref:CPP_Lessons.adoc#object_orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a `frc::VictorSP` variable and initialized the channel to zero. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_joystick.html[`frc::Joystick`] variable initialized to port zero. Add the two headers that are needed for the new classes.
+
+.Robot.h after changes
+[source,C++]
+----
+#pragma once
+
+#include <frc/TimedRobot.h>
+#include <frc/motorcontrol/VictorSP.h>
+#include <frc/Joystick.h>
+
+class Robot : public frc::TimedRobot {
+ public:
+  void TeleopInit() override;
+  void TeleopPeriodic() override;
+ private:
+  frc::VictorSP m_motor{0};
+  frc::Joystick m_joystick{0};
+};
+----
+
+
+.Contents of Generated Robot.cpp
+[source,C++]
+----
+include::src/Robot.cpp[]
+----
+

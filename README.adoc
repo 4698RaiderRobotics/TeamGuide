@@ -3,6 +3,8 @@ Coding Resources for Raider Robotics (Team 4698)
 :source-highlighter: highlight.js
 :xrefstyle: short
 :sectnums:
+:idprefix:
+:idseparator: -
 :CPP: C++
 :url-wpilibdocs: https://docs.wpilib.org/en/stable/
 :toc:
@@ -88,7 +90,6 @@ Brushless motors are much more electrically complex but mechanically simpler.  B
 
 Motor controllers receive commands from the robot program and talk directly to the motors.  Team 4698 uses *TalonFX*, *TalonSRX*, and *SparkMAX* motor controllers mainly. The *TalonSRX* can only control brushed motors while the *TalonFX* and *SparkMAX* can control brushed or brushless.  The *TalonSRX* must use an external encoder whereas the *TalonFX* and *SparkMAX* can use a brushless motor's built-in encoder or an external encoder.  All three controllers have built-in PID control (see <<smart_pid>>).
 
-[#encoders]
 === Encoders
 
 Encoders are devices that measure the rotation of a shaft.  Usually encoders are either built into motors or added to the motor shaft but it is also possible to add an encoder to any rotating shaft.  Encoders have a resolution which is specified in "tics" per rotation.  The *Falcon* motor has a built-in encoder which has a resolution of 2048.  That means that it can detect rotations of 360 / 2048 = 0.176 degrees.
@@ -125,13 +126,13 @@ WPILib provides two main ways to structure a robot program. One is called "Timed
 
 * See {url-wpilibdocs}docs/software/vscode-overview/creating-robot-program.html[Creating a Robot Program]
 
-[#units]
 == Units Library
 
 The Units Library is very powerful and useful for robot programming.  It is a bit difficult to learn and understand initially but it will help keep your code's units consistent and avoid conversion errors. Read the {url-wpilibdocs}docs/software/basic-programming/cpp-units.html[FRC Units Library Documentation^] to get an overview.
 
 One of the more useful aspects of using the Units Library is being able to define custom units that pertain to your robot code.  One example is converting from motor revolutions to distance traveled for the robot drivetrain.  If you have a gear box between the motor and the wheel that has a gear ratio of 6.86 to 1 and a wheel diameter of 4 inches then you could define a custom unit type of "meters per rotation" and then create a constant with those units that you can use to multiply desired linear velocities by to get motor angular velocities.
 
+.Custom Unit For Drivetrain
 [source,C++]
 ----
        // Gear ratio of the drive motors. 6.86 rotations of the drive motor is one rotation of the wheel.
@@ -143,13 +144,14 @@ One of the more useful aspects of using the Units Library is being able to defin
 
       // The number of meters traveled per rotation of the drive motor
       // wheel circumference / gear ratio
-    constexpr meters_per_rev_t kDriveMetersPerRotation = wpi::numbers::pi * 4_in / (kDriveGearRatio *  1_tr );
+    constexpr meters_per_rev_t kDriveMetersPerRotation = std::numbers::pi * 4_in / (kDriveGearRatio *  1_tr );
 ----
 
 Note that the units library uses "turns" for rotations with the suffix "tr".  Also notice that on the last line the wheel diameter is specified in inches but the units library automatically converts inches to meters.
 
 Another example is using the *TalonFX* smart motor controller library's `Set()` function. It requires the position or velocity inputs in very awkward units (See <<talon_pid_table>>). The position should be in "encoder tics" and the velocity should be in "encoder tics" per 100 milliseconds. There are 2048 encoder tics per rotation for the *TalonFX* built-in encoder. Custom units can help with converting from these strange units to more physically meaningful units. You could define a custom angular position unit that is ("tics") and a custom angular velocity unit that is ("tics" / 100_ms).
 
+.Custom Unit for Encoder Tics 
 [source,C++]
 ----
         // Create a unit called "tics" that represents 1/2048th of a revolution
@@ -169,6 +171,7 @@ Another example is using the *TalonFX* smart motor controller library's `Set()` 
 
 Once these types are defined then the programmer doesn't need to worry about converting from `tics` to degrees or from RPM to `tics_per_100ms`. The units types will do all the conversions automatically.  The code below shows how to use these types.
 
+.Automatic Units Conversion
 [source,C++]
 ----
 tics_t talon_position;
@@ -198,8 +201,9 @@ printf( "Talon Velocity = %7.2f rpm\n",
     // This will print "Talon Velocity = 2400.00 rpm"
 ----
 
-This choice could be a bit inconvienent as well since in order to print out the value of the `talon_velocity` or to send it to the Network Tables (See <<nt>>) in RPM you must use the syntax `units::revolutions_per_minute_t(talon_velocity).value()`.  A better approach might be to create a `class` that encapsulates the mechanism that the motor is used in (like a shooter). Then create a member function in that class that sets the velocity of the motor and does the necessary conversion from RPM to `tics_per_100ms`.  So for example if the TalonFX motor was connected to a flywheel that is used to shoot a ball then you might want to create a `Shooter` class that looks like:
+This choice could be a bit inconvienent as well since in order to print out the value of the `talon_velocity` or to send it to the Network Tables (See <<networktables>>) in RPM you must use the syntax `units::revolutions_per_minute_t(talon_velocity).value()`.  A better approach might be to create a `class` that encapsulates the mechanism that the motor is used in (like a shooter). Then create a member function in that class that sets the velocity of the motor and does the necessary conversion from RPM to `tics_per_100ms`.  So for example if the TalonFX motor was connected to a flywheel that is used to shoot a ball then you might want to create a `Shooter` class that looks like:
 
+.Encapsulating Unit Conversion
 [source,C++]
 ----
 class Shooter {
@@ -217,7 +221,6 @@ private:
 
 The `Shooter` class is then used in the main robot program and can be called with whatever angular velocity units you want (RPM, radians per second, etc) and it will convert them to the correct units for the `Set()` command inside `Shooter::SetVelocity()`.
 
-[#motion_control]
 == Motion Control
 
 Suppose you want to control a flywheel that will be used to shoot a ball towards a target.  Suppose also that you need the ball to be going just the right speed so that it hits the target correctly.  The simplest thing that you could do is to put a certain voltage on the motor so the flywheel so it is going just the right speed to work.  This method is called "open-loop control" because you actually don't know how fast the motor is spinning but you adjust the voltage so it "just works".  The problem with this method is that if the motor heats up, or the battery voltage drops, or the temperature outside changes then the speed of the flywheel will change.  Then you have to change the voltage that is sent to the motor to make it shoot correctly under the new conditions.  It will always need to be tweaked to work because we don't know what the angular velocity of the flywheel is when the ball is shot.
@@ -288,10 +291,9 @@ Each software vendor uses different units for their PID Controllers.  The table 
 | Position | "units" (encoder tics)^[1]^ | divide by 2048 for rotations
 | Velocity | "units" (tics) per 100ms^[1]^ | multiply by 600/2048 for RPM
 | Current | Amps | 
-3+| *TalonFX* feed forward `kFF` works the same as `kV` in WPILib. There is also an Arbitrary feed forward mechanism that is similar to `kS` in WPILib or can be customized (e.g. to vary with arm angle to compensate for varying gravity effect).  NOTE [1]: See <<units>> and the Phoenix API in <<_resources>>.
+3+| *TalonFX* feed forward `kFF` works the same as `kV` in WPILib. There is also an Arbitrary feed forward mechanism that is similar to `kS` in WPILib or can be customized (e.g. to vary with arm angle to compensate for varying gravity effect).  NOTE [1]: See <<units>> and the Phoenix API in <<resources>>.
 |===
 
-[#nt]
 == NetworkTables
 
 See https://docs.wpilib.org/en/stable/docs/software/networktables/networktables-intro.html[WPILib Documentation on NetworkTables^]
@@ -320,6 +322,8 @@ Raspberry Pi
 
 * https://docs.ctre-phoenix.com/en/stable/[CTRE Phoenix Framework Docs^] 
 (https://api.ctr-electronics.com/phoenix/release/cpp/namespaces.html[*{CPP}* API^]) (https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages[Example Code^])
+
+* https://limelightvision.io/[Limelight^] (https://docs.limelightvision.io/en/latest/index.html[Docs^])
 
 * https://git-scm.com/[Git Home Page^] (https://git-scm.com/book[Pro Git Book^]) (https://ndpsoftware.com/git-cheatsheet.html[Cheat Sheet^])
 
