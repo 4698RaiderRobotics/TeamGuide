@@ -20,7 +20,7 @@ The Test Bench does not have a WiFi radio so the coding computer must be connect
 .The Test Bench
 image::img/TestBench.jpg[Test Bench, align="center"]
 
-== Percent Output
+== Percent Output Example
 
 In this example we will be creating a "Timed Robot" program to set the velocity motor's percent output based on the position of a joystick.
 
@@ -31,16 +31,47 @@ You should now have an empty project.  The two files that we will be working wit
 .Contents of Generated Robot.h
 [source,C++]
 ----
-include::src/Robot.h[]
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+#pragma once
+
+#include <frc/TimedRobot.h>
+
+class Robot : public frc::TimedRobot {
+ public:
+  void RobotInit() override;
+  void RobotPeriodic() override;
+
+  void AutonomousInit() override;
+  void AutonomousPeriodic() override;
+
+  void TeleopInit() override;
+  void TeleopPeriodic() override;
+
+  void DisabledInit() override;
+  void DisabledPeriodic() override;
+
+  void TestInit() override;
+  void TestPeriodic() override;
+
+  void SimulationInit() override;
+  void SimulationPeriodic() override;
+};
 ----
 
-For this simple example we won't need most of the Init() and Periodic() functions so delete all the declared functions except `TeleopInit()` and `TeleopPeriodic()`.  `TeleopInit()` runs once when the Driver Station is switched into Teleop Mode and `TeleopPeriodic()` runs every 20 milliseconds while in Teleop Mode.
+For this simple example we won't need most of the Init() and Periodic() functions so delete all the declared functions except `RobotInit()` and `TeleopPeriodic()`.  `RobotInit()` runs once when the code first starts and `TeleopPeriodic()` runs every 20 milliseconds while the  Driver Station is in Teleop Mode.
 
 We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the velocity motor is a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#victor-sp[Victor SP] controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_victor_s_p.html[`frc::VictorSP`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_victor_s_p.html[`frc::VictorSP` class API documentation] which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_victor_s_p.html[`frc::VictorSP`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_victor_s_p.html[`frc::VictorSP`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of `frc::VictorSP` (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a `frc::VictorSP` variable and initialized the channel to zero. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_joystick.html[`frc::Joystick`] variable initialized to port zero. Add the two headers that are needed for the new classes.
 
 .Robot.h after changes
 [source,C++]
 ----
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 #pragma once
 
 #include <frc/TimedRobot.h>
@@ -49,7 +80,7 @@ We need to add member variables to the `Robot` class for our motor controller an
 
 class Robot : public frc::TimedRobot {
  public:
-  void TeleopInit() override;
+  void RobotInit() override;
   void TeleopPeriodic() override;
  private:
   frc::VictorSP m_motor{0};
@@ -57,10 +88,67 @@ class Robot : public frc::TimedRobot {
 };
 ----
 
+The `src/main/cpp/Robot.cpp` file has the definitions of the Init() and Periodic() functions for the `Robot` class. Remove all the Init() and Periodic() functions except `RobotInit()` and `TeleopPeriodic()`.  Now add the line shown below to `TeleopPeriodic()` which sets the motor percent output (-1 to 1 value) to the value of the X-axis on the joystick.
 
-.Contents of Generated Robot.cpp
+.Robot.cpp after modifications
 [source,C++]
 ----
-include::src/Robot.cpp[]
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+#include "Robot.h"
+
+void Robot::RobotInit() {}
+
+void Robot::TeleopPeriodic() {
+  m_motor.Set( m_joystick.GetX() );
+}
+
+#ifndef RUNNING_FRC_TESTS
+int main() {
+  return frc::StartRobot<Robot>();
+}
+#endif
 ----
+
+Compile the project and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect a joystick to the coding laptop and run the Driver Station.  Now deploy the code to the roboRIO.  Select `Teleop` on the driver station and press `Enable`.  The joystick should control the speed of the motor.
+
+=== Visualizing What is Happening
+
+The `Shuffleboard` program is used to communicate with the roboRIO.  The roboRIO can send information to `Shuffleboard` and `Shuffleboard` can be used to send information to the roboRIO.  The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class is one method to communicate with `Shuffleboard`.  We will use the *static* member functions of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class to add information about the motor and the joystick position to `Shuffleboard`. 
+
+[%collaspable]
+****
+*{CPP}* classes with *static* member functions are used like regular functions. You do not create instances of the class. See https://www.learncpp.com/cpp-tutorial/static-member-functions/[Static Member Functions]
+****
+
+Modify `Robot.cpp` to the following:
+
+[source,C++]
+----
+#include "Robot.h"
+#include <frc/smartdashboard/SmartDashboard.h>
+
+void Robot::RobotInit() {
+  frc::SmartDashboard::PutData( "Velocity Motor", &m_motor );
+}
+
+void Robot::TeleopPeriodic() {
+  double x_axis = m_joystick.GetX();
+
+  frc::SmartDashboard::PutNumber( "X-axis", x_axis );
+  m_motor.Set( x_axis );
+}
+
+#ifndef RUNNING_FRC_TESTS
+int main() {
+  return frc::StartRobot<Robot>();
+}
+#endif
+----
+
+Compile and deploy the code to the test bench.  Run shuffleboard and select the "SmartDashboard" tab.  Select `Teleop` in the Driver Station and `Enable` the roboRIO.
+
+== Position Control Example
 
