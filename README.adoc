@@ -306,6 +306,8 @@ TODO "Self Driving Robot"
 
 == Vision / Cameras
 
+https://www.team254.com/documents/vision-control/
+
 TODO
 
 Limelight
@@ -334,3 +336,5 @@ Raspberry Pi
 * https://hackingcpp.com/cpp/libs/fmt.png[*{fmt}* Cheat Sheet^]
 
 * https://frc3512.github.io/ci/[Team 3512 Learning Curriculum^]
+
+<<toc,TOP>>
