@@ -3,6 +3,7 @@
 :xrefstyle: short
 :stem:
 :sectnums:
+:section-refsig: Exercise
 :idprefix:
 :idseparator: -
 :CPP: C++
@@ -23,7 +24,7 @@ The Test Bench does not have a WiFi radio so the coding computer must be connect
 .The Test Bench
 image::img/TestBench.jpg[Test Bench, align="center"]
 
-== Percent Output Example
+== Percent Output Exercise
 
 In this example we will be creating a "Timed Robot" program to set the position motor's percent output based on the position of a joystick.
 
@@ -119,7 +120,7 @@ Compile the project and make sure there are no errors.  Then connect to the test
 
 === Adding an Encoder
 
-We are going to add the built-in encoder to our program so we can see how many revolutions the motor has turned and how fast it is turning.  In `Robot.h`, use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class to declare a variable for the encoder on channels 6 and 7.
+We are going to add the built-in encoder to our program so we can see how many revolutions the motor has turned and how fast it is turning.  In `Robot.h`, use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class to declare a variable for the encoder on channels 3 and 4.
 
 .Changes to Robot.h
 [source,C++]
@@ -130,7 +131,7 @@ We are going to add the built-in encoder to our program so we can see how many r
 ... 
 
     // Add a private member variable such as:
-  frc::Encoder m_enc{ 6, 7 };
+  frc::Encoder m_enc{ 3, 4 };
 ----
 
 === Visualizing What is Happening
@@ -185,7 +186,7 @@ The video in the first part of the xref:README.adoc#motion-control[Motion Contro
 Motor Output = *K~p~* * *e* = *K~p~* * ( *r* - *y* )
 ****
 
-* #TASK 1# -- Modify the code to hold the position 0 while the button *A* is held down and then move to the position 500 when the *B* button is held down.  Write the P-controller yourself as is done in video "PID Video, Part 1" in the xref:README.adoc#motion-control[Motion Control] section and determine a decent estimate for the *K~p~* constant.
+* #TASK 1# -- Modify the code to hold the position 0 while the button *A* is held down and then move to the position 500 when the *B* button is held down.  When neither button is held then it should just stop the motor.  Write the P-controller yourself as is done in video "PID Video, Part 1" in the xref:README.adoc#motion-control[Motion Control] section and determine a decent estimate for the *K~p~* constant.
 
 === Shuffleboard Graphs
 
@@ -215,8 +216,15 @@ A homing switch can be used to put a motor with a relative encoder into a known 
 
 == Trapezoidal Motion Exercise
 
+In <<position-control-exercise>> if the current motor position was very far from the desired position, then the motor would be immediately set to full power (100% output) toward the new desired position.  This results in very abrupt and jerky movements of the mechanism.  A better way to move the motor is to smoothly accelerate the motor towards the *goal* position until we reach a "cruise" velocity and then as we get close to the *goal* position we smoothly decelerate to a stop.  This type of motion is called a trapezoidal motion profile because the plot of the velocity during the motion is a trapezoid.
 
+.Trapezoid Profile (from CTRE Docs)
+image::https://v5.docs.ctr-electronics.com/en/stable/_images/closedlp-1.png[]
 
-== Velocity Control Exercise
+The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_trapezoid_profile.html[`frc::TrapezoidProfile<Distance>`] class to generate a trapezoidal motion profile.  It is a template class templated on either an angular unit or a distance unit.
+
+* #TASK 1# -- Modify the <<position-control-exercise>> code to use a trapezoidal profile to move between a 0 degree position when *A* is held and 180 degrees when *B* is held.
+
+// == Velocity Control Exercise
  
 
