@@ -5,6 +5,7 @@ Coding Resources for Raider Robotics (Team 4698)
 :sectnums:
 :idprefix:
 :idseparator: -
+:tip-caption: WPILib:
 :CPP: C++
 :url-wpilibdocs: https://docs.wpilib.org/en/stable/
 :toc:
@@ -91,6 +92,8 @@ Brushless motors are much more electrically complex but mechanically simpler.  B
 Motor controllers receive commands from the robot program and talk directly to the motors.  Team 4698 uses *TalonFX*, *TalonSRX*, and *SparkMAX* motor controllers mainly. The *TalonSRX* can only control brushed motors while the *TalonFX* and *SparkMAX* can control brushed or brushless.  The *TalonSRX* must use an external encoder whereas the *TalonFX* and *SparkMAX* can use a brushless motor's built-in encoder or an external encoder.  All three controllers have built-in PID control (see <<smart_pid>>).
 
 === Encoders
+
+TIP: See https://docs.wpilib.org/en/stable/docs/hardware/sensors/encoders-hardware.html[Encoders -- Hardware] and https://docs.wpilib.org/en/stable/docs/software/hardware-apis/sensors/encoders-software.html[Encoders -- Software]
 
 Encoders are devices that measure the rotation of a shaft.  Usually encoders are either built into motors or added to the motor shaft but it is also possible to add an encoder to any rotating shaft.  Encoders have a resolution which is specified in "tics" per rotation.  The *Falcon* motor has a built-in encoder which has a resolution of 2048.  That means that it can detect rotations of 360 / 2048 = 0.176 degrees.
 

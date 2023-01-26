@@ -6,6 +6,7 @@
 :section-refsig: Exercise
 :idprefix:
 :idseparator: -
+:tip-caption: WPILib:
 :CPP: C++
 :toc:
 
@@ -26,7 +27,7 @@ image::img/TestBench.jpg[Test Bench, align="center"]
 
 == Percent Output Exercise
 
-In this example we will be creating a "Timed Robot" program to set the position motor's percent output based on the position of a joystick.
+In this example we will be creating a "Timed Robot" program to set the position motor's percent output based on the position of a controller joystick.
 
 Launch "WPILib VS Code" from the desktop.  This runs VS Code with the WPILib libraries and tools enabled. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html[Follow these directions to create a blank project from the "Timed Skeleton (Advanced)" template].
 
@@ -67,7 +68,7 @@ class Robot : public frc::TimedRobot {
 
 For this simple example we won't need most of the Init() and Periodic() functions so delete all the declared functions except `RobotInit()` and `TeleopPeriodic()`.  `RobotInit()` runs once when the code first starts and `TeleopPeriodic()` runs every 20 milliseconds while the  Driver Station is in Teleop Mode.
 
-We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the velocity motor is a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[Spark] controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark` class API documentation] which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of `frc::VictorSP` (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a `frc::VictorSP` variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_joystick.html[`frc::Joystick`] variable initialized to port zero. Add the two headers that are needed for the new classes.
+We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the velocity motor is a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[Spark] controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark` class API documentation] which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of `frc::VictorSP` (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a `frc::VictorSP` variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`] variable initialized to port zero. Add the two headers that are needed for the new classes.
 
 .Robot.h after changes
 [source,C++]
@@ -80,7 +81,7 @@ We need to add member variables to the `Robot` class for our motor controller an
 
 #include <frc/TimedRobot.h>
 #include <frc/motorcontrol/Spark.h>
-#include <frc/Joystick.h>
+#include <frc/XboxController.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -88,11 +89,11 @@ class Robot : public frc::TimedRobot {
   void TeleopPeriodic() override;
  private:
   frc::Spark m_motor{1};
-  frc::Joystick m_joystick{0};
+  frc::XboxController m_controller{0};
 };
 ----
 
-The `src/main/cpp/Robot.cpp` file has the definitions of the Init() and Periodic() functions for the `Robot` class. Remove all the Init() and Periodic() functions except `RobotInit()` and `TeleopPeriodic()`.  Now add the line shown below to `TeleopPeriodic()` which sets the motor percent output (-1 to 1 value) to the value of the X-axis on the joystick.
+The `src/main/cpp/Robot.cpp` file has the definitions of the Init() and Periodic() functions for the `Robot` class. Remove all the Init() and Periodic() functions except `RobotInit()` and `TeleopPeriodic()`.  Now add the line shown below to `TeleopPeriodic()` which sets the motor percent output (-1 to 1 value) to the value of the X-axis on the controller.
 
 .Robot.cpp after modifications
 [source,C++]
@@ -106,7 +107,7 @@ The `src/main/cpp/Robot.cpp` file has the definitions of the Init() and Periodic
 void Robot::RobotInit() {}
 
 void Robot::TeleopPeriodic() {
-  m_motor.Set( m_joystick.GetX() );
+  m_motor.Set( m_controller.GetLeftX() );
 }
 
 #ifndef RUNNING_FRC_TESTS
@@ -116,7 +117,7 @@ int main() {
 #endif
 ----
 
-Compile the project and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect a joystick to the coding laptop and run the Driver Station.  Now deploy the code to the roboRIO.  Select `Teleop` on the driver station and press `Enable`.  The joystick should control the speed of the motor.
+Compile the project and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect an Xbox Controller or a Logitech controller to the coding laptop and run the Driver Station.  Now deploy the code to the roboRIO.  Select `Teleop` on the driver station and press `Enable`.  The joystick should control the speed of the motor.
 
 === Adding an Encoder
 
@@ -156,7 +157,7 @@ void Robot::RobotInit() {
 }
 
 void Robot::TeleopPeriodic() {
-  double x_axis = m_joystick.GetX();
+  double x_axis = m_controller.GetX();
 
   frc::SmartDashboard::PutNumber( "Joystick X-axis", x_axis );
   m_motor.Set( x_axis );
@@ -214,6 +215,10 @@ A homing switch can be used to put a motor with a relative encoder into a known 
 
 * #TASK 5# -- Use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc2_1_1_p_i_d_controller.html[`frc2::PIDController`] class to implement the P-control.
 
+== Velocity Control Exercise
+
+TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-flywheel.html[Tuning a Flywheel Controller]
+
 == Trapezoidal Motion Exercise
 
 In <<position-control-exercise>> if the current motor position was very far from the desired position, then the motor would be immediately set to full power (100% output) toward the new desired position.  This results in very abrupt and jerky movements of the mechanism.  A better way to move the motor is to smoothly accelerate the motor towards the *goal* position until we reach a "cruise" velocity and then as we get close to the *goal* position we smoothly decelerate to a stop.  This type of motion is called a trapezoidal motion profile because the plot of the velocity during the motion is a trapezoid.
@@ -221,10 +226,7 @@ In <<position-control-exercise>> if the current motor position was very far from
 .Trapezoid Profile (from CTRE Docs)
 image::https://v5.docs.ctr-electronics.com/en/stable/_images/closedlp-1.png[]
 
-The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_trapezoid_profile.html[`frc::TrapezoidProfile<Distance>`] class to generate a trapezoidal motion profile.  It is a template class templated on either an angular unit or a distance unit.
+The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_trapezoid_profile.html[`frc::TrapezoidProfile<Distance>`] class to generate a trapezoidal motion profile.  It is a template class templated on either an angular unit or a distance unit.  The WPI Documenation describes https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/trapezoidal-profiles.html[using trapezoidal motion profiles]. 
 
 * #TASK 1# -- Modify the <<position-control-exercise>> code to use a trapezoidal profile to move between a 0 degree position when *A* is held and 180 degrees when *B* is held.
-
-// == Velocity Control Exercise
- 
 
