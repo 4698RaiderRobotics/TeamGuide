@@ -8,7 +8,15 @@ Coding Resources for Raider Robotics (Team 4698)
 :tip-caption: WPILib:
 :CPP: C++
 :url-wpilibdocs: https://docs.wpilib.org/en/stable/
-:toc:
+:toc: macro
+
+[NOTE]
+====
+* See the xref:CPP_Lessons.adoc[*{CPP}* Lessons Document] for beginning coding information.
+* See the xref:TestBench.adoc[Test Bench Document] for exercises using the Test Bench.
+====
+
+toc::[]
 
 == Getting Started
 
@@ -18,7 +26,7 @@ NOTE: Programming a robot requires both software development skills and a good f
 
 Team 4698 competes in the FIRST Robotics Competition (FRC).  FRC provides many software tools and programming libraries that are used to create the program that runs on the robot's controller. It is possible to program using LabVIEW, Java, or *{CPP}*.  Our team writes the robot program in the *{CPP}* programming language.  
 
-As a first starting point, a basic understanding of *{CPP}* is necessary.  If you don't know *{CPP}* then you can follow the xref:CPP_Lessons.adoc[C++ Lessons] which give topics and exercises to get you up to speed.
+As a first starting point, a basic understanding of *{CPP}* is necessary.  If you don't know *{CPP}* then you can follow the xref:CPP_Lessons.adoc[*{CPP}* Lessons] which give topics and exercises to get you up to speed.
 
 === FRC Game Tools Install
 
@@ -42,7 +50,7 @@ If you are using your own computer then you can run the robot program in simulat
 
 Team 4698 has a test bench that can be used to learn the programming concepts that are needed to write good programs on an actual robot.  There are example problems that you can work through using the test bench.  They will greatly help with understanding many of the concepts needed for good FRC robot programming.
 
-xref:TestBench.adoc[The Test Bench Section] 
+xref:TestBench.adoc[The Test Bench Document] 
 
 == Hardware Overview
 
@@ -127,11 +135,13 @@ When you write a program to control the robot you are actually just writing some
 
 WPILib provides two main ways to structure a robot program. One is called "TimedRobot" based and the other is "Command" based.  Both program structures have methods that are called by the WPILib scheduler but when and how those methods are called differ between the two program structures.  A TimedRobot program is given control at a fixed interval of time (20 milliseconds).  A Command based program is only given control when some kind of condition is met (like a button was pressed on an Xbox controller).  Command based programs are structured such that they force the programmer to segment their code into classes that represent they types of Actions that the robot does.
 
-* See {url-wpilibdocs}docs/software/vscode-overview/creating-robot-program.html[Creating a Robot Program]
+TIP: * See {url-wpilibdocs}docs/software/vscode-overview/creating-robot-program.html[Creating a Robot Program]
 
 == Units Library
 
-The Units Library is very powerful and useful for robot programming.  It is a bit difficult to learn and understand initially but it will help keep your code's units consistent and avoid conversion errors. Read the {url-wpilibdocs}docs/software/basic-programming/cpp-units.html[FRC Units Library Documentation^] to get an overview.
+The Units Library is very powerful and useful for robot programming.  It is a bit difficult to learn and understand initially but it will help keep your code's units consistent and avoid conversion errors. 
+
+TIP: See the {url-wpilibdocs}docs/software/basic-programming/cpp-units.html[FRC Units Library Documentation^] to get an overview.
 
 One of the more useful aspects of using the Units Library is being able to define custom units that pertain to your robot code.  One example is converting from motor revolutions to distance traveled for the robot drivetrain.  If you have a gear box between the motor and the wheel that has a gear ratio of 6.86 to 1 and a wheel diameter of 4 inches then you could define a custom unit type of "meters per rotation" and then create a constant with those units that you can use to multiply desired linear velocities by to get motor angular velocities.
 
@@ -236,7 +246,7 @@ We can calculate the difference between the current flywheel RPMs and the target
 
 WPILib has a good discussion of PID Control in:
 
-* https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html[Introduction to PID -- WPILib^]
+TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html[Introduction to PID^]
 
 The videos below by FRC 0 to Autonomous are really good at describing PID and showing the PID loop calculations.  The IZone parameter that they implement is not a very good solution and in general it is best if you can avoid integral control.
 
@@ -245,9 +255,11 @@ The videos below by FRC 0 to Autonomous are really good at describing PID and sh
 
 === Feed Forward
 
-We will continue with the flywheel shooter example from <<motion_control>>.  If you want your flywheel to achieve a certain RPM then you can use the fact that you know what the maximum RPM of the motor attached to the flywheel.  Using this maximum RPM, you can make a good guess about what voltage will be required to get close to the target RPMs.  For example if you are using a NEO Motor (see <<motor_specs_table>>) then we know that it has a maximum speed of 5676 RPM when 12 volts is applied under no load.  Lets assume that the motor has 1-to-1 gearing to the flywheel and our target RPM of the flywheel is 3000 RPM.  We therefore want to spin the motor to (3000/5676) = 0.529 or 52.9% of its maximum speed. So we should be able to apply (0.529*12 volts) = 6.35 volts to the motor to get our desired 3000 RPM.  
+We will continue with the flywheel shooter example from <<motion-control>>.  If you want your flywheel to achieve a certain RPM then you can use the fact that you know what the maximum RPM of the motor attached to the flywheel.  Using this maximum RPM, you can make a good guess about what voltage will be required to get close to the target RPMs.  For example if you are using a NEO Motor (see <<motor_specs_table>>) then we know that it has a maximum speed of 5676 RPM when 12 volts is applied under no load.  Lets assume that the motor has 1-to-1 gearing to the flywheel and our target RPM of the flywheel is 3000 RPM.  We therefore want to spin the motor to (3000/5676) = 0.529 or 52.9% of its maximum speed. So we should be able to apply (0.529*12 volts) = 6.35 volts to the motor to get our desired 3000 RPM.  
 
-The idea of using the physics of the motor to estimate what the motor output should be is called "feed forward".  Feed forward is used in addition of PID Control to achieve very good motor behavior.  WPILib provides some classes to help do some of the feed forward calculations (see {url-wpilibdocs}docs/software/advanced-controls/controllers/feedforward.html[WPILib Feed Forward]).
+The idea of using the physics of the motor to estimate what the motor output should be is called "feed forward".  Feed forward is used in addition of PID Control to achieve very good motor behavior.  WPILib provides some classes to help do some of the feed forward calculations.
+
+TIP: See {url-wpilibdocs}docs/software/advanced-controls/controllers/feedforward.html[WPILib Feed Forward].
 
 [#smart_pid]
 === Smart Controller PID
@@ -294,12 +306,12 @@ Each software vendor uses different units for their PID Controllers.  The table 
 | Position | "units" (encoder tics)^[1]^ | divide by 2048 for rotations
 | Velocity | "units" (tics) per 100ms^[1]^ | multiply by 600/2048 for RPM
 | Current | Amps | 
-3+| *TalonFX* feed forward `kFF` works the same as `kV` in WPILib. There is also an Arbitrary feed forward mechanism that is similar to `kS` in WPILib or can be customized (e.g. to vary with arm angle to compensate for varying gravity effect).  NOTE [1]: See <<units>> and the Phoenix API in <<resources>>.
+3+| *TalonFX* feed forward `kFF` works the same as `kV` in WPILib. There is also an Arbitrary feed forward mechanism that is similar to `kS` in WPILib or can be customized (e.g. to vary with arm angle to compensate for varying gravity effect).  NOTE [1]: See <<units-library>> and the CTRE Phoenix API in <<resources>>.
 |===
 
 == NetworkTables
 
-See https://docs.wpilib.org/en/stable/docs/software/networktables/networktables-intro.html[WPILib Documentation on NetworkTables^]
+TIP: See https://docs.wpilib.org/en/stable/docs/software/networktables/networktables-intro.html[WPILib Documentation on NetworkTables^]
 
 Don't use NetworkTables to hold the values of the robot program variables.  Read from and write to the NT when needed.  Preferably only read settings that change the robot behavior in Test Mode or at the very beginning of code execution (`TeleopInit()` or `AutonomousInit()`).
 
