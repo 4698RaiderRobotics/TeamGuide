@@ -1,5 +1,5 @@
 = Raider Robotics Coding Guide
-Coding Resources for Raider Robotics (Team 4698)
+T. Smith
 :source-highlighter: highlight.js
 :xrefstyle: short
 :sectnums:
@@ -9,6 +9,9 @@ Coding Resources for Raider Robotics (Team 4698)
 :CPP: C++
 :url-wpilibdocs: https://docs.wpilib.org/en/stable/
 :toc: macro
+
+[discrete]
+=== Coding Resources for Raider Robotics (Team 4698)
 
 [NOTE]
 ====
