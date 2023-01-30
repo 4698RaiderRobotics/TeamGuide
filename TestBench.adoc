@@ -7,6 +7,7 @@
 :idseparator: -
 :tip-caption: WPILib:
 :CPP: C++
+:task-col-width: 15
 :toc:
 
 == Test Bench Description
@@ -121,7 +122,6 @@ int main() {
 #endif
 ----
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Compile (Build) the project with above changes added and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect an Xbox Controller or a Logitech controller to the your laptop and run the Driver Station.  Now deploy the code to the roboRIO.  Select `TeleOperated` on the driver station and press `Enable`.  The left joystick's x-axis motion should now control the speed of the motor.
@@ -190,7 +190,7 @@ int main() {
 #endif
 ----
 
-[cols="1,8"]
+
 |===
 | `*TASK {counter:tasknum}*`
 | Compile and deploy the code to the test bench.  Run Shuffleboard and select the "SmartDashboard" tab.  Move the motor disc by hand and observe the encoder value changing.  Now select `TeleOperated` in the Driver Station and `Enable` the roboRIO.  As you move the joystick, `Shuffleboard` will display the joystick output, the motor percent output (which should be the same), and the encoder distance.
@@ -202,7 +202,6 @@ The encoder values displayed on Shuffleboard are obtained with the https://githu
 
 When programming the robot we want to work with more meaningful units than raw counts.  If the mechanism is an arm that will move less than a full revolution then we probably want to use degrees.  If the mechanism is a spinning flywheel then we probably want to use revolutions. The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class has a member function called `SetDistancePerPulse()` which allows you to change the units returned by the `GetDistance()` function.  
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Modify the code so the encoder returns distance in rotations by adding the following to the `RobotInit()` function:
@@ -218,7 +217,6 @@ When programming the robot we want to work with more meaningful units than raw c
 
 Deploy and run the robot code with the `SetDistancePerPulse()` function call added and note the units displayed in Shuffleboard.  The encoder distance shown in Shuffleboard should now be rotations.
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Modify the code so the encoder returns distance in degrees.
@@ -258,7 +256,6 @@ Add code to hold the position 0 while the *A* Button is held down and then move 
 
 This logic will go in the `TeleopPeriodic()` method. A good starting value for *K~p~* is to take the total distance that the motor has to move from one setpoint to the other (500 in this case) and take the inverse of that number ( 1.0 / 500 ).  So as a first guess, the value of *K~p~* should be 0.002. 
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Implement the above pseudocode for the P-controller. Change the value of the *K~p~* constant and observe the difference in behavior of the mechanism.
@@ -268,13 +265,11 @@ This logic will go in the `TeleopPeriodic()` method. A good starting value for *
 
 Read the https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/index.html[Shuffleboard^] documentation and in particular https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/getting-started/shuffleboard-graphs.html[Working with Graphs].
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Graph the desired position and the actual encoder position in `Shuffleboard` as you move from the 0 position to the 500 position and back.  Note whether the actual position gets exactly to the desired position.
 |===
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Modify the units returned by the encoder as demonstrated in <<encoder-values>> to use rotations.  Have Button *A* still go to 0 but change Button *B* to go to 2 rotations.  How does this affect the value of the *K~p~* constant?
@@ -284,7 +279,6 @@ Read the https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard
 
 Relative encoders consider the "0" position to be wherever the motor was when the encoder was turned on.  Therefore it is not possible to know where the "0" position is and it changes each time the robot is powered on.
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Note where the encoder considers the zero positon.  Disable the robot and manually move the position motor to a new position then restart the robot code by going to `Diagnostics -> Restart Robot Code` in the Driver Station.  Rerun the code and notice that the 0 position is not in the same location as the last time the code was run.
@@ -298,13 +292,11 @@ Relative encoders consider the "0" position to be wherever the motor was when th
 
 So far we have been using the relative quadrature output of the https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder].  The encoder also has a PWM signal for absolute positioning (See https://store.ctr-electronics.com/content/user-manual/Magnetic%20Encoder%20User%27s%20Guide.pdf[SRX Mag Encoder Hardware Guide]). The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class is used to interface with the PWM absolute position signal which is wired to the DIO channel 5. 
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Modify the code to read the https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder]'s absolute PWM signal using the `GetAbsolutePosition()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class.  Move the motor disc by hand and note the values returned by the encoder (rotate more than one rotation).  Note 
 |===
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Use the absolute PWM signal to always move to the same 0 position when the *A* Button is pressed on the controller.   
@@ -312,7 +304,6 @@ So far we have been using the relative quadrature output of the https://store.ct
 
 === Real Angular Units
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Modify the code to move to locations based on angles in degrees when the *A* and *B* Buttons are pressed.  You will need to determine how to configure the  https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class to return angles in degrees.
@@ -320,7 +311,6 @@ So far we have been using the relative quadrature output of the https://store.ct
 
 === PID Controller Class
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc2_1_1_p_i_d_controller.html[`frc2::PIDController`] class to implement the P-control.
@@ -341,7 +331,6 @@ image::https://v5.docs.ctr-electronics.com/en/stable/_images/closedlp-1.png[]
 
 The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_trapezoid_profile.html[`frc::TrapezoidProfile<Distance>`] class to generate a trapezoidal motion profile.  It is a template class templated on either an angular unit or a distance unit.  The WPI Documenation describes https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/trapezoidal-profiles.html[using trapezoidal motion profiles]. 
 
-[cols="1,8"]
 |===
 | `*TASK {counter:tasknum}*`
 | Modify the <<position-control-exercise>> code to use a trapezoidal profile to move between a 0 degree position when *A* is held and 180 degrees when *B* is held.
