@@ -47,21 +47,51 @@ If all of the above goes correctly then you now have a working *{CPP}* compiler 
 
 == *{CPP}* Syntax, Functions, Data Types
 
-There are several good websites for learning *{CPP}* online.  I will point you in the direction of https://www.learncpp.com/[LearnCPP] for a lot of these lessons.  If you prefer to learn from a book then you can get "Programming: Principles and Practice Using C++", by Bjarne Stroustrup although it is a bit expensive.
+There are several good websites for learning *{CPP}* online.  I will point you in the direction of https://www.learncpp.com/[LearnCPP] for a lot of these lessons.  If you prefer to learn from a book then you can get _"Programming: Principles and Practice Using C++", by Bjarne Stroustrup_ although it is a bit expensive.
+
+Each chapter in https://www.learncpp.com/[LearnCPP] has several sections and you need to click on the green NEXT LESSON banner near the bottom of each section.  There are also quizes for most sections and entire chapter summaries and quizes.
 
 * Read Chapter 1: https://www.learncpp.com/cpp-tutorial/statements-and-the-structure-of-a-program/[Basic Program Structure]
 * Read Chapter 2: https://www.learncpp.com/cpp-tutorial/introduction-to-functions/[Functions and Files]
+
+[cols="a"]
+|===
+| Questions
+| . What is a `void function`?
+  . What is a declaration versus a definition?
+|=== 
+
+[cols="a"]
+|===
+| Exercises
+| . Do https://www.learncpp.com/cpp-tutorial/chapter-1-summary-and-quiz/[Question #3 here] 
+
+. Write a program that has a function that takes two numbers as parameters and returns the ratio of two numbers.  It's function declaration should be:
++
+[source,C++]
+----
+double ratio( double numerator, double denominator );
+----
+Print out the ratio of several numbers.
++
+NOTE: https://www.learncpp.com/cpp-tutorial/introduction-to-function-parameters-and-arguments/[Very similar to Question #5 here]
+|=== 
+
 * Read Chapter 4: https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/[Data Types]
 * Read Chapter 5: https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/[Operators]
 * Read Chapters 7.1 - 7.10: https://www.learncpp.com/cpp-tutorial/control-flow-introduction/[Control Flow]
 
-Exercises: 
+[cols="a"]
+|===
+| Exercises
+| . Some https://en.wikibooks.org/wiki/C%2B%2B_Programming/Exercises/Variables_and_types[Basic Exercises Here]
 
-Some https://en.wikibooks.org/wiki/C%2B%2B_Programming/Exercises/Variables_and_types[Basic Exercises Here]
-
-FRC specific exercises: 
-
-. Write a program to convert RPM to radians per second with a function `RPMtoRadPerSec()`. Printout the results something like: `2000.0000 RPM is 209.43951 rad/s` for several different RPMs.
+. Write a program to convert RPM to radians per second with a function `RPMtoRadPerSec()`. Printout the results something like: 
++
+`2000.0000 RPM is 209.43951 rad/s` 
++
+for several different RPMs.
+|===
 
 == Object Orientation
 
