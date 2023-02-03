@@ -7,18 +7,22 @@
 :idseparator: -
 :tip-caption: WPILib:
 :CPP: C++
-:task-col-width: 15
+:pos-motor-pwm: 1
+:pos-motor-quadA: 3
+:pos-motor-quadB: 4
+:pos-motor-abs: 5
+:spark-max-canID: 1
 :toc:
 
 == Test Bench Description
 
 The Test Bench was created to allow students wanting to learn FRC robot programming a way to do example problems without needing access to a functioning robot.  As you read these examples they will refer to terms and/or concepts that will not be familiar to you.  Stop and lookup what these unfamiliar terms/concepts mean as you go along.  
 
-The test bench uses a https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[RoboRIO 1] and a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#ctre-power-distribution-panel[CTRE Power Distribution Panel].  It has two simple brushed motors (a https://www.andymark.com/products/neverest-classic-40-gearmotor[NeveRest with 40:1 gearbox] and a unknown motor) connected to two different motor controllers (a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] and a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#victor-sp[Victor SP]).  Both motor controllers are controlled with PWM. The "Position Control" motor is the NeveRest motor that is connected to a large disc.  The "Velocity Control" motor is the other small generic motor.
+The Test Bench uses a https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[RoboRIO 1] and a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#ctre-power-distribution-panel[CTRE Power Distribution Panel].  It has two motors attached to it, a brushed motor (a https://www.andymark.com/products/neverest-classic-40-gearmotor[NeveRest with 40:1 gearbox]) and a brushless motor (a https://www.revrobotics.com/rev-21-1651/[NEO 550]) connected to two different motor controllers (a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] and a https://www.revrobotics.com/rev-11-2158/[SparkMAX]).  The https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] motor controller is controlled with PWM and the https://www.revrobotics.com/rev-11-2158/[SparkMAX] is controlled over the https://en.wikipedia.org/wiki/CAN_bus[CAN bus] of the https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[RoboRIO 1]. 
 
-The "Velocity Control" motor is connected to the https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#victor-sp[Victor SP] motor controller which is wired into the roboRIO PWM channel 0.  It has a https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder] attached to its output shaft.  The SRX is wired into the roboRIO DIO channels 0, 1, and 2.  Channels 0 & 1 are the Quadrature A and B inputs and channel 2 is the absolute PWM signal.
+The NeveRest motor that is connected to a large disc is used in the position control exercises and refered to as the "Position Control" motor. It is connected to the https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] motor controller which is wired into the roboRIO PWM channel {pos-motor-pwm}.  The position control motor has a https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder] attached to its output shaft.  The SRX is wired into the roboRIO DIO channels {pos-motor-quadA}, {pos-motor-quadB}, and {pos-motor-abs}. Channels {pos-motor-quadA} & {pos-motor-quadB} are the Quadrature A and B inputs and channel {pos-motor-abs} is the absolute PWM signal.
 
-The "Position Control" motor is connected to the https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] motor controller which is wired into the roboRIO PWM channel 1.  The position control motor has a built-in encoder and it also has a https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder] attached to its output shaft.  The SRX is wired into the roboRIO DIO channels 3, 4, and 5. Channels 3 & 4 are the Quadrature A and B inputs and channel 5 is the absolute PWM signal. The built-in encoder is wired into Channels 6 and 7.
+The NEO 550 motor that is mounted on the short bracket is used in the velocity control exercises and refered to as the "Velocity Control" motor. It is connected to the https://www.revrobotics.com/rev-11-2158/[SparkMAX] motor controller which is connected to the roboRIO CAN bus with ID {spark-max-canID}.  The NEO 550 has a built-in encoder.
 
 The Test Bench does not have a WiFi radio so the coding computer must be connected to the roboRIO with a USB cable (USB A to USB B).  The Test Bench must also be powered by a robot battery.
 
@@ -73,7 +77,7 @@ For this simple example we won't need most of the Init() and Periodic() function
 We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the position motor is a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[Spark] controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark` class API documentation] which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`] variable initialized to port zero. Add the two headers that are needed for the new classes.
 
 .Robot.h after changes
-[source,C++]
+[source,C++,subs="attributes"]
 ----
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
@@ -91,7 +95,7 @@ class Robot : public frc::TimedRobot {
   void RobotPeriodic() override;
   void TeleopPeriodic() override;
  private:
-  frc::Spark m_motor{1};
+  frc::Spark m_motor{{pos-motor-pwm}};
   frc::XboxController m_controller{0};
 };
 ----
@@ -124,7 +128,12 @@ int main() {
 
 |===
 | `*TASK {counter:tasknum}*`
-| Compile (Build) the project with above changes added and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect an Xbox Controller or a Logitech controller to the your laptop and run the Driver Station.  Now deploy the code to the roboRIO.  Select `TeleOperated` on the driver station and press `Enable`.  The left joystick's x-axis motion should now control the speed of the motor.
+| Build the project with the above changes added and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect an Xbox Controller or a Logitech controller to the your laptop and run the Driver Station.  Now deploy the code to the roboRIO.  Select `TeleOperated` on the driver station and press `Enable`.  The left joystick's x-axis motion should now control the speed of the motor.
+a| QUESTIONS: ::
+. What other Xbox Controller controls could be used to move the motor? 
+. What is the difference between a controller "button" and an "axis"?  
+. How many axes are on an Xbox Controller?
+. How would you change the code to use the PS4 Controller?
 |===
 
 === Adding an Encoder
@@ -132,7 +141,7 @@ int main() {
 We are going to add the built-in encoder to our program so we can see how much the motor has turned and how fast it is turning.  In `Robot.h`, use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class to declare a variable for the encoder on channels 3 and 4.
 
 .Changes to Robot.h
-[source,C++]
+[source,C++,subs="attributes"]
 ----
   // Add the following header:
 #include <frc/Encoder.h>
@@ -140,7 +149,7 @@ We are going to add the built-in encoder to our program so we can see how much t
 ... 
 
     // Add a private member variable such as:
-  frc::Encoder m_enc{ 3, 4 };
+  frc::Encoder m_enc{ {pos-motor-quadA}, {pos-motor-quadB} };
 ----
 
 === Visualizing What is Happening
@@ -194,6 +203,8 @@ int main() {
 |===
 | `*TASK {counter:tasknum}*`
 | Compile and deploy the code to the test bench.  Run Shuffleboard and select the "SmartDashboard" tab.  Move the motor disc by hand and observe the encoder value changing.  Now select `TeleOperated` in the Driver Station and `Enable` the roboRIO.  As you move the joystick, `Shuffleboard` will display the joystick output, the motor percent output (which should be the same), and the encoder distance.
+a| QUESTIONS: ::
+. How much does the encoder distance value change for one rotation of the disc? 
 |===
 
 === Encoder Values
@@ -202,10 +213,7 @@ The encoder values displayed on Shuffleboard are obtained with the https://githu
 
 When programming the robot we want to work with more meaningful units than raw counts.  If the mechanism is an arm that will move less than a full revolution then we probably want to use degrees.  If the mechanism is a spinning flywheel then we probably want to use revolutions. The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class has a member function called `SetDistancePerPulse()` which allows you to change the units returned by the `GetDistance()` function.  
 
-|===
-| `*TASK {counter:tasknum}*`
-| Modify the code so the encoder returns distance in rotations by adding the following to the `RobotInit()` function:
-|===
+Make the following modifications to the `RobotInit()` function to make the encoder return distance in rotations:
 
 .Changing Encoder Units
 [source,C++]
@@ -215,11 +223,12 @@ When programming the robot we want to work with more meaningful units than raw c
   m_enc.SetDistancePerPulse( 1.0 / 1024 );
 ----
 
-Deploy and run the robot code with the `SetDistancePerPulse()` function call added and note the units displayed in Shuffleboard.  The encoder distance shown in Shuffleboard should now be rotations.
-
 |===
 | `*TASK {counter:tasknum}*`
-| Modify the code so the encoder returns distance in degrees.
+| Deploy and run the robot code with the `SetDistancePerPulse()` function call added and note the units displayed in Shuffleboard which should now be rotations. 
+a| QUESTIONS: ::
+. How would you modify the code so the encoder returned distance in degrees?
+. What units would be most useful for a drive base motor?
 |===
 
 == Position Control Exercise
@@ -244,7 +253,7 @@ Add code to hold the position 0 while the *A* Button is held down and then move 
 [subs=normal]
 ----
     If *Button A* is held::
-      error = 0 - { encoder position }
+      error = 0 - {encoder position}
       set motor output to (K~p~ * error)
     Else If *Button B* is held::
       error = 500 - {encoder position}
@@ -258,7 +267,23 @@ This logic will go in the `TeleopPeriodic()` method. A good starting value for *
 
 |===
 | `*TASK {counter:tasknum}*`
-| Implement the above pseudocode for the P-controller. Change the value of the *K~p~* constant and observe the difference in behavior of the mechanism.
+| Implement the above pseudocode for the P-controller. Change the value of the *K~p~* constant and observe the difference in behavior of the mechanism. Note whether the actual position gets exactly to the desired position (setpoint).
+a| QUESTIONS: ::
+. What happens when K~p~ is too small? too large?
+. What is the difference between the `GetAButton()` and `GetAButtonPressed()` methods of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`]?
+. How would you implement the P-controller logic with only one call to the `Set()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class?
+|===
+
+=== Sending Data with Shuffleboard
+
+Not only is possible to send data from the robot program to Shuffleboard but also to send data back to the robot. The changing of the K~p~ constant in the above situation is a perfect example of when using Shuffleboard to send data to the robot is helpful.  If we can send the K~p~ value to the robot while it is running then we do not need to change the code / compile / deploy just to change one constant.  Above we used the `PutNumber()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class to send a number to Shuffleboard.  There is a corresponding `GetNumber()` method that will read a number from Shuffleboard. If we create a Shuffleboard entry in `RobotInit()` for the K~p~ value then we can read that value in `TeleopPeriodic()`.  This way the value can be changed in Shuffleboard and it will use the new value in `TeleopPeriodic()`.
+
+|===
+| `*TASK {counter:tasknum}*`
+| Change the code so that the value of the *K~p~* constant is read from Shuffleboard and therefore can be set while the robot code is running.
+a| QUESTIONS: ::
+. When we find a good value for K~p~ what should we do to remember it?
+. It is dangerous to allow critical constants to be changed while in `TeleOperated` mode during a competition.  `Test` mode is used to change parameters like this.  How would `Test` mode be used so the K~p~ parameter cannot be changed during `TeleOperated` mode?
 |===
 
 === Shuffleboard Graphs
@@ -267,7 +292,7 @@ Read the https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard
 
 |===
 | `*TASK {counter:tasknum}*`
-| Graph the desired position and the actual encoder position in `Shuffleboard` as you move from the 0 position to the 500 position and back.  Note whether the actual position gets exactly to the desired position.
+| Graph the desired position (setpoint) and the actual encoder position in a `Shuffleboard` graph.  Note the shape of the curve as you move from the 0 position to the 500 position and back.  Note whether the actual position gets exactly to the desired position.
 |===
 
 |===
@@ -277,11 +302,11 @@ Read the https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard
 
 === Relative Encoder Limitations
 
-Relative encoders consider the "0" position to be wherever the motor was when the encoder was turned on.  Therefore it is not possible to know where the "0" position is and it changes each time the robot is powered on.
+Relative encoders consider the "0" position to be wherever the motor was when the encoder was powered on.  Therefore it is not possible to know where the "0" position is and it changes each time the robot is powered on.
 
 |===
 | `*TASK {counter:tasknum}*`
-| Note where the encoder considers the zero positon.  Disable the robot and manually move the position motor to a new position then restart the robot code by going to `Diagnostics -> Restart Robot Code` in the Driver Station.  Rerun the code and notice that the 0 position is not in the same location as the last time the code was run.
+| Note where the encoder considers the zero positon.  Disable the robot and manually move the position motor to a new position then restart the robot code by going to `Diagnostics -> Restart Robot Code` in the Driver Station.  Re-enable the robot and notice that the 0 position is not in the same location as the last time the code was run.
 |===
 
 // === Limit Switch
@@ -290,36 +315,42 @@ Relative encoders consider the "0" position to be wherever the motor was when th
 
 === Absolute Encoder
 
-So far we have been using the relative quadrature output of the https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder].  The encoder also has a PWM signal for absolute positioning (See https://store.ctr-electronics.com/content/user-manual/Magnetic%20Encoder%20User%27s%20Guide.pdf[SRX Mag Encoder Hardware Guide]). The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class is used to interface with the PWM absolute position signal which is wired to the DIO channel 5. 
+So far we have been using the relative quadrature output of the https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder].  The encoder also has a PWM signal for absolute positioning (See https://store.ctr-electronics.com/content/user-manual/Magnetic%20Encoder%20User%27s%20Guide.pdf[SRX Mag Encoder Hardware Guide]). The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class is used to interface with the PWM absolute position signal which is wired to the DIO channel {pos-motor-abs}.
 
 |===
 | `*TASK {counter:tasknum}*`
-| Modify the code to read the https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder]'s absolute PWM signal using the `GetAbsolutePosition()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class.  Move the motor disc by hand and note the values returned by the encoder (rotate more than one rotation).  Note 
+| Modify the code to read the https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder]'s absolute PWM signal using the `GetAbsolutePosition()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class.  Move the motor disc by hand and note the values returned by the encoder.  Use the absolute PWM signal to always move to the same 0 position when the *A* Button is pressed on the controller. 
+a| QUESTIONS: ::
+. What is the maximum value that the encoder reads and what happens when you rotate more than one rotation?
+. What is the difference between the `GetAbsolutePosition()` and `GetDistance()` methods of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class?
 |===
+
+=== Physical Units
+
+The absolute encoder PWM signal is reading in "counts" just like the relative encoder signal did in <<encoder-values>>.  In this case the absolute signal has a larger number of "counts" per rotation that the relative signal.  As before, it is much more useful to use some physical units with the encoder.
 
 |===
 | `*TASK {counter:tasknum}*`
-| Use the absolute PWM signal to always move to the same 0 position when the *A* Button is pressed on the controller.   
+| Modify the code to move to locations based on angles in degrees when the *A* and *B* Buttons are pressed.  You will need to determine how to configure the  https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class to return angles in degrees.  It is different than `frc::Encoder`.
 |===
 
-=== Real Angular Units
+== Velocity Control Exercise
+:tasknum: 0
 
-|===
-| `*TASK {counter:tasknum}*`
-| Modify the code to move to locations based on angles in degrees when the *A* and *B* Buttons are pressed.  You will need to determine how to configure the  https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class to return angles in degrees.
-|===
+Velocity control is typically used on flywheels for shooting mechanisms or sometimes for intake wheels for game pieces.  Although it may seem like percent output control is essentially velocity control, it is not due to the battery voltage dropping while the robot is running during a competition.
 
+TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-flywheel.html[Tuning a Flywheel Controller]
+
+=== REVLib
+=== P-Control
+=== Feed Forward
+=== Feed Forward with P-control
 === PID Controller Class
 
 |===
 | `*TASK {counter:tasknum}*`
 | Use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc2_1_1_p_i_d_controller.html[`frc2::PIDController`] class to implement the P-control.
 |===
-
-== Velocity Control Exercise
-:tasknum: 0
-
-TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-flywheel.html[Tuning a Flywheel Controller]
 
 == Trapezoidal Motion Exercise
 :tasknum: 0
@@ -333,5 +364,11 @@ The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/cla
 
 |===
 | `*TASK {counter:tasknum}*`
-| Modify the <<position-control-exercise>> code to use a trapezoidal profile to move between a 0 degree position when *A* is held and 180 degrees when *B* is held.
+| Modify the <<position-control-exercise>> code to use a trapezoidal profile to move to a 0 degree position when *Button A* is pressed and 180 degrees when *Button B* is pressed.  
 |===
+
+== Arm Control Exercise
+
+=== Gravity Effects
+
+=== Motion Profiling
