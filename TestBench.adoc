@@ -1,4 +1,4 @@
-= Test Bench Examples
+= Test Bench Exercises
 :source-highlighter: highlight.js
 :xrefstyle: short
 :stem:
@@ -7,6 +7,13 @@
 :idseparator: -
 :tip-caption: WPILib:
 :CPP: C++
+:hw-roborio: https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[roboRIO]
+:hw-PDP: https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#ctre-power-distribution-panel[CTRE Power Distribution Panel]
+:hw-neverest: https://www.andymark.com/products/neverest-classic-40-gearmotor[NeveRest with 40:1 gearbox]
+:hw-neo550: https://www.revrobotics.com/rev-21-1651/[NEO 550]
+:hw-spark: https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK]
+:hw-sparkmax: https://www.revrobotics.com/rev-11-2158/[SparkMAX]
+:hw-srxmag: https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder]
 :pos-motor-pwm: 1
 :pos-motor-quadA: 3
 :pos-motor-quadB: 4
@@ -14,23 +21,23 @@
 :spark-max-canID: 1
 :toc:
 
-== Test Bench Description
+== The Team 4698 Test Bench
 
 The Test Bench was created to allow students wanting to learn FRC robot programming a way to do example problems without needing access to a functioning robot.  As you read these examples they will refer to terms and/or concepts that will not be familiar to you.  Stop and lookup what these unfamiliar terms/concepts mean as you go along.  
 
-The Test Bench uses a https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[RoboRIO 1] and a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#ctre-power-distribution-panel[CTRE Power Distribution Panel].  It has two motors attached to it, a brushed motor (a https://www.andymark.com/products/neverest-classic-40-gearmotor[NeveRest with 40:1 gearbox]) and a brushless motor (a https://www.revrobotics.com/rev-21-1651/[NEO 550]) connected to two different motor controllers (a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] and a https://www.revrobotics.com/rev-11-2158/[SparkMAX]).  The https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] motor controller is controlled with PWM and the https://www.revrobotics.com/rev-11-2158/[SparkMAX] is controlled over the https://en.wikipedia.org/wiki/CAN_bus[CAN bus] of the https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[RoboRIO 1]. 
+The Test Bench uses a {hw-roborio} and a {hw-PDP}.  It has two motors attached to it, a brushed motor {hw-neverest} and a brushless motor (a {hw-neo550}) connected to two different motor controllers (a {hw-spark} and a {hw-sparkmax}).  The {hw-spark} motor controller is controlled with PWM and the {hw-sparkmax} is controlled over the https://en.wikipedia.org/wiki/CAN_bus[CAN bus] of the {hw-roborio}. 
 
-The NeveRest motor that is connected to a large disc is used in the position control exercises and refered to as the "Position Control" motor. It is connected to the https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK] motor controller which is wired into the roboRIO PWM channel {pos-motor-pwm}.  The position control motor has a https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder] attached to its output shaft.  The SRX is wired into the roboRIO DIO channels {pos-motor-quadA}, {pos-motor-quadB}, and {pos-motor-abs}. Channels {pos-motor-quadA} & {pos-motor-quadB} are the Quadrature A and B inputs and channel {pos-motor-abs} is the absolute PWM signal.
+The NeveRest motor connected to the large disc is used in the position control exercises and refered to as the "Position Control" motor. It is connected to the {hw-spark} motor controller which is wired into the {hw-roborio} PWM channel {pos-motor-pwm}.  The position control motor has a {hw-srxmag} attached to its output shaft.  The SRX is wired into the {hw-roborio} DIO channels {pos-motor-quadA}, {pos-motor-quadB}, and {pos-motor-abs}. Channels {pos-motor-quadA} & {pos-motor-quadB} are the Quadrature A and B inputs and channel {pos-motor-abs} is the absolute PWM signal.
 
-The NEO 550 motor that is mounted on the short bracket is used in the velocity control exercises and refered to as the "Velocity Control" motor. It is connected to the https://www.revrobotics.com/rev-11-2158/[SparkMAX] motor controller which is connected to the roboRIO CAN bus with ID {spark-max-canID}.  The NEO 550 has a built-in encoder.
+The {hw-neo550} motor that is mounted on the short bracket is used in the velocity control exercises and refered to as the "Velocity Control" motor. It is connected to the {hw-sparkmax} motor controller which is connected to the {hw-roborio} CAN bus with ID {spark-max-canID}.  The {hw-neo550} has a built-in encoder.
 
-The Test Bench does not have a WiFi radio so the coding computer must be connected to the roboRIO with a USB cable (USB A to USB B).  The Test Bench must also be powered by a robot battery.
+The Test Bench does not have a WiFi radio so the coding computer must be connected to the {hw-roborio} with a USB cable (USB A to USB B).  The Test Bench must also be powered by a robot battery.
 
 .The Test Bench
 image::img/TestBench.jpg[Test Bench, align="center"]
 
 :sectnums:
-== Percent Output Exercise
+== Simple Motor Percent Output
 :tasknum: 0
 
 In this example we will be creating a "Timed Robot" program to set the position motor's percent output based on the position of a controller joystick.
@@ -74,7 +81,7 @@ class Robot : public frc::TimedRobot {
 
 For this simple example we won't need most of the Init() and Periodic() functions so delete all the declared functions except `RobotInit()`, `RobotPeriodic()` and `TeleopPeriodic()`.  `RobotInit()` runs once when the code first starts, `RobotPeriodic()` runs every 20 milliseconds at all times, and `TeleopPeriodic()` runs every 20 milliseconds while the Driver Station is in `TeleOperated` Mode.
 
-We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the position motor is a https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[Spark] controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark` class API documentation] which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`] variable initialized to port zero. Add the two headers that are needed for the new classes.
+We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the position motor is a {hw-spark} controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class API documentation which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`] variable initialized to port zero. Add the two headers that are needed for the new classes.
 
 .Robot.h after changes
 [source,C++,subs="attributes"]
@@ -234,9 +241,9 @@ a| QUESTIONS: ::
 == Position Control Exercise
 :tasknum: 0
 
-The Percent Output Example (<<percent-output-exercise>>) above is the most simplistic way of controlling a motor.  Percent output control cannot perform the kinds of control that are needed for almost all robotic systems.  This project will move a motor to a specified position and hold it there.  It will use P-control (position-control) to maintain the desired position which is a *feedback* control algorithm.
+The Percent Output exercise (<<simple-motor-percent-output>>) above is the most simplistic way of controlling a motor.  Percent output control cannot perform the kinds of control that are needed for almost all robotic systems.  This project will move a motor to a specified position and hold it there.  It will use P-control (position-control) to maintain the desired position which is a *feedback* control algorithm.
 
-If you haven't already, read the xref:README.adoc#motion-control[Motion Control] section and watch the "PID Video, Part 1" in the first part of that section.  This example builds on the project that was created in <<percent-output-exercise>> so you will need the code from that project. If you have used the `SetDistancePerPulse()` function as outlined in <<encoder-values>> then comment out the function call so that the encoder reads "counts".
+If you haven't already, read the xref:README.adoc#motion-control[Motion Control] section and watch the "PID Video, Part 1" in the first part of that section.  This example builds on the project that was created in <<simple-motor-percent-output>> so you will need the code from that project. If you have used the `SetDistancePerPulse()` function as outlined in <<encoder-values>> then comment out the function call so that the encoder reads "counts".
 
 === P-Controller
 
@@ -315,11 +322,11 @@ Relative encoders consider the "0" position to be wherever the motor was when th
 
 === Absolute Encoder
 
-So far we have been using the relative quadrature output of the https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder].  The encoder also has a PWM signal for absolute positioning (See https://store.ctr-electronics.com/content/user-manual/Magnetic%20Encoder%20User%27s%20Guide.pdf[SRX Mag Encoder Hardware Guide]). The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class is used to interface with the PWM absolute position signal which is wired to the DIO channel {pos-motor-abs}.
+So far we have been using the relative quadrature output of the {hw-srxmag}.  The encoder also has a PWM signal for absolute positioning (See https://store.ctr-electronics.com/content/user-manual/Magnetic%20Encoder%20User%27s%20Guide.pdf[SRX Mag Encoder Hardware Guide]). The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class is used to interface with the PWM absolute position signal which is wired to the DIO channel {pos-motor-abs}.
 
 |===
 | `*TASK {counter:tasknum}*`
-| Modify the code to read the https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder]'s absolute PWM signal using the `GetAbsolutePosition()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class.  Move the motor disc by hand and note the values returned by the encoder.  Use the absolute PWM signal to always move to the same 0 position when the *A* Button is pressed on the controller. 
+| Modify the code to read the {hw-srxmag}'s absolute PWM signal using the `GetAbsolutePosition()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class.  Move the motor disc by hand and note the values returned by the encoder.  Use the absolute PWM signal to always move to the same 0 position when the *A* Button is pressed on the controller. 
 a| QUESTIONS: ::
 . What is the maximum value that the encoder reads and what happens when you rotate more than one rotation?
 . What is the difference between the `GetAbsolutePosition()` and `GetDistance()` methods of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class?
@@ -337,14 +344,34 @@ The absolute encoder PWM signal is reading in "counts" just like the relative en
 == Velocity Control Exercise
 :tasknum: 0
 
-Velocity control is typically used on flywheels for shooting mechanisms or sometimes for intake wheels for game pieces.  Although it may seem like percent output control is essentially velocity control, it is not due to the battery voltage dropping while the robot is running during a competition.
+Velocity control is typically used on flywheels for shooting mechanisms or sometimes for intake wheels for game pieces.  Using velocity control may seem like essentially the same as setting a motor's percent output. However, velocity control reads the speed that the motor is actually spinning and makes corrections if the speed is wrong whereas percent output does not check for the correct speed. This becomes important, for example, when the battery voltage drops while the robot is running during a competition which will cause a motor set to a percent output value to slow down.
+
+=== REVLib
+
+We will use the velocity motor ({hw-neo550}) that is connected to the {hw-sparkmax} motor controller for this exercise.  The {hw-sparkmax} uses the CAN bus of the {hw-roboRIO} and requires an external (vendor) library to function. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html#vs-code[Vendor libraries can be added to a project following these instructions].  You need to add the "RevLIB 2023" library to this project in order to use the {hw-sparkmax} controller.
+
+The https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] class is used to communicate with the {hw-sparkmax} controller.  The https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] is not part of the WPILib library and was added when the REVLib vendor library was added to the project in the steps above.  Therefore the documention for the https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] class and other classes that are provided by the REVLib library are located on the RevRobotics website.  The xref:README.adoc#resources[Resources] section of the Coding Guide gives links to the RevLib documentation, RevLib {CPP} API, and RevLib Examples. The xref:README.adoc#resources[Resources] section also has several other useful links.
+
+=== Velocity P-Control
+
+NOTE: Read the xref:README.adoc#motion-control[Motion Control] section (again).  
+
+The {hw-sparkmax} is assigned CAN id #{spark-max-CANid} on the CAN bus. In `Robot.h`, create a variable for the motor using the https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] class.  You will need to determine what header file is needed to use the class.  The https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] `Set()` method will be used to control the motor percent output.  Use the https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] `GetEncoder()` method to access the built-in encoder on the {hw-neo550}. The `GetEncoder()` method returns a https://codedocs.revrobotics.com/cpp/classrev_1_1_spark_max_relative_encoder.html[rev::SparkMaxRelativeEncoder] class object that can be used to retrieve the motor velocity (what method?).
+
+|===
+| `*TASK {counter:tasknum}*`
+| Write a program to spin the {hw-neo550} to 9000 RPM when the *A Button* is held down.  Use P-control on the motor velocity. Graph the setpoint and actual velocity in Shuffleboard.
+a| QUESTIONS: ::
+. What value of K~p~ should you start with as a best guess?
+. Does the motor reach the setpoint velocity?
+. What is happening in this case (as opposed to position control)?
+|===
+
+=== Feed Forward
+=== Feed Forward with P-control
 
 TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-flywheel.html[Tuning a Flywheel Controller]
 
-=== REVLib
-=== P-Control
-=== Feed Forward
-=== Feed Forward with P-control
 === PID Controller Class
 
 |===
@@ -372,3 +399,5 @@ The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/cla
 === Gravity Effects
 
 === Motion Profiling
+
+// == Command Based Exercise
