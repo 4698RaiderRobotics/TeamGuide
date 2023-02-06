@@ -134,8 +134,8 @@ int main() {
 ----
 
 |===
-| `*TASK {counter:tasknum}*`
-| Build the project with the above changes added and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect an Xbox Controller or a Logitech controller to the your laptop and run the Driver Station.  Now deploy the code to the roboRIO.  Select `TeleOperated` on the driver station and press `Enable`.  The left joystick's x-axis motion should now control the speed of the motor.
+a| `*TASK {counter:tasknum}*`
+| Build the project with the above changes added and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect an Xbox controller or a Logitech controller to the your laptop and run the Driver Station.  Now deploy the code to the {hw-roborio}.  Select `TeleOperated` on the driver station and press `Enable`.  The left joystick's x-axis motion should now control the speed of the motor.
 a| QUESTIONS: ::
 . What other Xbox Controller controls could be used to move the motor? 
 . What is the difference between a controller "button" and an "axis"?  
@@ -145,7 +145,7 @@ a| QUESTIONS: ::
 
 === Adding an Encoder
 
-We are going to add the built-in encoder to our program so we can see how much the motor has turned and how fast it is turning.  In `Robot.h`, use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class to declare a variable for the encoder on channels 3 and 4.
+We are going to add the built-in encoder to our program so we can see how much the motor has turned and how fast it is turning.  In `Robot.h`, use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class to declare a variable for the encoder on channels {pos-motor-quadA} and {pos-motor-quadB}.
 
 .Changes to Robot.h
 [source,C++,subs="attributes"]
@@ -161,12 +161,11 @@ We are going to add the built-in encoder to our program so we can see how much t
 
 === Visualizing What is Happening
 
-The `Shuffleboard` program is used to communicate with the roboRIO.  The roboRIO can send information to `Shuffleboard` and `Shuffleboard` can be used to send information to the roboRIO.  The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class is one method to communicate with `Shuffleboard`.  We will use the *static* member functions of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class to add information about the motor and the joystick position to `Shuffleboard`. 
+The `Shuffleboard` program is used to communicate with the {hw-roborio}.  The {hw-roborio} can send information to `Shuffleboard` and `Shuffleboard` can be used to send information to the {hw-roborio}.  The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class is one method to communicate with `Shuffleboard`.  We will use the *static* member functions of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class to add information about the motor and the joystick position to `Shuffleboard`. 
 
-[%collaspable]
-****
-*{CPP}* classes with *static* member functions are used like regular functions. You do not create instances of the class. See https://www.learncpp.com/cpp-tutorial/static-member-functions/[Static Member Functions]
-****
+|===
+| *{CPP}* classes with *static* member functions are used like regular functions. You do not create instances of the class. See https://www.learncpp.com/cpp-tutorial/static-member-functions/[Static Member Functions]
+|===
 
 Modify `Robot.cpp` to the following:
 
@@ -208,8 +207,8 @@ int main() {
 
 
 |===
-| `*TASK {counter:tasknum}*`
-| Compile and deploy the code to the test bench.  Run Shuffleboard and select the "SmartDashboard" tab.  Move the motor disc by hand and observe the encoder value changing.  Now select `TeleOperated` in the Driver Station and `Enable` the roboRIO.  As you move the joystick, `Shuffleboard` will display the joystick output, the motor percent output (which should be the same), and the encoder distance.
+a| `*TASK {counter:tasknum}*`
+| Compile and deploy the code to the test bench.  Run Shuffleboard and select the "SmartDashboard" tab.  Move the motor disc by hand and observe the encoder value changing.  Now select `TeleOperated` in the Driver Station and `Enable` the {hw-roborio}.  As you move the joystick, `Shuffleboard` will display the joystick output, the motor percent output (which should be the same), and the encoder distance.
 a| QUESTIONS: ::
 . How much does the encoder distance value change for one rotation of the disc? 
 |===
@@ -231,7 +230,7 @@ Make the following modifications to the `RobotInit()` function to make the encod
 ----
 
 |===
-| `*TASK {counter:tasknum}*`
+a| `*TASK {counter:tasknum}*`
 | Deploy and run the robot code with the `SetDistancePerPulse()` function call added and note the units displayed in Shuffleboard which should now be rotations. 
 a| QUESTIONS: ::
 . How would you modify the code so the encoder returned distance in degrees?
@@ -273,7 +272,7 @@ Add code to hold the position 0 while the *A* Button is held down and then move 
 This logic will go in the `TeleopPeriodic()` method. A good starting value for *K~p~* is to take the total distance that the motor has to move from one setpoint to the other (500 in this case) and take the inverse of that number ( 1.0 / 500 ).  So as a first guess, the value of *K~p~* should be 0.002. 
 
 |===
-| `*TASK {counter:tasknum}*`
+a| `*TASK {counter:tasknum}*`
 | Implement the above pseudocode for the P-controller. Change the value of the *K~p~* constant and observe the difference in behavior of the mechanism. Note whether the actual position gets exactly to the desired position (setpoint).
 a| QUESTIONS: ::
 . What happens when K~p~ is too small? too large?
@@ -286,7 +285,7 @@ a| QUESTIONS: ::
 Not only is possible to send data from the robot program to Shuffleboard but also to send data back to the robot. The changing of the K~p~ constant in the above situation is a perfect example of when using Shuffleboard to send data to the robot is helpful.  If we can send the K~p~ value to the robot while it is running then we do not need to change the code / compile / deploy just to change one constant.  Above we used the `PutNumber()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class to send a number to Shuffleboard.  There is a corresponding `GetNumber()` method that will read a number from Shuffleboard. If we create a Shuffleboard entry in `RobotInit()` for the K~p~ value then we can read that value in `TeleopPeriodic()`.  This way the value can be changed in Shuffleboard and it will use the new value in `TeleopPeriodic()`.
 
 |===
-| `*TASK {counter:tasknum}*`
+a| `*TASK {counter:tasknum}*`
 | Change the code so that the value of the *K~p~* constant is read from Shuffleboard and therefore can be set while the robot code is running.
 a| QUESTIONS: ::
 . When we find a good value for K~p~ what should we do to remember it?
@@ -298,13 +297,18 @@ a| QUESTIONS: ::
 Read the https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/index.html[Shuffleboard^] documentation and in particular https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/getting-started/shuffleboard-graphs.html[Working with Graphs].
 
 |===
-| `*TASK {counter:tasknum}*`
-| Graph the desired position (setpoint) and the actual encoder position in a `Shuffleboard` graph.  Note the shape of the curve as you move from the 0 position to the 500 position and back.  Note whether the actual position gets exactly to the desired position.
+a| `*TASK {counter:tasknum}*`
+| Graph the desired position (setpoint) and the actual encoder position in a `Shuffleboard` graph.
+a| QUESTIONS: ::
+. What is the shape of the curve as you move from the 0 position to the 500 position and back?
+. Does the actual position get exactly to the desired position?
 |===
 
 |===
-| `*TASK {counter:tasknum}*`
-| Modify the units returned by the encoder as demonstrated in <<encoder-values>> to use rotations.  Have Button *A* still go to 0 but change Button *B* to go to 2 rotations.  How does this affect the value of the *K~p~* constant?
+a| `*TASK {counter:tasknum}*`
+| Modify the units returned by the encoder as demonstrated in <<encoder-values>> to use rotations.  Have Button *A* still go to 0 but change Button *B* to go to 2 rotations.
+a| QUESTIONS: ::
+. How does the change in units affect the value of the *K~p~* constant?
 |===
 
 === Relative Encoder Limitations
@@ -312,7 +316,7 @@ Read the https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard
 Relative encoders consider the "0" position to be wherever the motor was when the encoder was powered on.  Therefore it is not possible to know where the "0" position is and it changes each time the robot is powered on.
 
 |===
-| `*TASK {counter:tasknum}*`
+a| `*TASK {counter:tasknum}*`
 | Note where the encoder considers the zero positon.  Disable the robot and manually move the position motor to a new position then restart the robot code by going to `Diagnostics -> Restart Robot Code` in the Driver Station.  Re-enable the robot and notice that the 0 position is not in the same location as the last time the code was run.
 |===
 
@@ -325,7 +329,7 @@ Relative encoders consider the "0" position to be wherever the motor was when th
 So far we have been using the relative quadrature output of the {hw-srxmag}.  The encoder also has a PWM signal for absolute positioning (See https://store.ctr-electronics.com/content/user-manual/Magnetic%20Encoder%20User%27s%20Guide.pdf[SRX Mag Encoder Hardware Guide]). The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class is used to interface with the PWM absolute position signal which is wired to the DIO channel {pos-motor-abs}.
 
 |===
-| `*TASK {counter:tasknum}*`
+a| `*TASK {counter:tasknum}*`
 | Modify the code to read the {hw-srxmag}'s absolute PWM signal using the `GetAbsolutePosition()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class.  Move the motor disc by hand and note the values returned by the encoder.  Use the absolute PWM signal to always move to the same 0 position when the *A* Button is pressed on the controller. 
 a| QUESTIONS: ::
 . What is the maximum value that the encoder reads and what happens when you rotate more than one rotation?
@@ -337,7 +341,7 @@ a| QUESTIONS: ::
 The absolute encoder PWM signal is reading in "counts" just like the relative encoder signal did in <<encoder-values>>.  In this case the absolute signal has a larger number of "counts" per rotation that the relative signal.  As before, it is much more useful to use some physical units with the encoder.
 
 |===
-| `*TASK {counter:tasknum}*`
+a| `*TASK {counter:tasknum}*`
 | Modify the code to move to locations based on angles in degrees when the *A* and *B* Buttons are pressed.  You will need to determine how to configure the  https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class to return angles in degrees.  It is different than `frc::Encoder`.
 |===
 
@@ -345,6 +349,10 @@ The absolute encoder PWM signal is reading in "counts" just like the relative en
 :tasknum: 0
 
 Velocity control is typically used on flywheels for shooting mechanisms or sometimes for intake wheels for game pieces.  Using velocity control may seem like essentially the same as setting a motor's percent output. However, velocity control reads the speed that the motor is actually spinning and makes corrections if the speed is wrong whereas percent output does not check for the correct speed. This becomes important, for example, when the battery voltage drops while the robot is running during a competition which will cause a motor set to a percent output value to slow down.
+
+There is a very good description of controling a flywheel mechanism in the link below along with some interactive tools to see how changing the control system parameters affects the flywheel behavior.
+
+TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-flywheel.html[Tuning a Flywheel Controller]
 
 === REVLib
 
@@ -359,7 +367,7 @@ NOTE: Read the xref:README.adoc#motion-control[Motion Control] section (again).
 The {hw-sparkmax} is assigned CAN id #{spark-max-CANid} on the CAN bus. In `Robot.h`, create a variable for the motor using the https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] class.  You will need to determine what header file is needed to use the class.  The https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] `Set()` method will be used to control the motor percent output.  Use the https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] `GetEncoder()` method to access the built-in encoder on the {hw-neo550}. The `GetEncoder()` method returns a https://codedocs.revrobotics.com/cpp/classrev_1_1_spark_max_relative_encoder.html[rev::SparkMaxRelativeEncoder] class object that can be used to retrieve the motor velocity (what method?).
 
 |===
-| `*TASK {counter:tasknum}*`
+a| `*TASK {counter:tasknum}*`
 | Write a program to spin the {hw-neo550} to 9000 RPM when the *A Button* is held down.  Use P-control on the motor velocity. Graph the setpoint and actual velocity in Shuffleboard.
 a| QUESTIONS: ::
 . What value of K~p~ should you start with as a best guess?
@@ -368,15 +376,38 @@ a| QUESTIONS: ::
 |===
 
 === Feed Forward
-=== Feed Forward with P-control
 
-TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-flywheel.html[Tuning a Flywheel Controller]
+TIP: See https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-feedforward.html[Introduction to DC Motor Feedforward] and https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/feedforward.html[Feedforward Control in WPILib]
 
-=== PID Controller Class
+NOTE: Read the xref:README.adoc#feed-forward[Feed Forward] section and, if confused, read the xref:README.adoc#motion-control[Motion Control] section a third time and the above WPILib information. This topic is confusing at first and you may need to re-read these sections several times.
+
+Feed forward predictions are typically expressed in units of voltage.  P-control on the otherhand is usually giving you a corrective error in percentage units.  When using feed forward it is most common to use the motor controller class' `SetVoltage()` method if one exists.
 
 |===
-| `*TASK {counter:tasknum}*`
-| Use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc2_1_1_p_i_d_controller.html[`frc2::PIDController`] class to implement the P-control.
+a| `*TASK {counter:tasknum}*`
+| Modify your program to spin the {hw-neo550} to 9000 RPM when the *A Button* is held down using velocity based feed forward only.
+a| QUESTIONS: ::
+. How do you determine the value of K~v~ you should start with? (HINT: See xref:README.adoc#motors[Motors Section] and pay attention to units!)
+. Can you get the motor reach the setpoint velocity?  What about a different setpoint velocity?
+|===
+
+=== Feed Forward with P-control
+
+Typically a motorized mechanism would be controlled with both some form of feed forward combined with PID feedback to compensate for any error.  The PID values (-1 to 1) are usually scaled to voltage (multiply by 12) and then the two terms (FF and PID) are added and sent to the `SetVoltage()` method.  
+
+|===
+a| `*TASK {counter:tasknum}*`
+| Modify your program to use both feed forward and P-control.
+a| QUESTIONS: ::
+. What would work if a class didn't have a `SetVoltage()` method?
+|===
+
+
+=== Built-in WPILib Classes for Control
+
+|===
+a| `*TASK {counter:tasknum}*`
+| Use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc2_1_1_p_i_d_controller.html[`frc2::PIDController`] class to implement the P-control and the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_simple_motor_feedforward.html[`frc::SimpleMotorFeedforward<Distance>`] class for feed forward. 
 |===
 
 == Trapezoidal Motion Exercise
@@ -384,20 +415,37 @@ TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduct
 
 In <<position-control-exercise>> if the current motor position was very far from the desired position, then the motor would be immediately set to full power (100% output) toward the new desired position.  This results in very abrupt and jerky movements of the mechanism.  A better way to move the motor is to smoothly accelerate the motor towards the *goal* position until we reach a "cruise" velocity and then as we get close to the *goal* position we smoothly decelerate to a stop.  This type of motion is called a trapezoidal motion profile because the plot of the velocity during the motion is a trapezoid.
 
+The term *goal* is emphasized because it differs from the setpoint that we have been using up until this point.  The way profiled motion works is that at each timestep the trapezoid profile computes a new setpoint.  The setpoint has both position information and velocity information.  The profiled motion is finished when the setpoint reaches the *goal*.  Because the setpoint has position and velocity information, it is fairly straight forward to use feed forward and PID control while performing a profiled motion.
+
 .Trapezoid Profile (from CTRE Docs)
 image::https://v5.docs.ctr-electronics.com/en/stable/_images/closedlp-1.png[]
 
 The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_trapezoid_profile.html[`frc::TrapezoidProfile<Distance>`] class to generate a trapezoidal motion profile.  It is a template class templated on either an angular unit or a distance unit.  The WPI Documenation describes https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/trapezoidal-profiles.html[using trapezoidal motion profiles]. 
 
 |===
-| `*TASK {counter:tasknum}*`
-| Modify the <<position-control-exercise>> code to use a trapezoidal profile to move to a 0 degree position when *Button A* is pressed and 180 degrees when *Button B* is pressed.  
+a| `*TASK {counter:tasknum}*`
+| Write a program to use a trapezoidal profile to move the position motor disc to a 0 degree position when *Button A* is pressed and 180 degrees when *Button B* is pressed. Use P-control, then add feed forward once P-control works.
+a| QUESTIONS: ::
+. How does the maximum acceleration and maximum velocity affect the speed and accuracy of the motion?
 |===
 
 == Arm Control Exercise
+:tasknum: 0
 
-=== Gravity Effects
+A vertical arm mechanism is one of the most complex control problems that is encountered on FRC robots. The links below give the basic information needed to understand the feed forward and PID aspects of the problem.  Moving a vertical arm with motion profiles (i.e. trapezoidal profiles) gives good results and allows easy feed forward compensation. 
 
-=== Motion Profiling
+TIP: See https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-feedforward.html#arm-feedforward[Arm Feedforward] and https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-vertical-arm.html[Tuning a Vertical Arm Position Controller]
+
+|===
+a| `*TASK {counter:tasknum}*`
+| Write a program to use a trapezoidal profile to move the position motor disc with the added weight blocks to a 0 degree position when *Button A* is pressed, 90 degrees when *Button B* is pressed, and 180 degrees when *Button Y* is pressed. Use both feed forward and PID control. 
+a| QUESTIONS: ::
+. How can K~v~ be fine tuned using graphs?
+. What is the feed forward output at each position?
+|===
+
+// == SysID
 
 // == Command Based Exercise
+
+// == Simulation
