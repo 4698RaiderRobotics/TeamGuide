@@ -84,7 +84,7 @@ For this simple example we won't need most of the Init() and Periodic() function
 We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the position motor is a {hw-spark} controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class API documentation which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`] variable initialized to port zero. Add the two headers that are needed for the new classes.
 
 .Robot.h after changes
-[source,C++,subs="attributes"]
+[source,C++,subs="+attributes"]
 ----
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
@@ -148,7 +148,7 @@ a| QUESTIONS: ::
 We are going to add the built-in encoder to our program so we can see how much the motor has turned and how fast it is turning.  In `Robot.h`, use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class to declare a variable for the encoder on channels {pos-motor-quadA} and {pos-motor-quadB}.
 
 .Changes to Robot.h
-[source,C++,subs="attributes"]
+[source,C++,subs="+attributes"]
 ----
   // Add the following header:
 #include <frc/Encoder.h>
@@ -441,11 +441,32 @@ a| `*TASK {counter:tasknum}*`
 | Write a program to use a trapezoidal profile to move the position motor disc with the added weight blocks to a 0 degree position when *Button A* is pressed, 90 degrees when *Button B* is pressed, and 180 degrees when *Button Y* is pressed. Use both feed forward and PID control. 
 a| QUESTIONS: ::
 . How can K~v~ be fine tuned using graphs?
-. What is the feed forward output at each position?
+. What should the feed forward output be at each position?  Does it achieve those values?
 |===
 
-// == SysID
+== Command Based Exercise
+:tasknum: 0
 
-// == Command Based Exercise
+So far all the exercises have used the "Timed Robot" design pattern.  When the robot code needs to respond to multiple button presses and joystick positions the logic in the `TeleopPeriodic()` function can get very busy with multiple `if ... else` statements.  The "Command Based" design pattern removes the need to worry about the button press and joystick logic.  It also forces the programmer to break down their code into multiple files containing logically related information which results in better program organization.
+
+One of the more difficult to understand aspects of Command Based programming is the use of Lambda Expressions and the idea of treating "functions as data" (i.e. passing functions as paramters to other functions).
+
+TIP: See https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html[Command-Based Programming] and https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html[Functions as Data] particularly https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html#lambda-expressions-in-c[Lambda Expressions in *{CPP}*]
+
+|===
+a| `*TASK {counter:tasknum}*`
+| Write a command based program to control the velocity motor speed with the right joystick of the controller. 
+a| QUESTIONS: ::
+. Do you need to use the default command?
+. How many subsystems do you need?
+|===
+
+// == Tank Drive Exercise
+:tasknum: 0
+
+// == SysID
+:tasknum: 0
+
 
 // == Simulation
+:tasknum: 0
