@@ -10,7 +10,7 @@ T. Smith
 :url-wpilibdocs: https://docs.wpilib.org/en/stable/
 :toc: macro
 
-[discrete]
+[discrete#top]
 === Coding Resources for Raider Robotics (Team 4698)
 
 [NOTE]
@@ -355,4 +355,4 @@ Raspberry Pi
 
 * https://frc3512.github.io/ci/[Team 3512 Learning Curriculum^]
 
-<<toc,TOP>>
+<<top,TOP>>

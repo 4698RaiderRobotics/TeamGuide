@@ -449,16 +449,28 @@ a| QUESTIONS: ::
 
 So far all the exercises have used the "Timed Robot" design pattern.  When the robot code needs to respond to multiple button presses and joystick positions the logic in the `TeleopPeriodic()` function can get very busy with multiple `if ... else` statements.  The "Command Based" design pattern removes the need to worry about the button press and joystick logic.  It also forces the programmer to break down their code into multiple files containing logically related information which results in better program organization.
 
-One of the more difficult to understand aspects of Command Based programming is the use of Lambda Expressions and the idea of treating "functions as data" (i.e. passing functions as paramters to other functions).
+In the Command Based design pattern, controller buttons and axes are "bound" to commands.  When the button (or axis) is pressed the bound command is executed.  The underlying command scheduler takes care of determining if the button is being pressed and calling your command if it is.  One of the more difficult to understand aspects of Command Based programming is the use of Lambda Expressions and the idea of treating "functions as data" (i.e. passing functions as paramters to other functions).  In Command Based programming lambda expressions occur frequently for simple commands that are bound to a controller button.
 
 TIP: See https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html[Command-Based Programming] and https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html[Functions as Data] particularly https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html#lambda-expressions-in-c[Lambda Expressions in *{CPP}*]
 
+Create a blank project using the "Command Robot" template.  Browse the files that are automatically generated.  The directory structure is a bit more complicated than the "Timed Robot" projects that you have been working with so far.  There are still the `Robot.h` and `Robot.cpp` files but there are several more files created.  The Command Based design pattern compartmentalizes the project into several files that each contain code for distinct parts of the project.  The `RobotContainer.cpp` file has all the subsystems in it.  The `subsystems` folder contains all the subsystems for the robot and the `commands folder contains all the commands needed for the robot.
+
 |===
 a| `*TASK {counter:tasknum}*`
-| Write a command based program to control the velocity motor speed with the right joystick of the controller. 
+| Write a command based program to control the velocity motor. When the `A` button is pressed, stop the motor.  When the `B` button is pressed, set the motor speed to 2000 rpm.  When the `Y` button is pressed, set the motor speed to 6000 rpm.  Use `frc2::InstantCommand` with lambda expressions.
 a| QUESTIONS: ::
-. Do you need to use the default command?
 . How many subsystems do you need?
+. What files in the project are not needed? 
+|===
+
+Commands that are bound to a joystick button only execute when the button is pressed (or held etc).  Usually during TeleOp mode a robot program needs to respond to joystick input at all times (such as driving the robot around).  This is accomplished with the default command of a subsystem.  Each subsystem can have a different default command.
+  
+|===
+a| `*TASK {counter:tasknum}*`
+| Modify the command based program to control the velocity motor such that the right trigger varys the speed of the motor from 0 to 6000 rpm.
+a| QUESTIONS: ::
+. How many subsystems should the 2023 Charged Up robot have? 
+. Browse the 2023 robot code and look at the subsystems and commands that it uses.
 |===
 
 // == Tank Drive Exercise
