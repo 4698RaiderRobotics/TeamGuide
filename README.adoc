@@ -101,7 +101,7 @@ Brushless motors are much more electrically complex but mechanically simpler.  B
 
 === Motor Controllers
 
-Motor controllers receive commands from the robot program and talk directly to the motors.  Team 4698 uses *TalonFX*, *TalonSRX*, and *SparkMAX* motor controllers mainly. The *TalonSRX* can only control brushed motors while the *TalonFX* and *SparkMAX* can control brushed or brushless.  The *TalonSRX* must use an external encoder whereas the *TalonFX* and *SparkMAX* can use a brushless motor's built-in encoder or an external encoder.  All three controllers have built-in PID control (see <<smart_pid>>).
+Motor controllers receive commands from the robot program and talk directly to the motors.  Team 4698 uses *TalonFX*, *TalonSRX*, and *SparkMAX* motor controllers mainly. The *TalonSRX* can only control brushed motors while the *TalonFX* and *SparkMAX* can control brushed or brushless.  The *TalonSRX* must use an external encoder whereas the *TalonFX* and *SparkMAX* can use a brushless motor's built-in encoder or an external encoder.  All three controllers have built-in PID control (see <<smart-controller-pid>>).
 
 === Encoders
 
@@ -265,7 +265,7 @@ The idea of using the physics of the motor to estimate what the motor output sho
 
 TIP: See {url-wpilibdocs}docs/software/advanced-controls/controllers/feedforward.html[WPILib Feed Forward].
 
-[#smart_pid]
+// [#smart_pid]
 === Smart Controller PID
 
 WPILib provides classes to do PID calculations within the robot program however, smart controllers can perform PID calculations themselves.  These "onboard" PID calculations are typically done at a much faster rate than is possible in the robot program (1ms vs 20ms).  The faster PID calculations should provide better control of the motor.
