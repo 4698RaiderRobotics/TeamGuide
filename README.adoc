@@ -2,13 +2,14 @@
 T. Smith
 :source-highlighter: highlight.js
 :xrefstyle: short
-:sectnums:
-:idprefix:
+// :sectnums:
+:idprefix!: 
 :idseparator: -
 :tip-caption: WPILib:
 :CPP: C++
 :url-wpilibdocs: https://docs.wpilib.org/en/stable/
-:toc: macro
+:toc:
+:toc-placement!:
 
 [discrete#top]
 === Coding Resources for Raider Robotics (Team 4698)

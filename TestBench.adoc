@@ -36,7 +36,7 @@ The Test Bench does not have a WiFi radio so the coding computer must be connect
 .The Test Bench
 image::img/TestBench.jpg[Test Bench, align="center"]
 
-:sectnums:
+// :sectnums:
 == Simple Motor Percent Output
 :tasknum: 0
 

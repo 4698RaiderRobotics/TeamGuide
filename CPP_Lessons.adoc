@@ -1,7 +1,7 @@
 = C++ Lessons
 :source-highlighter: highlight.js
 :xrefstyle: short
-:sectnums:
+// :sectnums:
 :CPP: C++
 :toc:
 
