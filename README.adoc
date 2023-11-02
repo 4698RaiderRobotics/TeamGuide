@@ -272,7 +272,7 @@ WPILib provides classes to do PID calculations within the robot program however,
 
 === PID Tuning
 
-WARNING: It is best if you can find PID values that do not use the **I**ntegral (*kI*) term.  That is because including *kI* makes the PID controller have "memory" and can cause very unexpected behavior.  Try to use only PD and feed forward.
+WARNING: It is best if you can find PID values that do not use the **I**ntegral (*kI*) term.  That is because including *kI* makes the PID controller have "memory" and can cause very unexpected behavior.  Try to use only *Kp*, *Kd* and feed forward.
 
 
 * https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-pid-controller.html[Tuning a PID Controller -- WPILib^]
@@ -325,13 +325,27 @@ TODO "Self Driving Robot"
 
 == Vision / Cameras
 
-https://www.team254.com/documents/vision-control/
+LINKS:
 
-TODO
+* https://www.team254.com/documents/vision-control/
 
-Limelight
+* https://limelightvision.io/[Limelight^]
 
-Raspberry Pi
+* https://photonvision.org/[PhotonVision]
+
+* http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-5.html[Orange Pi 5]
+
+* https://www.raspberrypi.com/[Raspberry Pi]
+
+== Other Teams
+
+* https://www.team254.com/[The Cheesy Poofs]
+
+* https://www.littletonrobotics.org/[Mechanical Advantage] https://github.com/Mechanical-Advantage/AdvantageScope[(AdvantageScope)]
+
+* https://frc3512.github.io/ci/[Team 3512 Learning Curriculum^]
+
+* https://github.com/Jagwires7443[Jagwires 7443 Github (Swerve & Interface Board)]
 
 
 == Resources
@@ -354,6 +368,6 @@ Raspberry Pi
 
 * https://hackingcpp.com/cpp/libs/fmt.png[*{fmt}* Cheat Sheet^]
 
-* https://frc3512.github.io/ci/[Team 3512 Learning Curriculum^]
+* https://www.projectb.net.au/resources/robot-mechanisms/[The Unofficial FRC Mechanism Encyclopedia]
 
 <<top,TOP>>

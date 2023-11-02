@@ -388,7 +388,7 @@ a| `*TASK {counter:tasknum}*`
 | Modify your program to spin the {hw-neo550} to 9000 RPM when the *A Button* is held down using velocity based feed forward only.
 a| QUESTIONS: ::
 . How do you determine the value of K~v~ you should start with? (HINT: See xref:README.adoc#motors[Motors Section] and pay attention to units!)
-. Can you get the motor reach the setpoint velocity?  What about a different setpoint velocity?
+. Can you get the motor to reach the setpoint velocity?  What about a different setpoint velocity?
 |===
 
 === Feed Forward with P-control
@@ -470,7 +470,7 @@ a| `*TASK {counter:tasknum}*`
 | Modify the command based program to control the velocity motor such that the right trigger varys the speed of the motor from 0 to 6000 rpm.
 a| QUESTIONS: ::
 . How many subsystems should the 2023 Charged Up robot have? 
-. Browse the 2023 robot code and look at the subsystems and commands that it uses.
+. Browse the https://github.com/4698RaiderRobotics/FRC-2023[2023 Charged Up Code] and look at the subsystems and commands that it uses.
 |===
 
 // == Tank Drive Exercise
