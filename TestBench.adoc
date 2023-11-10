@@ -40,11 +40,16 @@ image::img/TestBench.jpg[Test Bench, align="center"]
 == Simple Motor Percent Output
 :tasknum: 0
 
+=== Creating a Blank Project
+
 In this example we will be creating a "Timed Robot" program to set the position motor's percent output based on the position of a controller joystick.
 
-Launch "WPILib VS Code" from the desktop.  This runs VS Code with the WPILib libraries and tools enabled. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html[Follow these directions to create a blank project from the "Timed Skeleton (Advanced)" template].
+Launch "WPILib VS Code" from the desktop.  This runs VS Code with the WPILib libraries and tools enabled. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html[Follow these directions to create a blank project from the "Timed Skeleton (Advanced)" template] or see the animation below.
 
 You should now have an empty project.  The two files that we will be working with are `src/main/include/Robot.h` and `src/main/cpp/Robot.cpp`.  Find those files in the Explorer on the left sidebar of VS Code and open `Robot.h`.  It contains the `Robot` class which declares (See https://www.learncpp.com/cpp-tutorial/forward-declarations/[Forward Declarations and Definitions]) the `Robot-`, `Autonomous-`, `Teleop-`, `Disabled-`, `Test-`, and `Simulation-` Init() and Periodic() functions.
+
+.Create a Blank Timed Robot Project
+image::img/BlankProject.gif[Blank Project, align="center"]
 
 .Contents of Generated Robot.h
 [source,C++]
@@ -79,9 +84,11 @@ class Robot : public frc::TimedRobot {
 };
 ----
 
+=== Adding Controller and Motor Variables
+
 For this simple example we won't need most of the Init() and Periodic() functions so delete all the declared functions except `RobotInit()`, `RobotPeriodic()` and `TeleopPeriodic()`.  `RobotInit()` runs once when the code first starts, `RobotPeriodic()` runs every 20 milliseconds at all times, and `TeleopPeriodic()` runs every 20 milliseconds while the Driver Station is in `TeleOperated` Mode.
 
-We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the position motor is a {hw-spark} controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class API documentation which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`] variable initialized to port zero. Add the two headers that are needed for the new classes.
+We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the position motor is a {hw-spark} controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class API documentation which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`] variable initialized to port zero. You also need to add the two header files that are needed for the new classes using the `#include` directive. The headers are `<frc/motorcontrol/Spark.h>` and `<frc/XboxController.h>`.
 
 .Robot.h after changes
 [source,C++,subs="+attributes"]
@@ -106,6 +113,8 @@ class Robot : public frc::TimedRobot {
   frc::XboxController m_controller{0};
 };
 ----
+
+=== Setting up Controller--Motor Connection
 
 The `src/main/cpp/Robot.cpp` file has the definitions of the Init() and Periodic() functions for the `Robot` class. Remove all the Init() and Periodic() functions except `RobotInit()`, `RobotPeriodic()`, and `TeleopPeriodic()`.  Now add the line shown below to `TeleopPeriodic()` which sets the motor percent output (-1 to 1 value) to the value of the X-axis on the controller.  You won't use `RobotInit()` and `RobotPeriodic()` just yet.
 
@@ -133,9 +142,23 @@ int main() {
 #endif
 ----
 
+=== Build and Deploy to RoboRIO
+
+The {hw-roborio} is an embedded computer running a real-time linux operation system.  In order to run the robot program, it much be built and deployed to the {hw-roborio} using VSCode.  There must be a link between the coding computer and the {hw-roborio}.  This link can be made in three ways, first the coding computer can be connected via USB to the {hw-roborio}.  Second they can be connected wirelessly if the {hw-roborio} is connected to an FRC Wifi Radio https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#openmesh-om5p-an-or-om5p-ac-radio[OpenMesh OM5P-AC] by connecting the coding computer to the hotspot created by the robot. Third they can be connected via ethernet by running an ethernet cable between the computer and the https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#openmesh-om5p-an-or-om5p-ac-radio[OpenMesh OM5P-AC] or a network switch connected to the OM5P-AC.
+
+Since the Test Bench does not have a radio we must use the USB connection.  After connecting to the {hw-roborio} the robot program can be built and deployed.
+
+ADD BUILD/DEPLOY GIF
+
+=== FRC Driver Station
+
+The https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html[Driver Station] program manages the connection between the computer and the {hw-roborio}.  It gives that status of the connection and whether joysticks are recognized.  It is how the robot is Enabled and Disabled among other things.
+
+TIP: See the https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html[Driver Station Overview] to learn about its features.
+
 |===
 a| `*TASK {counter:tasknum}*`
-| Build the project with the above changes added and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect an Xbox controller or a Logitech controller to the your laptop and run the Driver Station.  Now deploy the code to the {hw-roborio}.  Select `TeleOperated` on the driver station and press `Enable`.  The left joystick's x-axis motion should now control the speed of the motor.
+| Build the project with the above changes added and make sure there are no errors.  Then connect to the test bench with a USB cable and power the test bench. Connect an Xbox controller or a Logitech controller to the your laptop and run the Driver Station.  Deploy the code, select `TeleOperated` on the driver station and press `Enable`.  The left joystick's x-axis motion should now control the speed of the motor.
 a| QUESTIONS: ::
 . What other Xbox Controller controls could be used to move the motor? 
 . What is the difference between a controller "button" and an "axis"?  
