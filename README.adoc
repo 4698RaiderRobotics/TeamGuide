@@ -358,7 +358,9 @@ LINKS:
 * https://docs.ctre-phoenix.com/en/stable/[CTRE Phoenix Framework Docs^] 
 (https://api.ctr-electronics.com/phoenix/release/cpp/namespaces.html[*{CPP}* API^]) (https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages[Example Code^])
 
-* https://limelightvision.io/[Limelight^] (https://docs.limelightvision.io/en/latest/index.html[Docs^])
+* https://limelightvision.io/[Limelight^] (https://docs.limelightvision.io[Docs^])
+
+* https://photonvision.org/[PhotonVision^] (https://docs.photonvision.org/[Docs^])
 
 * https://git-scm.com/[Git Home Page^] (https://git-scm.com/book[Pro Git Book^]) (https://ndpsoftware.com/git-cheatsheet.html[Cheat Sheet^])
 
