@@ -281,7 +281,6 @@ WARNING: It is best if you can find PID values that do not use the **I**ntegral 
 
 * https://docs.ctre-phoenix.com/en/stable/ch16_ClosedLoop.html#closed-loop-configurations[Closed-Loop Configurations -- CTRE^]
 
-[#pid_kv]
 === PID Units and Feed Forward Values
 
 The WPILib `frc2::PIDController` class can use any units the programmer decides to use since the measurement values are passed into the `Calculate()` method which returns a percent output value from [-1,1].  Therefore the units of the PID constants will vary depending on the units used in the code.  The feed forward classes in WPILib use the units library and are templated on whatever units are used to measure distance (either linear or angular).
@@ -371,5 +370,7 @@ LINKS:
 * https://hackingcpp.com/cpp/libs/fmt.png[*{fmt}* Cheat Sheet^]
 
 * https://www.projectb.net.au/resources/robot-mechanisms/[The Unofficial FRC Mechanism Encyclopedia]
+
+* https://team2471.files.wordpress.com/2017/10/manipulators-firstfare-2017.pdf[Manipulators by Team 2471]
 
 <<top,TOP>>
