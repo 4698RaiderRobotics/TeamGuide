@@ -1,0 +1,18 @@
+= Raider Robotics Team Guide
+:source-highlighter: highlight.js
+:xrefstyle: short
+// :sectnums:
+:idprefix!: 
+:idseparator: -
+
+== Sub-Team Resources and Practice Exercises
+
+* xref:Design.adoc[Design Sub-Team]
+
+* xref:Manufacturing.adoc[Manufacturing Sub-Team]
+
+* xref:Electrical.adoc[Electrical Sub-Team]
+
+* xref:Mechanical.adoc[Mechanical Sub-Team]
+
+* xref:CodingGuide.adoc[Software Sub-Team]

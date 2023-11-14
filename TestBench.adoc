@@ -5,6 +5,7 @@
 :section-refsig: Exercise
 :idprefix:
 :idseparator: -
+:imagesdir: img/software
 :tip-caption: WPILib:
 :CPP: C++
 :hw-roborio: https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[roboRIO]
@@ -34,7 +35,7 @@ The {hw-neo550} motor that is mounted on the short bracket is used in the veloci
 The Test Bench does not have a WiFi radio so the coding computer must be connected to the {hw-roborio} with a USB cable (USB A to USB B).  The Test Bench must also be powered by a robot battery.
 
 .The Test Bench
-image::img/TestBench.jpg[Test Bench, align="center"]
+image::TestBench.jpg[Test Bench, align="center"]
 
 // :sectnums:
 == Simple Motor Percent Output
@@ -49,7 +50,7 @@ Launch "WPILib VS Code" from the desktop.  This runs VS Code with the WPILib lib
 You should now have an empty project.  The two files that we will be working with are `src/main/include/Robot.h` and `src/main/cpp/Robot.cpp`.  Find those files in the Explorer on the left sidebar of VS Code and open `Robot.h`.  It contains the `Robot` class which declares (See https://www.learncpp.com/cpp-tutorial/forward-declarations/[Forward Declarations and Definitions]) the `Robot-`, `Autonomous-`, `Teleop-`, `Disabled-`, `Test-`, and `Simulation-` Init() and Periodic() functions.
 
 .Create a Blank Timed Robot Project
-image::img/BlankProject.gif[Blank Project, align="center"]
+image::BlankProject.gif[Blank Project, align="center"]
 
 .Contents of Generated Robot.h
 [source,C++]

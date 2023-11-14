@@ -1,0 +1,27 @@
+= Raider Robotics Electrical Sub-Team Guide
+:source-highlighter: highlight.js
+:xrefstyle: short
+// :sectnums:
+:idprefix!: 
+:idseparator: -
+:tip-caption: WPILib:
+:CPP: C++
+:url-wpilibdocs: https://docs.wpilib.org/en/stable/
+:toc:
+:toc-placement!:
+
+[discrete#top]
+
+toc::[]
+
+== Overview
+The Electrical Sub-Team is responsible for ...
+
+
+== Resources
+
+* {url-wpilibdocs}[WPILib Documentation] (https://github.wpilib.org/allwpilib/docs/release/cpp/index.html[*{CPP}* API^]) (https://github.com/wpilibsuite/allwpilib/tree/main/wpilibcExamples/src/main/cpp/examples[Example Code^])
+
+
+
+<<top,TOP>>

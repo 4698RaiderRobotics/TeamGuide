@@ -1,0 +1,86 @@
+= Raider Robotics Design Sub-Team Guide
+:source-highlighter: highlight.js
+:xrefstyle: short
+// :sectnums:
+:idprefix!: 
+:idseparator: -
+:imagesdir: img/design
+:tip-caption: WPILib:
+:CPP: C++
+:url-wpilibdocs: https://docs.wpilib.org/en/stable/
+:toc:
+:toc-placement!:
+
+[discrete#top]
+
+toc::[]
+
+== Overview
+The Design Sub-Team is responsible for the CAD/CAM designs used to build the robot.  In order to make good designs it is necessary to understand the manufacturing and mechanical sub-team's jobs very well.  It is quite challenging to make a design that is easy to manufacture, easy to assemble, and easy to maintain.
+
+NOTE: The design process is an iterative process.  Designs evolve and change during robot building and testing.
+
+We use Autodesk Fusion 360 as our design software.  Each season we create a new Project that is used for all of the design files.  It is important to keep the project directory organized with folders that contain the components for each logical sub-component of the robot (i.e. frame base, drivetrain, arm, intake, turret, etc.).  There should also be a `Vendor` folder that contains all of the downloaded 3D models from the various vendors we use for Commercial Off-The-Shelf (COTS) items.
+
+== Fusion 360
+
+=== Learning Fusion
+
+Try to learn as much as you can in order to efficiently and effectively use Fusion 360.  This means practice by doing some examples, watch the tutorial videos from Autodesk, and ask questions when you are struggling.
+
+Watch the https://help.autodesk.com/view/fusion360/ENU/courses/[Fusion 360 Tutorials] in particular the [.underline]_Sketch basics_, [.underline]_Solid modeling basics_, [.underline]_Introduction to 3D modeling_, and [.underline]_Advanced part modeling techniques_ from the *3D modeling* series.
+
+Watch the video https://www.autodesk.com/autodesk-university/class/100-Things-Beginners-Should-Learn-Fusion-360-2020[100 Things Beginners Should Learn].
+
+https://www.autodesk.com/products/fusion-360/blog/components-vs-bodies-tips-fusion-360/[7 Tips for Organizing Bodies & Components] discusses the key idea of activating a component before doing any operations on the component to make the timeline cleaner and better organized.
+
+Also checkout the https://www.autodesk.com/products/fusion-360/blog#getting-started[Fusion 360 Blog] for other tips and tricks.
+
+=== Sketches are Key
+
+Sketches are the most important part of Fusion to master when you are just learning.  In particular the efficient use of constraints and dimensions will help make designs easier to modify in the future.
+
+IMPORTANT: ALL SKETCHES MUST BE FULLY CONSTRAINED.  No exceptions.  DO NOT USE THE LOCK CONSTRAINT. 
+
+Fully constrained sketches force you to consider all aspects of the geometry of the sketch and make modifying the sketch later much easier.  
+
+Use construction lines when necessary.  They are sometimes easier than using dimensions for overall positioning.  When a part must mate with another, project only the geometry necessary to align the two parts.
+
+[%notitle]
+=== Sketch Exercise {counter:tasknum}
+
+|===
+a| `*Exercise {tasknum}*` 
+a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center.  Use a close fit clearance hole size for the motor mount bolts.
+
+image::MotorMount.png[Motor Mount, align="center"]
+
+a| QUESTIONS: ::
+. Is your sketch completely constrained (no blue lines)? Do NOT use locking.
+. Would this hole pattern work for a Falcon 500 motor?  If not, what changes would have to be made to be able to use either a NEO or a Falcon?
+|===
+
+== Using Vendor 3D Models
+
+Most all of the robotics parts vendors provide 3D models (STEP files) of their products that can be easily used in a design.  In addition Fusion 360 makes it very easy to add fasteners from McMaster-Carr into a design.  It is easiest to put all the robotics vendors 3D models into a common folder (`Vendor`) so each design doesn't need to import their own copy.
+
+
+
+== Resources
+
+* https://wcproducts.com/[West Coast Products]
+
+* https://www.revrobotics.com/[RevRobotics] NEO, NEO Vortex
+
+* https://store.ctr-electronics.com/[Cross The Road Electronics] Falcon 500, Kraken X60
+
+* https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart] (Metric in the Printable Version link)
+
+* https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator]
+
+* https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator]
+
+* https://www.reca.lc/[ReCalc -- Chain & Belt Calcs, Motor Info]
+
+
+<<top,TOP>>
