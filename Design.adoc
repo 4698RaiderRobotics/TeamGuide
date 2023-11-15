@@ -51,7 +51,7 @@ Use construction lines when necessary.  They are sometimes easier than using dim
 
 |===
 a| `*Exercise {tasknum}*` 
-a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center.  Use a close fit clearance hole size for the motor mount bolts.
+a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart]).
 
 image::MotorMount.png[Motor Mount, align="center"]
 
@@ -63,6 +63,32 @@ a| QUESTIONS: ::
 == Using Vendor 3D Models
 
 Most all of the robotics parts vendors provide 3D models (STEP files) of their products that can be easily used in a design.  In addition Fusion 360 makes it very easy to add fasteners from McMaster-Carr into a design.  It is easiest to put all the robotics vendors 3D models into a common folder (`Vendor`) so each design doesn't need to import their own copy.
+
+== Drive System Design
+
+Belts, Chains, and Gears are commonly used on FRC robots.  When a design uses these elements it is possible to choose the distance between rotation centers such that exact lengths of belts or chains work correctly.  Gears will not work without precise center-to-center distances. 
+
+=== Belt Drive
+
+Belt drive systems are a quiet and relatively safe means of transferring rotation between shafts.  FRC belts are either 5mm HTD belts or 3mm GT2 belts, where the distance represents the pitch of the belt teeth.  They also come in either 9mm or 15mm widths. Belt pulleys don't come in as many tooth count options as chain sprockets or gears which limits the gear ratios available.
+
+The center-to-center distance for a belt system can be calculated with the https://www.reca.lc/belts[ReCalc Belt Calculator] or with the https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator].
+
+=== Chain Drive
+
+Chain used in FRC comes in a smaller size (#25) and a larger size (#35).  Chain drives are strong but noisy and dangerous (can cut off fingers easily).  Chain sprockets come is a fairly good range of sizes with the larger sprockets having a VersaHub bolt pattern rather than a 1/2" Hex bore.  Chains have a tendancy to stretch and loosen slightly over time.  ReCalc has a https://www.reca.lc/chains[Chain Length Calculator].
+
+=== Gear Drive
+
+Gears come in many tooth counts (every 2 tooth increments) and the larger sizes are 1/2" Hex bore (unlike chain sprockets).  The center-to-center distance can be found with the https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator].  
+
+Once a center-to-center distance is found for a pair of gears, any gears that sum to the same tooth count will work for that center-to-center distance.  For example if you find the center-to-center distance for a 16T gear meshing with a 44T gear then you can take the sum of the tooth counts (16T + 44T = 60T).  Now any pair of gears that sum to 60T will work with that center-to-center distance (e.g. 24T and 36T).  In the technical drawing for the  https://wcproducts.info/files/frc/drawings/Web-WCP-0225.PDF[WCP Rotaiton SS Gearbox] you can see that this sum is specified for each stage of the gearbox.
+
+== Fasteners
+
+FRC robots usually use either socket head cap screws or button head screws due to their strength and ease of use.  Socket head cap screws are the strongest type of screw.  Button head screws have a lower and wider head and are good when holding thin sheet metal or when the lower profile is needed.
+
+image::Socket-head-screw-types.jpg[Socket Head Types, align="center"]
 
 
 
@@ -76,11 +102,10 @@ Most all of the robotics parts vendors provide 3D models (STEP files) of their p
 
 * https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart] (Metric in the Printable Version link)
 
+* https://www.reca.lc/[ReCalc -- Chain & Belt Calcs, Motor Info]
+
 * https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator]
 
 * https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator]
-
-* https://www.reca.lc/[ReCalc -- Chain & Belt Calcs, Motor Info]
-
 
 <<top,TOP>>
