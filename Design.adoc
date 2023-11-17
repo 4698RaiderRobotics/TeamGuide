@@ -53,7 +53,7 @@ Use construction lines when necessary.  They are sometimes easier than using dim
 a| `*Exercise {tasknum}*` 
 a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart]).
 
-image::MotorMount.png[Motor Mount, align="center"]
+image::1_MotorMount.png[Motor Mount, align="center"]
 
 a| QUESTIONS: ::
 . Is your sketch completely constrained (no blue lines)? Do NOT use locking.
@@ -64,12 +64,16 @@ a| QUESTIONS: ::
 
 Most all of the robotics parts vendors provide 3D models (STEP files) of their products that can be easily used in a design.  In addition Fusion 360 makes it very easy to add fasteners from McMaster-Carr into a design.  It is easiest to put all the robotics vendors 3D models into a common folder (`Vendor`) so each design doesn't need to import their own copy.
 
+Use file names that make it easy for someone else to find a vendor model.  For example, 1/2" Hex Rod from WCPs website might be named `HEX_ROD_0500_WCP_217-2753` which tells everyone what it is, where it was downloaded from, and the part number.
+
+Moving and aligning imported components is done by rotating the component to the proper orientation then using Point-To-Point moving to get the component to the correct X,Y,Z location.
+
 [%notitle]
 === Vendor Exercise {counter:tasknum}
 
 |===
 a| `*Exercise {tasknum}*` 
-a| Design a hex rod shaft with a 40 tooth chain sprocket on each end as shown in the drawing below.  Get the FRC specific part files from WCProducts and use a `Vendor` folder to store your vendor models.  You will need part numbers 217-2637, 217-2753, WCP-0790, WCP-0324, and 217-2592.  You will also need e-clips and bolts from McMaster-Carr.  McMaster-Carr parts can be inserted directly from within Fusion 360.
+a| Design a hex rod shaft with a 40 tooth chain sprocket on each end as shown in the drawing below.  Get the FRC specific part files from https://wcproducts.com/[West Coast Products] and use a `Vendor` folder to store your vendor models.  Use meaningful names for your files within your Vendor folder (see above).  You will need part numbers 217-2753, 217-2637, WCP-0790, WCP-0324, and 217-2592.  You will also need e-clips and bolts from McMaster-Carr.  McMaster-Carr parts can be inserted directly from within Fusion 360.
 
 image::2_HexRodAsmDrawing.png[Hex Rod Asmb, align="center"]
 
