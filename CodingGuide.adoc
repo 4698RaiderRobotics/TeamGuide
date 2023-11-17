@@ -338,7 +338,9 @@ LINKS:
 
 == Other Teams
 
-* https://www.team254.com/[The Cheesy Poofs]
+* https://www.team254.com/[The Cheesy Poofs 254]
+
+* https://www.citruscircuits.org/[Citrus Circuits 1678]
 
 * https://www.littletonrobotics.org/[Mechanical Advantage] https://github.com/Mechanical-Advantage/AdvantageScope[(AdvantageScope)]
 

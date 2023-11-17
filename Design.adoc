@@ -64,6 +64,25 @@ a| QUESTIONS: ::
 
 Most all of the robotics parts vendors provide 3D models (STEP files) of their products that can be easily used in a design.  In addition Fusion 360 makes it very easy to add fasteners from McMaster-Carr into a design.  It is easiest to put all the robotics vendors 3D models into a common folder (`Vendor`) so each design doesn't need to import their own copy.
 
+[%notitle]
+=== Vendor Exercise {counter:tasknum}
+
+|===
+a| `*Exercise {tasknum}*` 
+a| Design a hex rod shaft with a 40 tooth chain sprocket on each end as shown in the drawing below.  Get the FRC specific part files from WCProducts and use a `Vendor` folder to store your vendor models.  You will need part numbers 217-2637, 217-2753, WCP-0790, WCP-0324, and 217-2592.  You will also need e-clips and bolts from McMaster-Carr.  McMaster-Carr parts can be inserted directly from within Fusion 360.
+
+image::2_HexRodAsmDrawing.png[Hex Rod Asmb, align="center"]
+
+image::2_HexRodAssembly.png[Hex Rod Asmb, align="center"]
+
+
+a| QUESTIONS: ::
+. What did you have to sketch for this design?
+. Did you draw the hex rod or use the Vendor model and shorten it?
+. How did you determine the fastener sizes needed?
+. How did you determine the e-clip groove dimensions?
+|===
+
 == Drive System Design
 
 Belts, Chains, and Gears are commonly used on FRC robots.  When a design uses these elements it is possible to choose the distance between rotation centers such that exact lengths of belts or chains work correctly.  Gears will not work without precise center-to-center distances. 
