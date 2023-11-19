@@ -20,7 +20,7 @@ The Design Sub-Team is responsible for the CAD/CAM designs used to build the rob
 
 NOTE: The design process is an iterative process.  Designs evolve and change during robot building and testing.
 
-We use Autodesk Fusion 360 as our design software.  Each season we create a new Project that is used for all of the design files.  It is important to keep the project directory organized with folders that contain the components for each logical sub-component of the robot (i.e. frame base, drivetrain, arm, intake, turret, etc.).  There should also be a `Vendor` folder that contains all of the downloaded 3D models from the various vendors we use for Commercial Off-The-Shelf (COTS) items.
+We use Autodesk Fusion 360 as our design software.  Each season we create a new Project that is used for all of the design files.  It is important to keep the project directory organized with folders that contain the components for each logical sub-component of the robot (i.e. frame base, drivetrain, arm, intake, turret, etc.).  There is also a `Vendor` folder that contains some of the 3D models from the various vendors we use for Commercial Off-The-Shelf (COTS) items organized into subfolders.
 
 == Fusion 360
 
@@ -40,7 +40,7 @@ Also checkout the https://www.autodesk.com/products/fusion-360/blog#getting-star
 
 Sketches are the most important part of Fusion to master when you are just learning.  In particular the efficient use of constraints and dimensions will help make designs easier to modify in the future.
 
-IMPORTANT: ALL SKETCHES MUST BE FULLY CONSTRAINED.  No exceptions.  DO NOT USE THE LOCK CONSTRAINT. 
+IMPORTANT: ALL SKETCHES MUST BE FULLY CONSTRAINED.  DO NOT USE THE LOCK CONSTRAINT. 
 
 Fully constrained sketches force you to consider all aspects of the geometry of the sketch and make modifying the sketch later much easier.  
 
@@ -51,18 +51,21 @@ Use construction lines when necessary.  They are sometimes easier than using dim
 
 |===
 a| `*Exercise {tasknum}*` 
-a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart]).
+a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center.  Do this exercise without downloading the STEP model of the NEO, look at the drawing to find the dimensions.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart]).
 
 image::1_MotorMount.png[Motor Mount, align="center"]
 
 a| QUESTIONS: ::
 . Is your sketch completely constrained (no blue lines)? Do NOT use locking.
-. Would this hole pattern work for a Falcon 500 motor?  If not, what changes would have to be made to be able to use either a NEO or a Falcon?
+. Would this hole pattern work for a Falcon 500 motor with least four bolts attaching the motor?  Kracken motor? If not, what changes would have to be made to be able to use either a NEO, Falcon or a Kracken?
+. Redo this exercise using the STEP model of the NEO and projecting the necessary geometry to the sketch plane.  Position the NEO into the correct location on the mount.
 |===
 
 == Using Vendor 3D Models
 
-Most all of the robotics parts vendors provide 3D models (STEP files) of their products that can be easily used in a design.  In addition Fusion 360 makes it very easy to add fasteners from McMaster-Carr into a design.  It is easiest to put all the robotics vendors 3D models into a common folder (`Vendor`) so each design doesn't need to import their own copy.
+Most of the FRC parts the are used on the robot have 3D model files of the item available (STEP files).  The `Vendor` folder in the Project directory contains the models that have been downloaded. If you need to add an item that isn't there then put it into the correct subfolder and use a file name that makes sense.  For example, 1/2" Hex Rod from WCPs website might be named `HEX_ROD_0500_WCP_217-2753` which tells everyone what it is, where it was downloaded from, and the part number(look at the other items there for other examples).  Do not modify the vendor files directly.  If you need to modify a part (e.g. shorten hex rod) then insert the component into your design and break the link between it and the vendor file.  It can then be modified without changing the original vendor file.
+
+Fasteners can also be inserted directly into a design using the `Insert -> Insert McMaster-Carr Component` command.  Search for the item you need on the McMaster-Carr website that pops up and then select "*3D STEP*" as the file type and click *Download*.  McMaster-Carr has many types of fasteners including nuts, bolts, washers, e-clips, hex keys, etc.
 
 Use file names that make it easy for someone else to find a vendor model.  For example, 1/2" Hex Rod from WCPs website might be named `HEX_ROD_0500_WCP_217-2753` which tells everyone what it is, where it was downloaded from, and the part number.
 
@@ -87,6 +90,12 @@ a| QUESTIONS: ::
 . How did you determine the e-clip groove dimensions?
 |===
 
+== Components in Fusion 360
+
+Unless you are making a single part made of a single body you should create components for each part of your design *AND BE SURE TO ACTIVATE* that component when you are working with it.  Most of the advanced functionality of Fusion 360 only works with components such as joints and rigid body constraints.  Activating a component before doing any operations on it will filter the timeline to only those that pertain to that component which makes working with the timeline much easier as designs get complicated.
+
+See https://www.autodesk.com/products/fusion-360/blog/components-bodies-for-new-designers/[Components & Bodies for New Designers^]
+
 == Drive System Design
 
 Belts, Chains, and Gears are commonly used on FRC robots.  When a design uses these elements it is possible to choose the distance between rotation centers such that exact lengths of belts or chains work correctly.  Gears will not work without precise center-to-center distances. 
@@ -107,6 +116,21 @@ Gears come in many tooth counts (every 2 tooth increments) and the larger sizes 
 
 Once a center-to-center distance is found for a pair of gears, any gears that sum to the same tooth count will work for that center-to-center distance.  For example if you find the center-to-center distance for a 16T gear meshing with a 44T gear then you can take the sum of the tooth counts (16T + 44T = 60T).  Now any pair of gears that sum to 60T will work with that center-to-center distance (e.g. 24T and 36T).  In the technical drawing for the  https://wcproducts.info/files/frc/drawings/Web-WCP-0225.PDF[WCP Rotaiton SS Gearbox] you can see that this sum is specified for each stage of the gearbox.
 
+[%notitle]
+=== Gearbox Exercise {counter:tasknum}
+
+|===
+a| `*Exercise {tasknum}*` 
+a| Design a 2-stage vertical oriented gearbox with a 16:1 ratio that uses a Falcon 500 motor and has a 1/2" Hex output shaft.  Have the gearbox bolt to a 1"x1" tube.  You will need to have the plate spacing at 1-1/8" in order for flange bearing to fit inside the plate.  This design is very similar to the https://wcproducts.com/collections/gearboxes/products/wcp-rotation-ss-gearbox[WCP Rotation SS Gearbox^] but in the vertical orientation.  Don't use the WCP 3D model, start from scratch.
+
+image::3_Gearbox_Hand_Sketch.jpg[Gearbox Sketch, align="center"]
+
+
+a| QUESTIONS: ::
+. This is a fairly complex design.  What problems did you run into?
+. Did you create multiple components and activate them to separate out the timeline?
+|===
+
 == Fasteners
 
 FRC robots usually use either socket head cap screws or button head screws due to their strength and ease of use.  Socket head cap screws are the strongest type of screw.  Button head screws have a lower and wider head and are good when holding thin sheet metal or when the lower profile is needed.
@@ -117,7 +141,7 @@ image::Socket-head-screw-types.jpg[Socket Head Types, align="center"]
 
 == Resources
 
-* https://wcproducts.com/[West Coast Products]
+* https://wcproducts.com/[West Coast Products,window=_blank]
 
 * https://www.revrobotics.com/[RevRobotics] NEO, NEO Vortex
 
