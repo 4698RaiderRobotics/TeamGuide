@@ -96,7 +96,7 @@ Brushless motors are much more electrically complex but mechanically simpler.  B
 |  https://www.vexrobotics.com/217-6515.html[Falcon 500^]
 | 6380 rpm | 783 W | 532 rpm/V | 2048 
 
-5+| See also https://www.reca.lc/motors[ReCalc Motors Table]
+5+| See also https://www.reca.lc/motors[ReCalc Motors Table^]
 |===
 
 === Motor Controllers
@@ -105,7 +105,7 @@ Motor controllers receive commands from the robot program and talk directly to t
 
 === Encoders
 
-TIP: See https://docs.wpilib.org/en/stable/docs/hardware/sensors/encoders-hardware.html[Encoders -- Hardware] and https://docs.wpilib.org/en/stable/docs/software/hardware-apis/sensors/encoders-software.html[Encoders -- Software]
+TIP: See https://docs.wpilib.org/en/stable/docs/hardware/sensors/encoders-hardware.html[Encoders -- Hardware^] and https://docs.wpilib.org/en/stable/docs/software/hardware-apis/sensors/encoders-software.html[Encoders -- Software^]
 
 Encoders are devices that measure the rotation of a shaft.  Usually encoders are either built into motors or added to the motor shaft but it is also possible to add an encoder to any rotating shaft.  Encoders have a resolution which is specified in "tics" per rotation.  The *Falcon* motor has a built-in encoder which has a resolution of 2048.  That means that it can detect rotations of 360 / 2048 = 0.176 degrees.
 
@@ -139,7 +139,7 @@ When you write a program to control the robot you are actually just writing some
 
 WPILib provides two main ways to structure a robot program. One is called "TimedRobot" based and the other is "Command" based.  Both program structures have methods that are called by the WPILib scheduler but when and how those methods are called differ between the two program structures.  A TimedRobot program is given control at a fixed interval of time (20 milliseconds).  A Command based program is only given control when some kind of condition is met (like a button was pressed on an Xbox controller).  Command based programs are structured such that they force the programmer to segment their code into classes that represent they types of Actions that the robot does.
 
-TIP: * See {url-wpilibdocs}docs/software/vscode-overview/creating-robot-program.html[Creating a Robot Program]
+TIP: * See {url-wpilibdocs}docs/software/vscode-overview/creating-robot-program.html[Creating a Robot Program^]
 
 == Units Library
 
@@ -254,8 +254,8 @@ TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduct
 
 The videos below by FRC 0 to Autonomous are really good at describing PID and showing the PID loop calculations.  The IZone parameter that they implement is not a very good solution and in general it is best if you can avoid integral control.
 
-* https://www.youtube.com/watch?v=jIKBWO7ps0w[PID Video, Part 1]
-* https://www.youtube.com/watch?v=Z24fSBVJeGs[PID Video, Part 2]
+* https://www.youtube.com/watch?v=jIKBWO7ps0w[PID Video, Part 1^]
+* https://www.youtube.com/watch?v=Z24fSBVJeGs[PID Video, Part 2^]
 
 === Feed Forward
 
@@ -263,7 +263,7 @@ We will continue with the flywheel shooter example from <<motion-control>>.  If 
 
 The idea of using the physics of the motor to estimate what the motor output should be is called "feed forward".  Feed forward is used in addition of PID Control to achieve very good motor behavior.  WPILib provides some classes to help do some of the feed forward calculations.
 
-TIP: See {url-wpilibdocs}docs/software/advanced-controls/controllers/feedforward.html[WPILib Feed Forward].
+TIP: See {url-wpilibdocs}docs/software/advanced-controls/controllers/feedforward.html[WPILib Feed Forward^].
 
 // [#smart_pid]
 === Smart Controller PID
@@ -326,32 +326,32 @@ TODO "Self Driving Robot"
 
 LINKS:
 
-* https://www.team254.com/documents/vision-control/
+* https://www.team254.com/documents/vision-control/[Cheesy Poofs Vision Control^]
 
 * https://limelightvision.io/[Limelight^]
 
-* https://photonvision.org/[PhotonVision]
+* https://photonvision.org/[PhotonVision^]
 
-* http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-5.html[Orange Pi 5]
+* http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-5.html[Orange Pi 5^]
 
-* https://www.raspberrypi.com/[Raspberry Pi]
+* https://www.raspberrypi.com/[Raspberry Pi^]
 
 == Other Teams
 
-* https://www.team254.com/[The Cheesy Poofs 254]
+* https://www.team254.com/[The Cheesy Poofs 254^]
 
-* https://www.citruscircuits.org/[Citrus Circuits 1678]
+* https://www.citruscircuits.org/[Citrus Circuits 1678^]
 
-* https://www.littletonrobotics.org/[Mechanical Advantage] https://github.com/Mechanical-Advantage/AdvantageScope[(AdvantageScope)]
+* https://www.littletonrobotics.org/[Mechanical Advantage^] https://github.com/Mechanical-Advantage/AdvantageScope[(AdvantageScope)^]
 
 * https://frc3512.github.io/ci/[Team 3512 Learning Curriculum^]
 
-* https://github.com/Jagwires7443[Jagwires 7443 Github (Swerve & Interface Board)]
+* https://github.com/Jagwires7443[Jagwires 7443 Github (Swerve & Interface Board)^]
 
 
 == Resources
 
-* {url-wpilibdocs}[WPILib Documentation] (https://github.wpilib.org/allwpilib/docs/release/cpp/index.html[*{CPP}* API^]) (https://github.com/wpilibsuite/allwpilib/tree/main/wpilibcExamples/src/main/cpp/examples[Example Code^])
+* {url-wpilibdocs}[WPILib Documentation^] (https://github.wpilib.org/allwpilib/docs/release/cpp/index.html[*{CPP}* API^]) (https://github.com/wpilibsuite/allwpilib/tree/main/wpilibcExamples/src/main/cpp/examples[Example Code^])
 
 * https://docs.revrobotics.com/sparkmax/software-resources/spark-max-api-information[Rev Robotics REVLib Docs^] 
 (https://codedocs.revrobotics.com/cpp/namespacerev.html[*{CPP}* API^]) (https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/C%2B%2B[Example Code^])
@@ -371,8 +371,8 @@ LINKS:
 
 * https://hackingcpp.com/cpp/libs/fmt.png[*{fmt}* Cheat Sheet^]
 
-* https://www.projectb.net.au/resources/robot-mechanisms/[The Unofficial FRC Mechanism Encyclopedia]
+* https://www.projectb.net.au/resources/robot-mechanisms/[The Unofficial FRC Mechanism Encyclopedia^]
 
-* https://team2471.files.wordpress.com/2017/10/manipulators-firstfare-2017.pdf[Manipulators by Team 2471]
+* https://team2471.files.wordpress.com/2017/10/manipulators-firstfare-2017.pdf[Manipulators by Team 2471^]
 
 <<top,TOP>>

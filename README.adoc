@@ -1,18 +1,4 @@
-= Raider Robotics Team Guide
-:source-highlighter: highlight.js
-:xrefstyle: short
-// :sectnums:
-:idprefix!: 
-:idseparator: -
+= Raider Robotics Team Guide GitHub Repo
 
-== Sub-Team Resources and Practice Exercises
 
-* xref:Design.adoc[Design Sub-Team]
-
-* xref:Manufacturing.adoc[Manufacturing Sub-Team]
-
-* xref:Electrical.adoc[Electrical Sub-Team]
-
-* xref:Mechanical.adoc[Mechanical Sub-Team]
-
-* xref:CodingGuide.adoc[Software Sub-Team]
+== This is the GitHub repository.  You want to goto the https://https://4698RaiderRobotics.github.io/TeamGuide/[Team Guide Webpage]

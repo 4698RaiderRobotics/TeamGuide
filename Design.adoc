@@ -5,9 +5,6 @@
 :idprefix!: 
 :idseparator: -
 :imagesdir: img/design
-:tip-caption: WPILib:
-:CPP: C++
-:url-wpilibdocs: https://docs.wpilib.org/en/stable/
 :toc:
 :toc-placement!:
 
@@ -28,13 +25,13 @@ We use Autodesk Fusion 360 as our design software.  Each season we create a new 
 
 Try to learn as much as you can in order to efficiently and effectively use Fusion 360.  This means practice by doing some examples, watch the tutorial videos from Autodesk, and ask questions when you are struggling.
 
-Watch the https://help.autodesk.com/view/fusion360/ENU/courses/[Fusion 360 Tutorials] in particular the [.underline]_Sketch basics_, [.underline]_Solid modeling basics_, [.underline]_Introduction to 3D modeling_, and [.underline]_Advanced part modeling techniques_ from the *3D modeling* series.
+Watch the https://help.autodesk.com/view/fusion360/ENU/courses/[Fusion 360 Tutorials^] in particular the [.underline]_Sketch basics_, [.underline]_Solid modeling basics_, [.underline]_Introduction to 3D modeling_, and [.underline]_Advanced part modeling techniques_ from the *3D modeling* series.
 
-Watch the video https://www.autodesk.com/autodesk-university/class/100-Things-Beginners-Should-Learn-Fusion-360-2020[100 Things Beginners Should Learn].
+Watch the video https://www.autodesk.com/autodesk-university/class/100-Things-Beginners-Should-Learn-Fusion-360-2020[100 Things Beginners Should Learn^].
 
-https://www.autodesk.com/products/fusion-360/blog/components-vs-bodies-tips-fusion-360/[7 Tips for Organizing Bodies & Components] discusses the key idea of activating a component before doing any operations on the component to make the timeline cleaner and better organized.
+https://www.autodesk.com/products/fusion-360/blog/components-vs-bodies-tips-fusion-360/[7 Tips for Organizing Bodies & Components^] discusses the key idea of activating a component before doing any operations on the component to make the timeline cleaner and better organized.
 
-Also checkout the https://www.autodesk.com/products/fusion-360/blog#getting-started[Fusion 360 Blog] for other tips and tricks.
+Also checkout the https://www.autodesk.com/products/fusion-360/blog#getting-started[Fusion 360 Blog^] for other tips and tricks.
 
 === Sketches are Key
 
@@ -51,14 +48,19 @@ Use construction lines when necessary.  They are sometimes easier than using dim
 
 |===
 a| `*Exercise {tasknum}*` 
-a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center.  Do this exercise without downloading the STEP model of the NEO, look at the drawing to find the dimensions.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart]).
+a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center.  Do this exercise without downloading the STEP model of the NEO, look at the drawing to find the dimensions.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^]).
 
 image::1_MotorMount.png[Motor Mount, align="center"]
 
+a| GOALS: ::
+. Practice making a simple sketch and using constraints.
+. Learn how to look at the motor/part drawings to get dimensions needed for designing.
+. Think about fasteners and the correct hole sizes for them.
+
 a| QUESTIONS: ::
-. Is your sketch completely constrained (no blue lines)? Do NOT use locking.
+. Is your sketch completely constrained (no blue lines)? Do NOT use locking (green lines).
 . Would this hole pattern work for a Falcon 500 motor with least four bolts attaching the motor?  Kracken motor? If not, what changes would have to be made to be able to use either a NEO, Falcon or a Kracken?
-. Redo this exercise using the STEP model of the NEO and projecting the necessary geometry to the sketch plane.  Position the NEO into the correct location on the mount.
+. Redo this exercise using the STEP model of the NEO and projecting the necessary geometry to the sketch plane.  Position the NEO into the correct location against the mount.
 |===
 
 == Using Vendor 3D Models
@@ -76,7 +78,7 @@ Moving and aligning imported components is done by rotating the component to the
 
 |===
 a| `*Exercise {tasknum}*` 
-a| Design a hex rod shaft with a 40 tooth chain sprocket on each end as shown in the drawing below.  Get the FRC specific part files from https://wcproducts.com/[West Coast Products] and use a `Vendor` folder to store your vendor models.  Use meaningful names for your files within your Vendor folder (see above).  You will need part numbers 217-2753, 217-2637, WCP-0790, WCP-0324, and 217-2592.  You will also need e-clips and bolts from McMaster-Carr.  McMaster-Carr parts can be inserted directly from within Fusion 360.
+a| Design a hex rod shaft with a 40 tooth chain sprocket on each end as shown in the drawing below.  Get the FRC specific part files from https://wcproducts.com/[West Coast Products^] and use a `Vendor` folder to store your vendor models.  Use meaningful names for your files within your Vendor folder (see above).  You will need part numbers 217-2753, 217-2637, WCP-0790, WCP-0324, and 217-2592.  You will also need e-clips and bolts from McMaster-Carr.  McMaster-Carr parts can be inserted directly from within Fusion 360.
 
 image::2_HexRodAsmDrawing.png[Hex Rod Asmb, align="center"]
 
@@ -104,17 +106,17 @@ Belts, Chains, and Gears are commonly used on FRC robots.  When a design uses th
 
 Belt drive systems are a quiet and relatively safe means of transferring rotation between shafts.  FRC belts are either 5mm HTD belts or 3mm GT2 belts, where the distance represents the pitch of the belt teeth.  They also come in either 9mm or 15mm widths. Belt pulleys don't come in as many tooth count options as chain sprockets or gears which limits the gear ratios available.
 
-The center-to-center distance for a belt system can be calculated with the https://www.reca.lc/belts[ReCalc Belt Calculator] or with the https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator].
+The center-to-center distance for a belt system can be calculated with the https://www.reca.lc/belts[ReCalc Belt Calculator^] or with the https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator^].
 
 === Chain Drive
 
-Chain used in FRC comes in a smaller size (#25) and a larger size (#35).  Chain drives are strong but noisy and dangerous (can cut off fingers easily).  Chain sprockets come is a fairly good range of sizes with the larger sprockets having a VersaHub bolt pattern rather than a 1/2" Hex bore.  Chains have a tendancy to stretch and loosen slightly over time.  ReCalc has a https://www.reca.lc/chains[Chain Length Calculator].
+Chain used in FRC comes in a smaller size (#25) and a larger size (#35).  Chain drives are strong but noisy and dangerous (can cut off fingers easily).  Chain sprockets come is a fairly good range of sizes with the larger sprockets having a VersaHub bolt pattern rather than a 1/2" Hex bore.  Chains have a tendancy to stretch and loosen slightly over time.  ReCalc has a https://www.reca.lc/chains[Chain Length Calculator^].
 
 === Gear Drive
 
-Gears come in many tooth counts (every 2 tooth increments) and the larger sizes are 1/2" Hex bore (unlike chain sprockets).  The center-to-center distance can be found with the https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator].  
+Gears come in many tooth counts (every 2 tooth increments) and the larger sizes are 1/2" Hex bore (unlike chain sprockets).  The center-to-center distance can be found with the https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator^].  
 
-Once a center-to-center distance is found for a pair of gears, any gears that sum to the same tooth count will work for that center-to-center distance.  For example if you find the center-to-center distance for a 16T gear meshing with a 44T gear then you can take the sum of the tooth counts (16T + 44T = 60T).  Now any pair of gears that sum to 60T will work with that center-to-center distance (e.g. 24T and 36T).  In the technical drawing for the  https://wcproducts.info/files/frc/drawings/Web-WCP-0225.PDF[WCP Rotaiton SS Gearbox] you can see that this sum is specified for each stage of the gearbox.
+Once a center-to-center distance is found for a pair of gears, any gears that sum to the same tooth count will work for that center-to-center distance.  For example if you find the center-to-center distance for a 16T gear meshing with a 44T gear then you can take the sum of the tooth counts (16T + 44T = 60T).  Now any pair of gears that sum to 60T will work with that center-to-center distance (e.g. 24T and 36T).  In the technical drawing for the  https://wcproducts.info/files/frc/drawings/Web-WCP-0225.PDF[WCP Rotaiton SS Gearbox^] you can see that this sum is specified for each stage of the gearbox.
 
 [%notitle]
 === Gearbox Exercise {counter:tasknum}
@@ -141,18 +143,18 @@ image::Socket-head-screw-types.jpg[Socket Head Types, align="center"]
 
 == Resources
 
-* https://wcproducts.com/[West Coast Products,window=_blank]
+* https://wcproducts.com/[West Coast Products^]
 
-* https://www.revrobotics.com/[RevRobotics] NEO, NEO Vortex
+* https://www.revrobotics.com/[RevRobotics^] NEO, NEO Vortex
 
-* https://store.ctr-electronics.com/[Cross The Road Electronics] Falcon 500, Kraken X60
+* https://store.ctr-electronics.com/[Cross The Road Electronics^] Falcon 500, Kraken X60
 
-* https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart] (Metric in the Printable Version link)
+* https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^] (Metric in the Printable Version link)
 
-* https://www.reca.lc/[ReCalc -- Chain & Belt Calcs, Motor Info]
+* https://www.reca.lc/[ReCalc -- Chain & Belt Calcs, Motor Info^]
 
-* https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator]
+* https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator^]
 
-* https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator]
+* https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator^]
 
 <<top,TOP>>
