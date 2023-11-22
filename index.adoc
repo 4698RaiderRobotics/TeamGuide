@@ -7,15 +7,4 @@
 
 == Sub-Team Resources and Practice Exercises
 
-=== xref:Design.adoc[Design Sub-Team]
-
-=== xref:Electrical.adoc[Electrical Sub-Team]
-
-=== xref:Manufacturing.adoc[Manufacturing Sub-Team]
-
-=== xref:Mechanical.adoc[Mechanical Sub-Team]
-
-=== xref:CodingGuide.adoc[Software Sub-Team]
-
-* xref:TestBench.adoc[Test Bench]
-* xref:CPP_Lessons.adoc[C++ Lessons / Primer]
+Choose your sub-team from the list at right.

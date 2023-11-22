@@ -1,4 +1,5 @@
-= Raider Robotics Team Guide GitHub Repo
+= Raider Robotics Team Guide
 
+image::img\Team4698Logo.webp[Logo, align="center"]
 
-== This is the GitHub repository.  You want to goto the https://https://4698RaiderRobotics.github.io/TeamGuide/[Team Guide Webpage]
+== Visit the https://4698raiderrobotics.github.io/TeamGuide/[Team Guide Webpage]

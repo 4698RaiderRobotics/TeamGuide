@@ -10,6 +10,8 @@
 
 [discrete#top]
 
+=== Design Sub-Team Exercises and Resources
+
 toc::[]
 
 == Overview
