@@ -1,6 +1,6 @@
 title: 4698 Raider Robotics Team Guide
 # uncomment baseurl if you want to publish the site to a subfolder
-baseurl: /testGHPages
+baseurl: /TeamGuide
 description: The Raider Robotics Team Guide has resources to help newer team members learn the skills they need for FRC robotics.
 exclude:
 - README.adoc

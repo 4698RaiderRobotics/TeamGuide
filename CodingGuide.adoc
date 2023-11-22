@@ -48,7 +48,7 @@ The software library that FRC uses in called WPILib.  WPILib is very large and c
 
 Some of the motors and motor controllers require software libraries that don't come in the WPILib libraries.  We use hardware that require the Rev Robotics REVLib library and the CTRE Phoenix Framework.  https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html[Information on installing these libraries^].
 
-If you are using your own computer then you can run the robot program in simulation mode without having access to the robot.  See {url-wpilibdocs}docs/zero-to-robot/step-2/wpilib-setup.html#additional-c-installation-for-simulation[Simulator Installation]
+If you are using your own computer then you can run the robot program in simulation mode without having access to the robot.  See {url-wpilibdocs}docs/zero-to-robot/step-2/wpilib-setup.html#additional-c-installation-for-simulation[Simulator Installation^]
 
 == Test Bench
 
@@ -58,11 +58,11 @@ xref:TestBench.adoc[The Test Bench Document]
 
 == Hardware Overview
 
-Read the WPILib sections on {url-wpilibdocs}docs/hardware/hardware-basics/index.html[Hardware-Basics] and {url-wpilibdocs}docs/hardware/sensors/index.html[Sensors], also check out the {url-wpilibdocs}docs/hardware/hardware-tutorials/index.html[Hardware Tutorials]
+Read the WPILib sections on {url-wpilibdocs}docs/hardware/hardware-basics/index.html[Hardware-Basics^] and {url-wpilibdocs}docs/hardware/sensors/index.html[Sensors^], also check out the {url-wpilibdocs}docs/hardware/hardware-tutorials/index.html[Hardware Tutorials^]
 
 === roboRIO
 
-The {url-wpilibdocs}docs/software/roborio-info/roborio-introduction.html[roboRIO] is the processor on the robot that executes the robot program.  It can communicate with many different motors and sensors through its various inputs and outputs.   
+The {url-wpilibdocs}docs/software/roborio-info/roborio-introduction.html[roboRIO^] is the processor on the robot that executes the robot program.  It can communicate with many different motors and sensors through its various inputs and outputs.   
 
 === Motors
 
@@ -150,7 +150,7 @@ TIP: See the {url-wpilibdocs}docs/software/basic-programming/cpp-units.html[FRC 
 One of the more useful aspects of using the Units Library is being able to define custom units that pertain to your robot code.  One example is converting from motor revolutions to distance traveled for the robot drivetrain.  If you have a gear box between the motor and the wheel that has a gear ratio of 6.86 to 1 and a wheel diameter of 4 inches then you could define a custom unit type of "meters per rotation" and then create a constant with those units that you can use to multiply desired linear velocities by to get motor angular velocities.
 
 .Custom Unit For Drivetrain
-[source,C++]
+[source,CPP]
 ----
        // Gear ratio of the drive motors. 6.86 rotations of the drive motor is one rotation of the wheel.
     constexpr double kDriveGearRatio = 6.86;
@@ -169,7 +169,7 @@ Note that the units library uses "turns" for rotations with the suffix "tr".  Al
 Another example is using the *TalonFX* smart motor controller library's `Set()` function. It requires the position or velocity inputs in very awkward units (See <<talon_pid_table>>). The position should be in "encoder tics" and the velocity should be in "encoder tics" per 100 milliseconds. There are 2048 encoder tics per rotation for the *TalonFX* built-in encoder. Custom units can help with converting from these strange units to more physically meaningful units. You could define a custom angular position unit that is ("tics") and a custom angular velocity unit that is ("tics" / 100_ms).
 
 .Custom Unit for Encoder Tics 
-[source,C++]
+[source,CPP]
 ----
         // Create a unit called "tics" that represents 1/2048th of a revolution
         // and make a type qualifier called "tics_t"
@@ -189,7 +189,7 @@ Another example is using the *TalonFX* smart motor controller library's `Set()` 
 Once these types are defined then the programmer doesn't need to worry about converting from `tics` to degrees or from RPM to `tics_per_100ms`. The units types will do all the conversions automatically.  The code below shows how to use these types.
 
 .Automatic Units Conversion
-[source,C++]
+[source,CPP]
 ----
 tics_t talon_position;
 tics_per_100ms_t talon_velocity;
@@ -221,7 +221,7 @@ printf( "Talon Velocity = %7.2f rpm\n",
 This choice could be a bit inconvienent as well since in order to print out the value of the `talon_velocity` or to send it to the Network Tables (See <<networktables>>) in RPM you must use the syntax `units::revolutions_per_minute_t(talon_velocity).value()`.  A better approach might be to create a `class` that encapsulates the mechanism that the motor is used in (like a shooter). Then create a member function in that class that sets the velocity of the motor and does the necessary conversion from RPM to `tics_per_100ms`.  So for example if the TalonFX motor was connected to a flywheel that is used to shoot a ball then you might want to create a `Shooter` class that looks like:
 
 .Encapsulating Unit Conversion
-[source,C++]
+[source,CPP]
 ----
 class Shooter {
 public:

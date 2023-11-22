@@ -7,11 +7,11 @@
 
 This document attempts to highlight the parts of the C++ language that are most helpful for FRC robotics.  Although some of the examples are oriented towards robotics, these lessons do not require any of the FRC software to be installed.
 
-Although there are simpler languages that could be used for robot programming, if you take the time to learn *{CPP}* it will be worth the effort.  https://www.evanmiller.org/you-cant-dig-upwards.html[See this blogpost] for an excellent argument for learning a lower-level language.
+Although there are simpler languages that could be used for robot programming, if you take the time to learn *{CPP}* it will be worth the effort.  https://www.evanmiller.org/you-cant-dig-upwards.html[See this blogpost^] for an excellent argument for learning a lower-level language.
 
 == Integrated Development Environment (IDE)
 
-An IDE is a system to write, compile, link, debug, and execute code.  These tasks (which you probably do not understand yet) are all done from a common application (the IDE).  FRC/WPILib uses Microsoft's Visual Studio IDE.  You should install the IDE on a laptop or desktop computer that you will use to learn *{CPP}*.  Follow the directions https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio[Visual Studio Community Install] and choose the Workload "Desktop Development with C++".
+An IDE is a system to write, compile, link, debug, and execute code.  These tasks (which you probably do not understand yet) are all done from a common application (the IDE).  FRC/WPILib uses Microsoft's Visual Studio IDE.  You should install the IDE on a laptop or desktop computer that you will use to learn *{CPP}*.  Follow the directions https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio[Visual Studio Community Install^] and choose the Workload "Desktop Development with C++".
 
 === Hello World
 
@@ -23,7 +23,7 @@ The ubiquitous first program of any programming language is the Hello World prog
 
 The HelloWorld project is created and the `HelloWorld.cpp` is opened in an editor window.  All of the lines that begin with double slashes (`//`) are comments.  The contents of the file with the comments removed is:
 
-[source,C++]
+[source,CPP]
 ----
 #include <iostream>
 
@@ -47,12 +47,12 @@ If all of the above goes correctly then you now have a working *{CPP}* compiler 
 
 == *{CPP}* Syntax, Functions, Data Types
 
-There are several good websites for learning *{CPP}* online.  I will point you in the direction of https://www.learncpp.com/[LearnCPP] for a lot of these lessons.  If you prefer to learn from a book then you can get _"Programming: Principles and Practice Using C++", by Bjarne Stroustrup_ although it is a bit expensive.
+There are several good websites for learning *{CPP}* online.  I will point you in the direction of https://www.learncpp.com/[LearnCPP^] for a lot of these lessons.  If you prefer to learn from a book then you can get _"Programming: Principles and Practice Using C++", by Bjarne Stroustrup_ although it is a bit expensive.
 
-Each chapter in https://www.learncpp.com/[LearnCPP] has several sections and you need to click on the green NEXT LESSON banner near the bottom of each section.  There are also quizes for most sections and entire chapter summaries and quizes.
+Each chapter in https://www.learncpp.com/[LearnCPP^] has several sections and you need to click on the green NEXT LESSON banner near the bottom of each section.  There are also quizes for most sections and entire chapter summaries and quizes.
 
-* Read Chapter 1: https://www.learncpp.com/cpp-tutorial/statements-and-the-structure-of-a-program/[Basic Program Structure]
-* Read Chapter 2: https://www.learncpp.com/cpp-tutorial/introduction-to-functions/[Functions and Files]
+* Read Chapter 1: https://www.learncpp.com/cpp-tutorial/statements-and-the-structure-of-a-program/[Basic Program Structure^]
+* Read Chapter 2: https://www.learncpp.com/cpp-tutorial/introduction-to-functions/[Functions and Files^]
 
 [cols="a"]
 |===
@@ -64,27 +64,27 @@ Each chapter in https://www.learncpp.com/[LearnCPP] has several sections and you
 [cols="a"]
 |===
 | Exercises
-| . Do https://www.learncpp.com/cpp-tutorial/chapter-1-summary-and-quiz/[Question #3 here] 
+| . Do https://www.learncpp.com/cpp-tutorial/chapter-1-summary-and-quiz/[Question #3 here^] 
 
 . Write a program that has a function that takes two numbers as parameters and returns the ratio of two numbers.  It's function declaration should be:
 +
-[source,C++]
+[source,CPP]
 ----
 double ratio( double numerator, double denominator );
 ----
 Print out the ratio of several numbers.
 +
-NOTE: https://www.learncpp.com/cpp-tutorial/introduction-to-function-parameters-and-arguments/[Very similar to Question #5 here]
+NOTE: https://www.learncpp.com/cpp-tutorial/introduction-to-function-parameters-and-arguments/[Very similar to Question #5 here^]
 |=== 
 
-* Read Chapter 4: https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/[Data Types]
-* Read Chapter 5: https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/[Operators]
-* Read Chapters 7.1 - 7.10: https://www.learncpp.com/cpp-tutorial/control-flow-introduction/[Control Flow]
+* Read Chapter 4: https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/[Data Types^]
+* Read Chapter 5: https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/[Operators^]
+* Read Chapters 7.1 - 7.10: https://www.learncpp.com/cpp-tutorial/control-flow-introduction/[Control Flow^]
 
 [cols="a"]
 |===
 | Exercises
-| . Some https://en.wikibooks.org/wiki/C%2B%2B_Programming/Exercises/Variables_and_types[Basic Exercises Here]
+| . Some https://en.wikibooks.org/wiki/C%2B%2B_Programming/Exercises/Variables_and_types[Basic Exercises Here^]
 
 . Write a program to convert RPM to radians per second with a function `RPMtoRadPerSec()`. Printout the results something like: 
 +
@@ -97,12 +97,12 @@ for several different RPMs.
 
 The real power of *{CPP}* is that it is an object oriented language.  The techniques of Object Oriented Programming (OOP) help organize a program by spliting tasks into logical pieces.  OOP turns out to be a very powerful way of organizing complex software.
 
-* Read Chapter 13: https://www.learncpp.com/cpp-tutorial/welcome-to-object-oriented-programming/[Welcome to OOP]
-* Read Chapter 16: https://www.learncpp.com/cpp-tutorial/object-relationships/[Object Relationships]
-* Read Chapter 17: https://www.learncpp.com/cpp-tutorial/introduction-to-inheritance/[Inheritance] 
+* Read Chapter 13: https://www.learncpp.com/cpp-tutorial/welcome-to-object-oriented-programming/[Welcome to OOP^]
+* Read Chapter 16: https://www.learncpp.com/cpp-tutorial/object-relationships/[Object Relationships^]
+* Read Chapter 17: https://www.learncpp.com/cpp-tutorial/introduction-to-inheritance/[Inheritance^] 
 
 
 == Types, Templates, and Template Classes
 
-* Read Chapter 8: https://www.learncpp.com/cpp-tutorial/implicit-type-conversion-coercion/[Types and Functions]
-* Read Chapter 19: https://www.learncpp.com/cpp-tutorial/template-classes/[Template Classes]
+* Read Chapter 8: https://www.learncpp.com/cpp-tutorial/implicit-type-conversion-coercion/[Types and Functions^]
+* Read Chapter 19: https://www.learncpp.com/cpp-tutorial/template-classes/[Template Classes^]

@@ -8,13 +8,15 @@
 :imagesdir: img/software
 :tip-caption: WPILib:
 :CPP: C++
-:hw-roborio: https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[roboRIO]
-:hw-PDP: https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#ctre-power-distribution-panel[CTRE Power Distribution Panel]
-:hw-neverest: https://www.andymark.com/products/neverest-classic-40-gearmotor[NeveRest with 40:1 gearbox]
-:hw-neo550: https://www.revrobotics.com/rev-21-1651/[NEO 550]
-:hw-spark: https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK]
-:hw-sparkmax: https://www.revrobotics.com/rev-11-2158/[SparkMAX]
-:hw-srxmag: https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder]
+:hw-roborio: https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-introduction.html[roboRIO^]
+:hw-PDP: https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#ctre-power-distribution-panel[CTRE Power Distribution Panel^]
+:hw-neverest: https://www.andymark.com/products/neverest-classic-40-gearmotor[NeveRest with 40:1 gearbox^]
+:hw-neo550: https://www.revrobotics.com/rev-21-1651/[NEO 550^]
+:hw-spark: https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#spark-motor-controller[SPARK^]
+:hw-sparkmax: https://www.revrobotics.com/rev-11-2158/[SparkMAX^]
+:hw-srxmag: https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder^]
+:frc-spark: https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`^]
+:rev-CANSparkMax: https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax^]
 :pos-motor-pwm: 1
 :pos-motor-quadA: 3
 :pos-motor-quadB: 4
@@ -26,7 +28,7 @@
 
 The Test Bench was created to allow students wanting to learn FRC robot programming a way to do example problems without needing access to a functioning robot.  As you read these examples they will refer to terms and/or concepts that will not be familiar to you.  Stop and lookup what these unfamiliar terms/concepts mean as you go along.  
 
-The Test Bench uses a {hw-roborio} and a {hw-PDP}.  It has two motors attached to it, a brushed motor {hw-neverest} and a brushless motor (a {hw-neo550}) connected to two different motor controllers (a {hw-spark} and a {hw-sparkmax}).  The {hw-spark} motor controller is controlled with PWM and the {hw-sparkmax} is controlled over the https://en.wikipedia.org/wiki/CAN_bus[CAN bus] of the {hw-roborio}. 
+The Test Bench uses a {hw-roborio} and a {hw-PDP}.  It has two motors attached to it, a brushed motor {hw-neverest} and a brushless motor (a {hw-neo550}) connected to two different motor controllers (a {hw-spark} and a {hw-sparkmax}).  The {hw-spark} motor controller is controlled with PWM and the {hw-sparkmax} is controlled over the https://en.wikipedia.org/wiki/CAN_bus[CAN bus^] of the {hw-roborio}. 
 
 The NeveRest motor connected to the large disc is used in the position control exercises and refered to as the "Position Control" motor. It is connected to the {hw-spark} motor controller which is wired into the {hw-roborio} PWM channel {pos-motor-pwm}.  The position control motor has a {hw-srxmag} attached to its output shaft.  The SRX is wired into the {hw-roborio} DIO channels {pos-motor-quadA}, {pos-motor-quadB}, and {pos-motor-abs}. Channels {pos-motor-quadA} & {pos-motor-quadB} are the Quadrature A and B inputs and channel {pos-motor-abs} is the absolute PWM signal.
 
@@ -45,15 +47,15 @@ image::TestBench.jpg[Test Bench, align="center"]
 
 In this example we will be creating a "Timed Robot" program to set the position motor's percent output based on the position of a controller joystick.
 
-Launch "WPILib VS Code" from the desktop.  This runs VS Code with the WPILib libraries and tools enabled. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html[Follow these directions to create a blank project from the "Timed Skeleton (Advanced)" template] or see the animation below.
+Launch "WPILib VS Code" from the desktop.  This runs VS Code with the WPILib libraries and tools enabled. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/creating-robot-program.html[Follow these directions to create a blank project from the "Timed Skeleton (Advanced)" template^] or see the animation below.
 
-You should now have an empty project.  The two files that we will be working with are `src/main/include/Robot.h` and `src/main/cpp/Robot.cpp`.  Find those files in the Explorer on the left sidebar of VS Code and open `Robot.h`.  It contains the `Robot` class which declares (See https://www.learncpp.com/cpp-tutorial/forward-declarations/[Forward Declarations and Definitions]) the `Robot-`, `Autonomous-`, `Teleop-`, `Disabled-`, `Test-`, and `Simulation-` Init() and Periodic() functions.
+You should now have an empty project.  The two files that we will be working with are `src/main/include/Robot.h` and `src/main/cpp/Robot.cpp`.  Find those files in the Explorer on the left sidebar of VS Code and open `Robot.h`.  It contains the `Robot` class which declares (See https://www.learncpp.com/cpp-tutorial/forward-declarations/[Forward Declarations and Definitions^]) the `Robot-`, `Autonomous-`, `Teleop-`, `Disabled-`, `Test-`, and `Simulation-` Init() and Periodic() functions.
 
 .Create a Blank Timed Robot Project
 image::BlankProject.gif[Blank Project, align="center"]
 
 .Contents of Generated Robot.h
-[source,C++]
+[source,CPP]
 ----
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
@@ -89,10 +91,10 @@ class Robot : public frc::TimedRobot {
 
 For this simple example we won't need most of the Init() and Periodic() functions so delete all the declared functions except `RobotInit()`, `RobotPeriodic()` and `TeleopPeriodic()`.  `RobotInit()` runs once when the code first starts, `RobotPeriodic()` runs every 20 milliseconds at all times, and `TeleopPeriodic()` runs every 20 milliseconds while the Driver Station is in `TeleOperated` Mode.
 
-We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the position motor is a {hw-spark} controller so we will be using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class.  Open the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class API documentation which will show what methods are available with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class and what header needs to be included to use the class.  In the API documentation for https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`] variable initialized to port zero. You also need to add the two header files that are needed for the new classes using the `#include` directive. The headers are `<frc/motorcontrol/Spark.h>` and `<frc/XboxController.h>`.
+We need to add member variables to the `Robot` class for our motor controller and for a joystick.  The motor controller on the position motor is a {hw-spark} controller so we will be using the {frc-spark} class.  Open the {frc-spark} class API documentation which will show what methods are available with the {frc-spark} class and what header needs to be included to use the class.  In the API documentation for {frc-spark} only the constructor that takes the PWM channel is shown along with the default constructor and the assignment operator.  Expand the `Public Member Functions inherited from frc::PWMMotorController` section to see more member functions that are available that are inherited from the `frc::PWMMotorController` class which is a base class of {frc-spark} (See xref:CPP_Lessons.adoc#object-orientation[Object Orientation]).  In `Robot.h` add a private section to the `Robot` class that declares a {frc-spark} variable and initialized the channel to one. Also add a https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`^] variable initialized to port zero. You also need to add the two header files that are needed for the new classes using the `#include` directive. The headers are `<frc/motorcontrol/Spark.h>` and `<frc/XboxController.h>`.
 
 .Robot.h after changes
-[source,C++,subs="+attributes"]
+[source,CPP,subs="+attributes"]
 ----
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
@@ -120,7 +122,7 @@ class Robot : public frc::TimedRobot {
 The `src/main/cpp/Robot.cpp` file has the definitions of the Init() and Periodic() functions for the `Robot` class. Remove all the Init() and Periodic() functions except `RobotInit()`, `RobotPeriodic()`, and `TeleopPeriodic()`.  Now add the line shown below to `TeleopPeriodic()` which sets the motor percent output (-1 to 1 value) to the value of the X-axis on the controller.  You won't use `RobotInit()` and `RobotPeriodic()` just yet.
 
 .Robot.cpp after modifications
-[source,C++]
+[source,CPP]
 ----
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
@@ -145,7 +147,7 @@ int main() {
 
 === Build and Deploy to RoboRIO
 
-The {hw-roborio} is an embedded computer running a real-time linux operation system.  In order to run the robot program, it much be built and deployed to the {hw-roborio} using VSCode.  There must be a link between the coding computer and the {hw-roborio}.  This link can be made in three ways, first the coding computer can be connected via USB to the {hw-roborio}.  Second they can be connected wirelessly if the {hw-roborio} is connected to an FRC Wifi Radio https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#openmesh-om5p-an-or-om5p-ac-radio[OpenMesh OM5P-AC] by connecting the coding computer to the hotspot created by the robot. Third they can be connected via ethernet by running an ethernet cable between the computer and the https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#openmesh-om5p-an-or-om5p-ac-radio[OpenMesh OM5P-AC] or a network switch connected to the OM5P-AC.
+The {hw-roborio} is an embedded computer running a real-time linux operation system.  In order to run the robot program, it much be built and deployed to the {hw-roborio} using VSCode.  There must be a link between the coding computer and the {hw-roborio}.  This link can be made in three ways, first the coding computer can be connected via USB to the {hw-roborio}.  Second they can be connected wirelessly if the {hw-roborio} is connected to an FRC Wifi Radio https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#openmesh-om5p-an-or-om5p-ac-radio[OpenMesh OM5P-AC^] by connecting the coding computer to the hotspot created by the robot. Third they can be connected via ethernet by running an ethernet cable between the computer and the https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html#openmesh-om5p-an-or-om5p-ac-radio[OpenMesh OM5P-AC^] or a network switch connected to the OM5P-AC.
 
 Since the Test Bench does not have a radio we must use the USB connection.  After connecting to the {hw-roborio} the robot program can be built and deployed.
 
@@ -153,9 +155,9 @@ ADD BUILD/DEPLOY GIF
 
 === FRC Driver Station
 
-The https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html[Driver Station] program manages the connection between the computer and the {hw-roborio}.  It gives that status of the connection and whether joysticks are recognized.  It is how the robot is Enabled and Disabled among other things.
+The https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html[Driver Station^] program manages the connection between the computer and the {hw-roborio}.  It gives that status of the connection and whether joysticks are recognized.  It is how the robot is Enabled and Disabled among other things.
 
-TIP: See the https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html[Driver Station Overview] to learn about its features.
+TIP: See the https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station.html[Driver Station Overview^] to learn about its features.
 
 |===
 a| `*TASK {counter:tasknum}*`
@@ -169,10 +171,10 @@ a| QUESTIONS: ::
 
 === Adding an Encoder
 
-We are going to add the built-in encoder to our program so we can see how much the motor has turned and how fast it is turning.  In `Robot.h`, use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class to declare a variable for the encoder on channels {pos-motor-quadA} and {pos-motor-quadB}.
+We are going to add the built-in encoder to our program so we can see how much the motor has turned and how fast it is turning.  In `Robot.h`, use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`^] class to declare a variable for the encoder on channels {pos-motor-quadA} and {pos-motor-quadB}.
 
 .Changes to Robot.h
-[source,C++,subs="+attributes"]
+[source,CPP,subs="+attributes"]
 ----
   // Add the following header:
 #include <frc/Encoder.h>
@@ -185,15 +187,15 @@ We are going to add the built-in encoder to our program so we can see how much t
 
 === Visualizing What is Happening
 
-The `Shuffleboard` program is used to communicate with the {hw-roborio}.  The {hw-roborio} can send information to `Shuffleboard` and `Shuffleboard` can be used to send information to the {hw-roborio}.  The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class is one method to communicate with `Shuffleboard`.  We will use the *static* member functions of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`] class to add information about the motor and the joystick position to `Shuffleboard`. 
+The `Shuffleboard` program is used to communicate with the {hw-roborio}.  The {hw-roborio} can send information to `Shuffleboard` and `Shuffleboard` can be used to send information to the {hw-roborio}.  The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`^] class is one method to communicate with `Shuffleboard`.  We will use the *static* member functions of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_smart_dashboard.html[`frc::SmartDashboard`^] class to add information about the motor and the joystick position to `Shuffleboard`. 
 
 |===
-| *{CPP}* classes with *static* member functions are used like regular functions. You do not create instances of the class. See https://www.learncpp.com/cpp-tutorial/static-member-functions/[Static Member Functions]
+| *{CPP}* classes with *static* member functions are used like regular functions. You do not create instances of the class. See https://www.learncpp.com/cpp-tutorial/static-member-functions/[Static Member Functions^]
 |===
 
 Modify `Robot.cpp` to the following:
 
-[source,C++]
+[source,CPP]
 ----
 #include "Robot.h"
 #include <frc/smartdashboard/SmartDashboard.h>
@@ -239,14 +241,14 @@ a| QUESTIONS: ::
 
 === Encoder Values
 
-The encoder values displayed on Shuffleboard are obtained with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] `GetDistance()` function. By default, encoders return distance in raw "counts" which can vary between a few counts per revolution up to 4096 or more depending on the resolution of the encoder.  Approximate how many "counts" the encoder has per revolution by rotating the disc one full revolution (with the joystick) and determining the change in the distance measurement.  For this motor the number of "counts" per revolution should come out to be 1024.
+The encoder values displayed on Shuffleboard are obtained with the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`^] `GetDistance()` function. By default, encoders return distance in raw "counts" which can vary between a few counts per revolution up to 4096 or more depending on the resolution of the encoder.  Approximate how many "counts" the encoder has per revolution by rotating the disc one full revolution (with the joystick) and determining the change in the distance measurement.  For this motor the number of "counts" per revolution should come out to be 1024.
 
-When programming the robot we want to work with more meaningful units than raw counts.  If the mechanism is an arm that will move less than a full revolution then we probably want to use degrees.  If the mechanism is a spinning flywheel then we probably want to use revolutions. The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`] class has a member function called `SetDistancePerPulse()` which allows you to change the units returned by the `GetDistance()` function.  
+When programming the robot we want to work with more meaningful units than raw counts.  If the mechanism is an arm that will move less than a full revolution then we probably want to use degrees.  If the mechanism is a spinning flywheel then we probably want to use revolutions. The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_encoder.html[`frc::Encoder`^] class has a member function called `SetDistancePerPulse()` which allows you to change the units returned by the `GetDistance()` function.  
 
 Make the following modifications to the `RobotInit()` function to make the encoder return distance in rotations:
 
 .Changing Encoder Units
-[source,C++]
+[source,CPP]
 ----
     // Add SetDistancePerPulse() function call to RobotInit()
     // Converts a 1024 count per revolution encoder to read rotations
@@ -300,8 +302,8 @@ a| `*TASK {counter:tasknum}*`
 | Implement the above pseudocode for the P-controller. Change the value of the *K~p~* constant and observe the difference in behavior of the mechanism. Note whether the actual position gets exactly to the desired position (setpoint).
 a| QUESTIONS: ::
 . What happens when K~p~ is too small? too large?
-. What is the difference between the `GetAButton()` and `GetAButtonPressed()` methods of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`]?
-. How would you implement the P-controller logic with only one call to the `Set()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`] class?
+. What is the difference between the `GetAButton()` and `GetAButtonPressed()` methods of https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html[`frc::XboxController`^]?
+. How would you implement the P-controller logic with only one call to the `Set()` method of the {frc-spark} class?
 |===
 
 === Sending Data with Shuffleboard
@@ -318,7 +320,7 @@ a| QUESTIONS: ::
 
 === Shuffleboard Graphs
 
-Read the https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/index.html[Shuffleboard^] documentation and in particular https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/getting-started/shuffleboard-graphs.html[Working with Graphs].
+Read the https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/index.html[Shuffleboard^] documentation and in particular https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/getting-started/shuffleboard-graphs.html[Working with Graphs^].
 
 |===
 a| `*TASK {counter:tasknum}*`
@@ -350,14 +352,14 @@ a| `*TASK {counter:tasknum}*`
 
 === Absolute Encoder
 
-So far we have been using the relative quadrature output of the {hw-srxmag}.  The encoder also has a PWM signal for absolute positioning (See https://store.ctr-electronics.com/content/user-manual/Magnetic%20Encoder%20User%27s%20Guide.pdf[SRX Mag Encoder Hardware Guide]). The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class is used to interface with the PWM absolute position signal which is wired to the DIO channel {pos-motor-abs}.
+So far we have been using the relative quadrature output of the {hw-srxmag}.  The encoder also has a PWM signal for absolute positioning (See https://store.ctr-electronics.com/content/user-manual/Magnetic%20Encoder%20User%27s%20Guide.pdf[SRX Mag Encoder Hardware Guide^]). The https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`^] class is used to interface with the PWM absolute position signal which is wired to the DIO channel {pos-motor-abs}.
 
 |===
 a| `*TASK {counter:tasknum}*`
-| Modify the code to read the {hw-srxmag}'s absolute PWM signal using the `GetAbsolutePosition()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class.  Move the motor disc by hand and note the values returned by the encoder.  Use the absolute PWM signal to always move to the same 0 position when the *A* Button is pressed on the controller. 
+| Modify the code to read the {hw-srxmag}'s absolute PWM signal using the `GetAbsolutePosition()` method of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`^] class.  Move the motor disc by hand and note the values returned by the encoder.  Use the absolute PWM signal to always move to the same 0 position when the *A* Button is pressed on the controller. 
 a| QUESTIONS: ::
 . What is the maximum value that the encoder reads and what happens when you rotate more than one rotation?
-. What is the difference between the `GetAbsolutePosition()` and `GetDistance()` methods of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class?
+. What is the difference between the `GetAbsolutePosition()` and `GetDistance()` methods of the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`^] class?
 |===
 
 === Physical Units
@@ -366,7 +368,7 @@ The absolute encoder PWM signal is reading in "counts" just like the relative en
 
 |===
 a| `*TASK {counter:tasknum}*`
-| Modify the code to move to locations based on angles in degrees when the *A* and *B* Buttons are pressed.  You will need to determine how to configure the  https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`] class to return angles in degrees.  It is different than `frc::Encoder`.
+| Modify the code to move to locations based on angles in degrees when the *A* and *B* Buttons are pressed.  You will need to determine how to configure the  https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`^] class to return angles in degrees.  It is different than `frc::Encoder`.
 |===
 
 == Velocity Control Exercise
@@ -376,19 +378,19 @@ Velocity control is typically used on flywheels for shooting mechanisms or somet
 
 There is a very good description of controling a flywheel mechanism in the link below along with some interactive tools to see how changing the control system parameters affects the flywheel behavior.
 
-TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-flywheel.html[Tuning a Flywheel Controller]
+TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-flywheel.html[Tuning a Flywheel Controller^]
 
 === REVLib
 
-We will use the velocity motor ({hw-neo550}) that is connected to the {hw-sparkmax} motor controller for this exercise.  The {hw-sparkmax} uses the CAN bus of the {hw-roboRIO} and requires an external (vendor) library to function. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html#vs-code[Vendor libraries can be added to a project following these instructions].  You need to add the "RevLIB 2023" library to this project in order to use the {hw-sparkmax} controller.
+We will use the velocity motor ({hw-neo550}) that is connected to the {hw-sparkmax} motor controller for this exercise.  The {hw-sparkmax} uses the CAN bus of the {hw-roboRIO} and requires an external (vendor) library to function. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html#vs-code[Vendor libraries can be added to a project following these instructions^].  You need to add the "RevLIB 2023" library to this project in order to use the {hw-sparkmax} controller.
 
-The https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] class is used to communicate with the {hw-sparkmax} controller.  The https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] is not part of the WPILib library and was added when the REVLib vendor library was added to the project in the steps above.  Therefore the documention for the https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] class and other classes that are provided by the REVLib library are located on the RevRobotics website.  The xref:README.adoc#resources[Resources] section of the Coding Guide gives links to the RevLib documentation, RevLib {CPP} API, and RevLib Examples. The xref:README.adoc#resources[Resources] section also has several other useful links.
+The {rev-CANSparkMax} class is used to communicate with the {hw-sparkmax} controller.  The {rev-CANSparkMax} is not part of the WPILib library and was added when the REVLib vendor library was added to the project in the steps above.  Therefore the documention for the {rev-CANSparkMax} class and other classes that are provided by the REVLib library are located on the RevRobotics website.  The xref:README.adoc#resources[Resources] section of the Coding Guide gives links to the RevLib documentation, RevLib {CPP} API, and RevLib Examples. The xref:README.adoc#resources[Resources] section also has several other useful links.
 
 === Velocity P-Control
 
 NOTE: Read the xref:README.adoc#motion-control[Motion Control] section (again).  
 
-The {hw-sparkmax} is assigned CAN id #{spark-max-CANid} on the CAN bus. In `Robot.h`, create a variable for the motor using the https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] class.  You will need to determine what header file is needed to use the class.  The https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] `Set()` method will be used to control the motor percent output.  Use the https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax] `GetEncoder()` method to access the built-in encoder on the {hw-neo550}. The `GetEncoder()` method returns a https://codedocs.revrobotics.com/cpp/classrev_1_1_spark_max_relative_encoder.html[rev::SparkMaxRelativeEncoder] class object that can be used to retrieve the motor velocity (what method?).
+The {hw-sparkmax} is assigned CAN id #{spark-max-CANid} on the CAN bus. In `Robot.h`, create a variable for the motor using the {rev-CANSparkMax} class.  You will need to determine what header file is needed to use the class.  The {rev-CANSparkMax} `Set()` method will be used to control the motor percent output.  Use the {rev-CANSparkMax} `GetEncoder()` method to access the built-in encoder on the {hw-neo550}. The `GetEncoder()` method returns a https://codedocs.revrobotics.com/cpp/classrev_1_1_spark_max_relative_encoder.html[rev::SparkMaxRelativeEncoder^] class object that can be used to retrieve the motor velocity (what method?).
 
 |===
 a| `*TASK {counter:tasknum}*`
@@ -401,7 +403,7 @@ a| QUESTIONS: ::
 
 === Feed Forward
 
-TIP: See https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-feedforward.html[Introduction to DC Motor Feedforward] and https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/feedforward.html[Feedforward Control in WPILib]
+TIP: See https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-feedforward.html[Introduction to DC Motor Feedforward^] and https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/feedforward.html[Feedforward Control in WPILib^]
 
 NOTE: Read the xref:README.adoc#feed-forward[Feed Forward] section and, if confused, read the xref:README.adoc#motion-control[Motion Control] section a third time and the above WPILib information. This topic is confusing at first and you may need to re-read these sections several times.
 
@@ -431,7 +433,7 @@ a| QUESTIONS: ::
 
 |===
 a| `*TASK {counter:tasknum}*`
-| Use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc2_1_1_p_i_d_controller.html[`frc2::PIDController`] class to implement the P-control and the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_simple_motor_feedforward.html[`frc::SimpleMotorFeedforward<Distance>`] class for feed forward. 
+| Use the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc2_1_1_p_i_d_controller.html[`frc2::PIDController`^] class to implement the P-control and the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_simple_motor_feedforward.html[`frc::SimpleMotorFeedforward<Distance>`^] class for feed forward. 
 |===
 
 == Trapezoidal Motion Exercise
@@ -444,7 +446,7 @@ The term *goal* is emphasized because it differs from the setpoint that we have 
 .Trapezoid Profile (from CTRE Docs)
 image::https://v5.docs.ctr-electronics.com/en/stable/_images/closedlp-1.png[]
 
-The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_trapezoid_profile.html[`frc::TrapezoidProfile<Distance>`] class to generate a trapezoidal motion profile.  It is a template class templated on either an angular unit or a distance unit.  The WPI Documenation describes https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/trapezoidal-profiles.html[using trapezoidal motion profiles]. 
+The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_trapezoid_profile.html[`frc::TrapezoidProfile<Distance>`^] class to generate a trapezoidal motion profile.  It is a template class templated on either an angular unit or a distance unit.  The WPI Documenation describes https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/trapezoidal-profiles.html[using trapezoidal motion profiles^]. 
 
 |===
 a| `*TASK {counter:tasknum}*`
@@ -458,7 +460,7 @@ a| QUESTIONS: ::
 
 A vertical arm mechanism is one of the most complex control problems that is encountered on FRC robots. The links below give the basic information needed to understand the feed forward and PID aspects of the problem.  Moving a vertical arm with motion profiles (i.e. trapezoidal profiles) gives good results and allows easy feed forward compensation. 
 
-TIP: See https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-feedforward.html#arm-feedforward[Arm Feedforward] and https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-vertical-arm.html[Tuning a Vertical Arm Position Controller]
+TIP: See https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-feedforward.html#arm-feedforward[Arm Feedforward^] and https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-vertical-arm.html[Tuning a Vertical Arm Position Controller^]
 
 |===
 a| `*TASK {counter:tasknum}*`
@@ -475,7 +477,7 @@ So far all the exercises have used the "Timed Robot" design pattern.  When the r
 
 In the Command Based design pattern, controller buttons and axes are "bound" to commands.  When the button (or axis) is pressed the bound command is executed.  The underlying command scheduler takes care of determining if the button is being pressed and calling your command if it is.  One of the more difficult to understand aspects of Command Based programming is the use of Lambda Expressions and the idea of treating "functions as data" (i.e. passing functions as paramters to other functions).  In Command Based programming lambda expressions occur frequently for simple commands that are bound to a controller button.
 
-TIP: See https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html[Command-Based Programming] and https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html[Functions as Data] particularly https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html#lambda-expressions-in-c[Lambda Expressions in *{CPP}*]
+TIP: See https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html[Command-Based Programming^] and https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html[Functions as Data^] particularly https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html#lambda-expressions-in-c[Lambda Expressions in *{CPP}*^]
 
 Create a blank project using the "Command Robot" template.  Browse the files that are automatically generated.  The directory structure is a bit more complicated than the "Timed Robot" projects that you have been working with so far.  There are still the `Robot.h` and `Robot.cpp` files but there are several more files created.  The Command Based design pattern compartmentalizes the project into several files that each contain code for distinct parts of the project.  The `RobotContainer.cpp` file has all the subsystems in it.  The `subsystems` folder contains all the subsystems for the robot and the `commands folder contains all the commands needed for the robot.
 
@@ -494,7 +496,7 @@ a| `*TASK {counter:tasknum}*`
 | Modify the command based program to control the velocity motor such that the right trigger varys the speed of the motor from 0 to 6000 rpm.
 a| QUESTIONS: ::
 . How many subsystems should the 2023 Charged Up robot have? 
-. Browse the https://github.com/4698RaiderRobotics/FRC-2023[2023 Charged Up Code] and look at the subsystems and commands that it uses.
+. Browse the https://github.com/4698RaiderRobotics/FRC-2023[2023 Charged Up Code^] and look at the subsystems and commands that it uses.
 |===
 
 // == Tank Drive Exercise
