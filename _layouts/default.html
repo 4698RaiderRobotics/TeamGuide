@@ -22,9 +22,9 @@
 
 <!-- Nav Bar -->
 
-<nav class="top-bar" data-topbar>
+<!-- <nav class="top-bar" data-topbar>
     <ul class="title-area">
-        <!-- Title Area -->
+      
         <li class="name">
             <h1>
                 <a href="{{site.baseurl}}/">{{site.title}}</a>
@@ -32,25 +32,81 @@
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
-</nav>
+</nav> -->
+
+<nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="{{site.baseurl}}/">{{site.title}}</a></h1>
+      </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+  
+    <section class="top-bar-section"> 
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li><a href="{{page.root}}Design.html">Design Guide</a></li>
+        <li><a href="{{page.root}}Electrical.html">Electrical Guide</a></li>
+        <li class="has-dropdown">
+          <a href="{{page.root}}CodingGuide.html">Software Guide</a>
+          <ul class="dropdown">
+            <li><a href="{{page.root}}CPP_Lessons.html">C++ Lessons</a></li>
+            <li><a href="{{page.root}}TestBench.html">Test Bench Exercises</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </nav>
 <!-- End Nav -->
+
+<!-- <div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="title-area">
+      <li class="name"><a href="{{site.baseurl}}/">{{site.title}}</a></li>
+      <li><a href="{{page.root}}Design.html">Design Guide</a></li>
+      <li><a href="{{page.root}}Electronics.html">Electronics Guide</a></li>
+      <li><a href="{{page.root}}CodingGuide.html">Software Guide</a></li>
+      <ul>
+          <li><a href="{{page.root}}CPP_Lessons.html">C++ Lessons</a></li>
+          <li><a href="{{page.root}}TestBench.html">Test Bench Exercises</a></li>
+      </ul>
+  </ul>
+</div> -->
+
+
+
+
+
+
+
+
+
+
 
 <!-- Main Page Content and Sidebar -->
 
-<div class="row">
+      <div class="row">
 
-    <!-- Main Blog Content -->
-    <div class="large-9 columns" role="content">
+    <!-- <div class="large-3 columns">
 
-        {{ content }}
+        <img src="img/Team4698Logo.webp" width="300">
 
     </div>
+ -->
+    <!-- Main Blog Content -->
+        <div class="large-12 columns" role="content">
+
+            {{ content }}
+
+        </div>
 
     <!-- End Main Content -->
 
     <!-- Sidebar -->
 
-    <aside class="large-3 columns">
+     
+    <!-- <aside class="large-3 columns">
 
         <img src="img/Team4698Logo.webp" width="300">
 
@@ -64,10 +120,10 @@
                 <li><a href="{{page.root}}TestBench.html">Test Bench Exercises</a></li>
             </ul>
         </ul>
-    </aside>
+    </aside> -->
 
     <!-- End Sidebar -->
-</div>
+    </div>
 
 <!-- End Main Content and Sidebar -->
 
