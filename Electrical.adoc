@@ -16,7 +16,7 @@
 toc::[]
 
 == Overview
-The Electrical Sub-Team is responsible for wiring the robot electrical components such that they can withstand the severe punishment that occurs during a FRC competition.  Wire routing, end crimping, and strain relief techniques are necessary to make the wiring system robust.
+The Electrical Sub-Team is responsible for wiring the robot electrical components according to the FRC competition rules.  The robot wiring must also withstand the severe punishment that occurs during a FRC competition.  Wire routing, end crimping, and strain relief techniques are necessary to make the wiring system robust.
 
 Read the following pages from the WPILib documentation for a basic overview:
 
@@ -27,7 +27,7 @@ Read the following pages from the WPILib documentation for a basic overview:
 [.float-group]
 --
 image::FRCbattery.webp[FRC Battery, width=200, float="left", align="center"]
-The battery that every FRC robot uses is a single 12-volt, 18Ah (Amp-Hour) sealed lead acid battery (see https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/robot-battery.html[Battery Bascis^]).  The battery has a red(or pink) https://www.andersonpower.com/us/en/shop/sbr50-standard-housings-red.html[Anderson SB50 connector] attached with short lengths of 6AWG wire.  
+The battery that every FRC robot uses is a single 12-volt, 18Ah (Amp-Hour) sealed lead acid battery (see https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/robot-battery.html[Battery Bascis^]).  The battery has a red(or pink) https://www.andersonpower.com/us/en/shop/sbr50-standard-housings-red.html[Anderson SB50 connector^] attached with short lengths of 6AWG wire.  
 --
 
 [.float-group]
@@ -36,7 +36,7 @@ image::batterycables.jpg[Battery Cables, width=200, float="left", align="center"
 The battery connections are a common source of failures and must be carefully connected and periodically inspected.  The hex bolts that come with the batteries should NOT be used.  Stronger #10-32 Socket Head Cap Screws (SHCS) should be used instead.  They should be used with Nord-lock washers and a Nylock washer (see https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/robot-battery.html#battery-lead-lug-to-post-connection[Lug To Post Connection^]).  These bolts need to be very tight.
 --
 
-== 12V DC Buss
+== 12V Power Distribution
 The robot Most robot components need 12VDC for power.  The Power Distribution Panel (PDP) or the Power Distribution Hub (PDH) is the circuit breaker panel of the robot.  It allows each motor or motor controller to be isolated onto it's own circuit with a circuit breaker protecting it.  For any components that need 5VDC there is a Voltage Regulator Module (VRM) that takes the battery's 12VDC and regulates it down to 5VDC.
 
 == Resources

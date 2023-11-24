@@ -1,30 +1,63 @@
 :imagesdir: img
+:table-grid: none
+:table-frame: none
 
 == Raider Robotics Team Guide
 
+=== First Robotics Competition Info
+[cols="1,5"]
+|===
+a| image::CRESCENDO_Logo.jpg[Crescendo, width=100, float="left" align="center", link=https://www.firstinspires.org/robotics/frc/game-and-season, window=_blank] 
+<.^| https://www.firstinspires.org/robotics/frc/game-and-season[Game & Season Information^]
+|===
+
+[cols="1,5"]
+|===
+a| image::ChargedUpLogo.png[Charged Up, width=100, float="left" align="center", link=https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system, window=_blank] 
+<.^| https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system[CHARGED UP 2023 Season Materials^]
+|===
+
+[cols="1,5"]
+|===
+a| image::frcLogo.png[Archived Games, width=100, float="left" align="right", link=https://www.firstinspires.org/resource-library/frc/archived-game-documentation, window=_blank] 
+<.^| https://www.firstinspires.org/resource-library/frc/archived-game-documentation[Archived Game Docs^]
+|===
+
 === Sub-Team Resources and Skill Builders
+[cols="1,2"]
+|===
+a| image::DesignLink.gif[Design, float="left" align="center", link=Design.html] 
+<.^| xref:Design.adoc[Design Sub-Team Guide]
+|===
 
 '''
 
-image::DesignLink.gif[Design, 300, , float="left" align="center", link=Design.html] 
-xref:Design.adoc[Design Sub-Team Guide]
+[cols="1,2"]
+|===
+a| image::SoftwareLink.gif[Software, float="left" align="center", link=CodingGuide.html] 
+<.^| xref:CodingGuide.adoc[Software Sub-Team Guide]
+|===
 
 '''
 
-image::SoftwareLink.gif[Software, 300, , float="left" align="center", link=CodingGuide.html] 
-xref:CodingGuide.adoc[Software Sub-Team Guide]
+[cols="1,2"]
+|===
+a| image::ElectricalLink.gif[Electrical, float="left" align="center", link=Electrical.html] 
+<.^| xref:Electrical.adoc[Electrical Sub-Team Guide]
+|===
 
 '''
 
-image::ElectricalLink.gif[Electrical, 300, , float="left" align="center", link=Electrical.html] 
-xref:Electrical.adoc[Electrical Sub-Team Guide]
+[cols="1,2"]
+|===
+a| image::ManufacturingLink.gif[Manufacturing, float="left" align="center", link=Manufacturing.html] 
+<.^| xref:Manufacturing.adoc[Manufacturing Sub-Team Guide]
+|===
 
 '''
 
-image::ManufacturingLink.gif[Manufacturing, 300, , float="left" align="center", link=Manufacturing.html] 
-xref:Manufacturing.adoc[Manufacturing Sub-Team Guide]
-
-'''
-
-image::MechanicalLink.gif[Mechanical, 300, , float="left" align="center", link=Mechanical.html] 
-xref:Mechanical.adoc[Mechanical Sub-Team Guide]
+[cols="1,2"]
+|===
+a| image::MechanicalLink.gif[Mechanical, float="left" align="center", link=Mechanical.html] 
+<.^| xref:Mechanical.adoc[Mechanical Sub-Team Guide]
+|===
