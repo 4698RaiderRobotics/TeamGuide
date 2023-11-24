@@ -1,10 +1,30 @@
-= Raider Robotics Team Guide
-:source-highlighter: highlight.js
-:xrefstyle: short
-// :sectnums:
-:idprefix!: 
-:idseparator: -
+:imagesdir: img
 
-== Sub-Team Resources and Practice Exercises
+== Raider Robotics Team Guide
 
-Choose your sub-team from the list at right.
+=== Sub-Team Resources and Skill Builders
+
+'''
+
+image::DesignLink.gif[Design, 300, , float="left" align="center", link=Design.html] 
+xref:Design.adoc[Design Sub-Team Guide]
+
+'''
+
+image::SoftwareLink.gif[Software, 300, , float="left" align="center", link=CodingGuide.html] 
+xref:CodingGuide.adoc[Software Sub-Team Guide]
+
+'''
+
+image::ElectricalLink.gif[Electrical, 300, , float="left" align="center", link=Electrical.html] 
+xref:Electrical.adoc[Electrical Sub-Team Guide]
+
+'''
+
+image::ManufacturingLink.gif[Manufacturing, 300, , float="left" align="center", link=Manufacturing.html] 
+xref:Manufacturing.adoc[Manufacturing Sub-Team Guide]
+
+'''
+
+image::MechanicalLink.gif[Mechanical, 300, , float="left" align="center", link=Mechanical.html] 
+xref:Mechanical.adoc[Mechanical Sub-Team Guide]
