@@ -3,7 +3,7 @@ T. Smith
 :source-highlighter: highlight.js
 :xrefstyle: short
 // :sectnums:
-:idprefix!: 
+:idprefix: 
 :idseparator: -
 :tip-caption: WPILib:
 :CPP: C++

@@ -2,7 +2,7 @@
 :source-highlighter: highlight.js
 :xrefstyle: short
 // :sectnums:
-:idprefix!: 
+:idprefix: 
 :idseparator: -
 :imagesdir: img/design
 :toc:
@@ -71,9 +71,7 @@ Most of the FRC parts the are used on the robot have 3D model files of the item 
 
 Fasteners can also be inserted directly into a design using the `Insert -> Insert McMaster-Carr Component` command.  Search for the item you need on the McMaster-Carr website that pops up and then select "*3D STEP*" as the file type and click *Download*.  McMaster-Carr has many types of fasteners including nuts, bolts, washers, e-clips, hex keys, etc.
 
-Use file names that make it easy for someone else to find a vendor model.  For example, 1/2" Hex Rod from WCPs website might be named `HEX_ROD_0500_WCP_217-2753` which tells everyone what it is, where it was downloaded from, and the part number.
-
-Moving and aligning imported components is done by rotating the component to the proper orientation then using Point-To-Point moving to get the component to the correct X,Y,Z location.
+Moving and aligning imported components is done by rotating the component to the proper orientation then using a Point-To-Point move to get the component to the correct X,Y,Z location.  It is usually easiest to select circles (or arc centers) as the source and target "points".
 
 [%notitle]
 === Vendor Exercise {counter:tasknum}
@@ -102,23 +100,27 @@ See https://www.autodesk.com/products/fusion-360/blog/components-bodies-for-new-
 
 == Drive System Design
 
-Belts, Chains, and Gears are commonly used on FRC robots.  When a design uses these elements it is possible to choose the distance between rotation centers such that exact lengths of belts or chains work correctly.  Gears will not work without precise center-to-center distances. 
+Belts, Chains, and Gears are commonly used on FRC robots.  When a design uses these elements it is possible to choose the distance between rotation centers such that exact lengths of belts or chains work correctly.  Gears will not work without precise center-to-center distances.  A great deal of very good information can be found in the https://docs.wcproducts.com/frc-build-system[WCP FRC Build System^] documenation.
 
-=== Belt Drive
+=== Belt Drives
 
 Belt drive systems are a quiet and relatively safe means of transferring rotation between shafts.  FRC belts are either 5mm HTD belts or 3mm GT2 belts, where the distance represents the pitch of the belt teeth.  They also come in either 9mm or 15mm widths. Belt pulleys don't come in as many tooth count options as chain sprockets or gears which limits the gear ratios available.
 
 The center-to-center distance for a belt system can be calculated with the https://www.reca.lc/belts[ReCalc Belt Calculator^] or with the https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator^].
 
-=== Chain Drive
+=== Chain Drives
 
 Chain used in FRC comes in a smaller size (#25) and a larger size (#35).  Chain drives are strong but noisy and dangerous (can cut off fingers easily).  Chain sprockets come is a fairly good range of sizes with the larger sprockets having a VersaHub bolt pattern rather than a 1/2" Hex bore.  Chains have a tendancy to stretch and loosen slightly over time.  ReCalc has a https://www.reca.lc/chains[Chain Length Calculator^].
 
-=== Gear Drive
+(see also xref:Mechanical.adoc#chain-drives[Mechanical Sub-Team -- Chain Drives])
+
+=== Gear Drives
 
 Gears come in many tooth counts (every 2 tooth increments) and the larger sizes are 1/2" Hex bore (unlike chain sprockets).  The center-to-center distance can be found with the https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator^].  
 
 Once a center-to-center distance is found for a pair of gears, any gears that sum to the same tooth count will work for that center-to-center distance.  For example if you find the center-to-center distance for a 16T gear meshing with a 44T gear then you can take the sum of the tooth counts (16T + 44T = 60T).  Now any pair of gears that sum to 60T will work with that center-to-center distance (e.g. 24T and 36T).  In the technical drawing for the  https://wcproducts.info/files/frc/drawings/Web-WCP-0225.PDF[WCP Rotaiton SS Gearbox^] you can see that this sum is specified for each stage of the gearbox.
+
+The smallest gears that mount on motors (motor pinions) come with smaller tooth counts but the same center-to-center distance.  This is called addendum modifying the gear (see https://docs.wcproducts.com/frc-build-system/belts-chain-and-gears/gears#addendum-modified-gears[Addendum Modified Gears^]) and it allows several motor pinion gears to be used with the same gearbox without modifying the driven gear that the motor pinion is mating with.
 
 [%notitle]
 === Gearbox Exercise {counter:tasknum}
@@ -136,22 +138,18 @@ a| QUESTIONS: ::
 |===
 
 == Fasteners
-
-FRC robots usually use either socket head cap screws or button head screws due to their strength and ease of use.  Socket head cap screws are the strongest type of screw.  Button head screws have a lower and wider head and are good when holding thin sheet metal or when the lower profile is needed.
-
-image::Socket-head-screw-types.jpg[Socket Head Types, align="center"]
-
-
+See xref:Mechanical.adoc#fasteners[Mechanical Sub-Team -- Fasteners]
 
 == Resources
 
-* https://wcproducts.com/[West Coast Products^]
+* https://wcproducts.com/[West Coast Products (WCP)^]
+* https://docs.wcproducts.com/frc-build-system[WCP FRC Build System^]
 
 * https://www.revrobotics.com/[RevRobotics^] NEO, NEO Vortex
 
 * https://store.ctr-electronics.com/[Cross The Road Electronics^] Falcon 500, Kraken X60
 
-* https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^] (Metric in the Printable Version link)
+* https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^] (Metric in the https://littlemachineshop.com/images/Gallery/PDF/TapDrillSizes.pdf[Printable Version])
 
 * https://www.reca.lc/[ReCalc -- Chain & Belt Calcs, Motor Info^]
 

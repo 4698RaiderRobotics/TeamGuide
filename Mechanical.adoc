@@ -2,26 +2,76 @@
 :source-highlighter: highlight.js
 :xrefstyle: short
 // :sectnums:
-:idprefix!: 
+:idprefix: 
 :idseparator: -
-:tip-caption: WPILib:
-:CPP: C++
-:url-wpilibdocs: https://docs.wpilib.org/en/stable/
+:imagesdir: img/mechanical
 :toc:
 :toc-placement!:
 
 [discrete#top]
 
+=== Mechanical Sub-Team Exercises and Resources
+
 toc::[]
 
 == Overview
-The Mechancial Sub-Team is responsible for ...
+The Mechanical Sub-Team is responsible for assembling and maintaining the mechanical components of the robot.  These team members are in the pit at competitions and are responsible for repairing any broken mechanical systems.  This team works with hand tools and mechanical drive systems such as chain drives, belt drives, gearboxes, and swerve drive modules.
 
+== Fasteners
+
+=== Socket Head Screws
+
+FRC robots usually use either socket head cap screws or button head screws due to their strength and ease of use.  Socket head cap screws are the strongest type of screw.  Button head screws have a lower and wider head and are good when holding thin sheet metal or when the lower profile is needed.
+
+.Socket Head Screw Types
+image::Socket-head-screw-types.jpg[Socket Head Types, align="center"]
+
+We almost always use Inch (or English) threaded fasteners.  Inch fasteners come in several diameters and two main thread pitches (coarse and fine).  Fastener diameters are fractions (like 1/4", 5/16", etc.) for diameters 1/4" or greater and they are denoted by numbers in the smaller diameters (#10, #8, #6, etc.).  A https://littlemachineshop.com/reference/tapdrill.php["Drill and Tap Chart"] shows the important dimensions of each size of bolt.   We mainly use the Unified National Coarse (UNC) threaded bolts except for #10 diameter for which we use Unified National Fine (UNF) threads (#10-32).  
+
+.Drill and Tap Chart and Thread Terminology, Yellow Highlighted Sizes are Commonly Used
+[#drill_and_tap]
+image::Screw_Threads.png[Screw Threads, align="center"]
+
+If you are working with a #10-32 bolt then <<drill_and_tap>> will tell you that the major diameter of the bolt will be 0.1900", the minor diameter is 0.1517" (not really used much), the drill size needed to tap threads is a #21 drill bit (0.1590"), and a close fit hole would be drilled with a #9 drill bit (0.1960").  The chart also shows both the coarse and fine thread sizes for each screw size and the maximum torque for both socket head screws and button head screws.  For example, a 1/4" screw comes in either a 1/4-20 UNC thread (coarse thread) or a 1/4-28 UNF thread (fine thread).  You would drill a #7 hole for a 1/4-20 bolt and a #3 drill for a 1/4-28 bolt.  You would also drill a #F drill size for a close fit and you can torque a 1/4" socket head screw to 16.7 ft-lbs and a 1/4" button head screw to 10.4 ft-lbs.
+
+
+== Thread Locker (LOC__**TITE**__)
+Thread locker is basically modified super glue that is applied to the threads of a fastener before it is assembled and then hardens to prevent the fastener from coming loose due to vibration.  Thread locker comes in three main colors that indicate how strong it is.  
+
+[.red]**RED Thread Locker** (LOC__**TITE**__ 263) is high strength and considered *PERMANENT* and should only be used when a fastener will not be removed *EVER*.  It is not used very often.  
+
+[.blue]**BLUE Thread Locker** (LOC__**TITE**__ 243) is medium strength and is removable with normal hand tools.  It should not be used on very small screws (e.g. #6 or #4).  This is the most commonly used thread locker.
+
+[.purple]**PURPLE Thread Locker** (LOC__**TITE**__ 222) is low strength and can be used on very small fasteners but it will not hold large fasteners well. 
+
+There are several types of [.green]**GREEN Thread Locker** such as LOC__**TITE**__ 294 which is a medium strength wicking grade that will penetrate a thread after assembly.  Another [.green]**GREEN** product is LOC__**TITE**__ 609 which is a medium strength compound used to lock press-fit gears and bearings onto a shaft such as the gear for the NEO steering motor on the SDS MK3 swerve drive modules.
+
+== Drive Systems 
+A great deal of very good information can be found in the https://docs.wcproducts.com/frc-build-system[WCP FRC Build System^] documenation.
+
+=== Belt Drives
+Refer to xref:Design.adoc#belt-drives[Design Sub-Team -- Belt Drives]
+
+=== Chain Drives
+Roller chain used in FRC comes in two sizes: #25 chain and #35 chain.  Roller chain is composed of inner links and outer plates.  Roller chain can be shortened using a chain breaker tool that is used to press one of the pins out from one side of the outer plate and far enough to clear the inner link.  Only even multiples of pins can be in a chain unless a half link (or 1.5 link) is used.  Half links require the use of a very small cotter pin whereas 1.5 links do not.
+
+.Roller Chain and Link Types
+image::standardrollerchain.jpg[Roller Chain, align="center"]
+
+(see also xref:Design.adoc#chain-drives[Design Sub-Team -- Chain Drives])
+
+=== Gear Drives
+Refer to xref:Design.adoc#gear-drives[Design Sub-Team -- Gear Drives]
 
 == Resources
 
-* {url-wpilibdocs}[WPILib Documentation] (https://github.wpilib.org/allwpilib/docs/release/cpp/index.html[*{CPP}* API^]) (https://github.com/wpilibsuite/allwpilib/tree/main/wpilibcExamples/src/main/cpp/examples[Example Code^])
+* https://docs.wcproducts.com/frc-build-system[WCP FRC Build System^]
 
+* https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^] (Metric in the https://littlemachineshop.com/images/Gallery/PDF/TapDrillSizes.pdf[Printable Version])
 
+* https://www.swervedrivespecialties.com/products/mk3-swerve-module[SDS MK3 Module^]
+* https://www.swervedrivespecialties.com/collections/kits/products/mk4i-swerve-module[SDS MK4i Module^]
+
+* https://www.hobby-machinist.com/threads/10-32-versus-m5.90423/[#10-32 almost the same as M5x0.8^]
 
 <<top,TOP>>
