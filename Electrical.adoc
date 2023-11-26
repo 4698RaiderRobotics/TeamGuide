@@ -10,7 +10,6 @@
 :toc-placement!:
 
 [discrete#top]
-
 === Electrical Sub-Team Exercises and Resources
 
 toc::[]

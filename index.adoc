@@ -4,29 +4,35 @@
 
 == Raider Robotics Team Guide
 
+[cols="1,5"]
+|===
+a| image::Team4698Logo.webp[Team 4698, width=100, link=docs/4698TeamHandbook.pdf, window=_blank] 
+<.^| xref:docs/4698TeamHandbook.pdf[Team 4698 Handbook]
+|===
+
 === First Robotics Competition Info
 [cols="1,5"]
 |===
-a| image::CRESCENDO_Logo.jpg[Crescendo, width=100, float="left" align="center", link=https://www.firstinspires.org/robotics/frc/game-and-season, window=_blank] 
+a| image::CRESCENDO_Logo.jpg[Crescendo, width=100, link=https://www.firstinspires.org/robotics/frc/game-and-season, window=_blank] 
 <.^| https://www.firstinspires.org/robotics/frc/game-and-season[Game & Season Information^]
 |===
 
 [cols="1,5"]
 |===
-a| image::ChargedUpLogo.png[Charged Up, width=100, float="left" align="center", link=https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system, window=_blank] 
+a| image::ChargedUpLogo.png[Charged Up, width=100, link=https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system, window=_blank] 
 <.^| https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system[CHARGED UP 2023 Season Materials^]
 |===
 
 [cols="1,5"]
 |===
-a| image::frcLogo.png[Archived Games, width=100, float="left" align="right", link=https://www.firstinspires.org/resource-library/frc/archived-game-documentation, window=_blank] 
+a| image::frcLogo.png[Archived Games, width=100, link=https://www.firstinspires.org/resource-library/frc/archived-game-documentation, window=_blank] 
 <.^| https://www.firstinspires.org/resource-library/frc/archived-game-documentation[Archived Game Docs^]
 |===
 
 === Sub-Team Resources and Skill Builders
 [cols="1,2"]
 |===
-a| image::DesignLink.gif[Design, float="left" align="center", link=Design.html] 
+a| image::DesignLink.gif[Design, link=Design.html] 
 <.^| xref:Design.adoc[Design Sub-Team Guide]
 |===
 
@@ -34,7 +40,7 @@ a| image::DesignLink.gif[Design, float="left" align="center", link=Design.html]
 
 [cols="1,2"]
 |===
-a| image::SoftwareLink.gif[Software, float="left" align="center", link=CodingGuide.html] 
+a| image::SoftwareLink.gif[Software, link=CodingGuide.html] 
 <.^| xref:CodingGuide.adoc[Software Sub-Team Guide]
 |===
 
@@ -42,7 +48,7 @@ a| image::SoftwareLink.gif[Software, float="left" align="center", link=CodingGui
 
 [cols="1,2"]
 |===
-a| image::ElectricalLink.gif[Electrical, float="left" align="center", link=Electrical.html] 
+a| image::ElectricalLink.gif[Electrical, link=Electrical.html] 
 <.^| xref:Electrical.adoc[Electrical Sub-Team Guide]
 |===
 
@@ -50,7 +56,7 @@ a| image::ElectricalLink.gif[Electrical, float="left" align="center", link=Elect
 
 [cols="1,2"]
 |===
-a| image::ManufacturingLink.gif[Manufacturing, float="left" align="center", link=Manufacturing.html] 
+a| image::ManufacturingLink.gif[Manufacturing, link=Manufacturing.html] 
 <.^| xref:Manufacturing.adoc[Manufacturing Sub-Team Guide]
 |===
 
@@ -58,6 +64,6 @@ a| image::ManufacturingLink.gif[Manufacturing, float="left" align="center", link
 
 [cols="1,2"]
 |===
-a| image::MechanicalLink.gif[Mechanical, float="left" align="center", link=Mechanical.html] 
+a| image::MechanicalLink.gif[Mechanical, link=Mechanical.html] 
 <.^| xref:Mechanical.adoc[Mechanical Sub-Team Guide]
 |===

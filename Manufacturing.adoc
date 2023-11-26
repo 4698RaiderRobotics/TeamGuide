@@ -2,26 +2,23 @@
 :source-highlighter: highlight.js
 :xrefstyle: short
 // :sectnums:
-:idprefix!: 
+:idprefix: 
 :idseparator: -
-:tip-caption: WPILib:
-:CPP: C++
-:url-wpilibdocs: https://docs.wpilib.org/en/stable/
 :toc:
 :toc-placement!:
 
 [discrete#top]
+=== Manufacturing Sub-Team Exercises and Resources
 
 toc::[]
 
 == Overview
-The Manufacturing Sub-Team is responsible for ...
+The Manufacturing Sub-Team is responsible for making the custom parts that are needed for the robot using the various tools available in the RAHS Shop.
 
 
 == Resources
 
-* {url-wpilibdocs}[WPILib Documentation] (https://github.wpilib.org/allwpilib/docs/release/cpp/index.html[*{CPP}* API^]) (https://github.com/wpilibsuite/allwpilib/tree/main/wpilibcExamples/src/main/cpp/examples[Example Code^])
-
+* https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^] (Metric in the https://littlemachineshop.com/images/Gallery/PDF/TapDrillSizes.pdf[Printable Version])
 
 
 <<top,TOP>>

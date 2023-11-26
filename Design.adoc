@@ -9,7 +9,6 @@
 :toc-placement!:
 
 [discrete#top]
-
 === Design Sub-Team Exercises and Resources
 
 toc::[]
@@ -144,6 +143,8 @@ See xref:Mechanical.adoc#fasteners[Mechanical Sub-Team -- Fasteners]
 
 * https://wcproducts.com/[West Coast Products (WCP)^]
 * https://docs.wcproducts.com/frc-build-system[WCP FRC Build System^]
+
+* https://www.andymark.com/[AndyMark^]
 
 * https://www.revrobotics.com/[RevRobotics^] NEO, NEO Vortex
 

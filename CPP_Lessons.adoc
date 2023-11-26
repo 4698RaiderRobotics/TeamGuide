@@ -4,8 +4,14 @@
 // :sectnums:
 :CPP: C++
 :toc:
+:toc-placement!:
 
-This document attempts to highlight the parts of the C++ language that are most helpful for FRC robotics.  Although some of the examples are oriented towards robotics, these lessons do not require any of the FRC software to be installed.
+[discrete#top]
+=== *{CPP}* Quick Primer and Practice Lessons
+
+toc::[]
+
+This document attempts to highlight the parts of the *{CPP}* language that are most helpful for FRC robotics.  Although some of the examples are oriented towards robotics, these lessons do not require any of the FRC software to be installed.
 
 Although there are simpler languages that could be used for robot programming, if you take the time to learn *{CPP}* it will be worth the effort.  https://www.evanmiller.org/you-cant-dig-upwards.html[See this blogpost^] for an excellent argument for learning a lower-level language.
 
