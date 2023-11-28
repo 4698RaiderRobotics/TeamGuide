@@ -36,11 +36,37 @@ The battery connections are a common source of failures and must be carefully co
 --
 
 == 12V Power Distribution
-The robot Most robot components need 12VDC for power.  The Power Distribution Panel (PDP) or the Power Distribution Hub (PDH) is the circuit breaker panel of the robot.  It allows each motor or motor controller to be isolated onto it's own circuit with a circuit breaker protecting it.  For any components that need 5VDC there is a Voltage Regulator Module (VRM) that takes the battery's 12VDC and regulates it down to 5VDC.
+Most robot components need 12VDC for power.  The Power Distribution Panel (https://store.ctr-electronics.com/power-distribution-panel/[PDP^]) or the Power Distribution Hub (https://www.revrobotics.com/rev-11-1850/[PDH^]) is the circuit breaker panel of the robot.  It allows each motor or motor controller to be isolated onto it's own circuit with a circuit breaker protecting it.  For any components that need 5VDC there is a Voltage Regulator Module (VRM) that takes the battery's 12VDC and regulates it down to 5VDC.
+
+== Anderson PowerPole Connectors
+We use PowerPole (PP45) connectors mostly for our motor and motor controller power connections.  They are capable of providing 45 Amps of current.  There are two good online resources for their proper use:
+
+* https://powerwerx.com/help/powerpole-assembly-instructions[Powerwerx PP45 Instructions^]
+* https://docs.revrobotics.com/sparkmax/tips-and-tricks/anderson-power-pole-connectors[REVrobotics PP45 Instructions^]
+
+There are several things that you must be careful of when putting together PP45 connectors:
+
+. Do not strip more insulation away from the wire than needed.
+. Crimp the contacts on correctly without deforming them excessively.
+. Keep the red and black wires the same length.
+. Insert the contacts into the housings completely until the spring retainer snap under the contact tip. 
+
+== Dupont / Servo Connectors
+Servo connectors are used with the CAN and PWM wires.  There are male and female contacts and they are both very small which makes them difficult to crimp onto wires without patience and practice.  A veteran team member or a mentor can help show you how to make servo contact crimps.
+
+== Wire Ferrules
+Wire ferrules should be used when the end of a wire needs to go into a screw terminal or a spring clamp terminal.  The ferrule keeps the individual strands of the wire from splitting apart.
+
+== Strain Relief and Routing
+During a competition the robot experiences very high shock loads from collisions with the playing field and other robots.  These shock loads can easily rip wires from their connected components if they are not securely fastened to the robot frame.  All wires must be routed such that they are the correct length and follow along the robot framing.  They should be bundled together and attached to the framing periodically.  It is especially important that the wires be attached to something rigid near their ends.
+
+* See https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/wiring-best-practices.html[Wiring Best Practices^]
 
 == Resources
 * https://powerwerx.com/help/powerpole-assembly-instructions[Powerwerx PP45 Instructions^]
 * https://docs.revrobotics.com/sparkmax/tips-and-tricks/anderson-power-pole-connectors[REVrobotics PP45 Instructions^]
 * https://www.andersonpower.com/content/dam/app/ecommerce/product-pdfs/MARC/111038s2.pdf[PP45 Contact Removal Tool^]
+
+* https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/wiring-best-practices.html[WPILib Wiring Best Practices^]
 
 <<top,TOP>>

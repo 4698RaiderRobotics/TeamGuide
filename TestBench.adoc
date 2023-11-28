@@ -34,7 +34,7 @@ toc::[]
 
 The Test Bench was created to allow students wanting to learn FRC robot programming a way to do example problems without needing access to a functioning robot.  As you read these examples they will refer to terms and/or concepts that will not be familiar to you.  Stop and lookup what these unfamiliar terms/concepts mean as you go along.  
 
-The Test Bench uses a {hw-roborio} and a {hw-PDP}.  It has two motors attached to it, a brushed motor {hw-neverest} and a brushless motor (a {hw-neo550}) connected to two different motor controllers (a {hw-spark} and a {hw-sparkmax}).  The {hw-spark} motor controller is controlled with PWM and the {hw-sparkmax} is controlled over the https://en.wikipedia.org/wiki/CAN_bus[CAN bus^] of the {hw-roborio}. 
+The Test Bench uses a {hw-roborio} and a {hw-PDP} (clink on the links and read about these things!).  It has two motors attached to it, a brushed motor ({hw-neverest}) and a brushless motor (a {hw-neo550}) connected to two different motor controllers (a {hw-spark} and a {hw-sparkmax}).  The {hw-spark} motor controller is controlled with PWM and the {hw-sparkmax} is controlled over the https://en.wikipedia.org/wiki/CAN_bus[CAN bus^] of the {hw-roborio}. 
 
 The NeveRest motor connected to the large disc is used in the position control exercises and refered to as the "Position Control" motor. It is connected to the {hw-spark} motor controller which is wired into the {hw-roborio} PWM channel {pos-motor-pwm}.  The position control motor has a {hw-srxmag} attached to its output shaft.  The SRX is wired into the {hw-roborio} DIO channels {pos-motor-quadA}, {pos-motor-quadB}, and {pos-motor-abs}. Channels {pos-motor-quadA} & {pos-motor-quadB} are the Quadrature A and B inputs and channel {pos-motor-abs} is the absolute PWM signal.
 
@@ -342,6 +342,9 @@ a| `*TASK {counter:tasknum}*`
 a| QUESTIONS: ::
 . How does the change in units affect the value of the *K~p~* constant?
 |===
+
+=== AdvantageScope
+https://github.com/Mechanical-Advantage/AdvantageScope/[AdvantageScope^] is a NT viewer and a Log File viewer that is much more powerful than Shuffleboard.  It's graphs are far superior and much easier to use.  Do the graphing exercises above using AdvantageScope rather than Shuffleboard.  Explore the https://github.com/Mechanical-Advantage/AdvantageScope/blob/main/docs/INDEX.md[AdvantageScope Docs^] to see all of its available features.
 
 === Relative Encoder Limitations
 

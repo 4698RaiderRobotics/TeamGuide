@@ -3,6 +3,7 @@
 :xrefstyle: short
 // :sectnums:
 :CPP: C++
+:imagesdir: img/software
 :toc:
 :toc-placement!:
 
@@ -26,6 +27,9 @@ The ubiquitous first program of any programming language is the Hello World prog
 . Launch Visual Studio and select "Create a new project"
 . Choose a "Console App"
 . Give it the name `HelloWorld`, optionally choose a different location, and check the "Place Solution and Project in the same directory" checkbox
+
+.Create a Hello World Console Project
+image::HelloWorld.gif[Hello World Project, align="center"]
 
 The HelloWorld project is created and the `HelloWorld.cpp` is opened in an editor window.  All of the lines that begin with double slashes (`//`) are comments.  The contents of the file with the comments removed is:
 
