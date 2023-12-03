@@ -1,5 +1,4 @@
 = Raider Robotics Design Sub-Team Guide
-:source-highlighter: highlight.js
 :xrefstyle: short
 // :sectnums:
 :idprefix: 
@@ -26,7 +25,7 @@ We use Autodesk Fusion 360 as our design software.  Each season we create a new 
 
 Try to learn as much as you can in order to efficiently and effectively use Fusion 360.  This means practice by doing some examples, watch the tutorial videos from Autodesk, and ask questions when you are struggling.
 
-Watch the https://help.autodesk.com/view/fusion360/ENU/courses/[Fusion 360 Tutorials^] in particular the [.underline]_Sketch basics_, [.underline]_Solid modeling basics_, [.underline]_Introduction to 3D modeling_, and [.underline]_Advanced part modeling techniques_ from the *3D modeling* series.
+Watch the https://help.autodesk.com/view/fusion360/ENU/courses/[Fusion 360 Tutorials^] in particular the  https://help.autodesk.com/view/fusion360/ENU/courses/AP-SKETCH-FUNDAMENTALS[[.underline]_Sketch basics_], https://help.autodesk.com/view/fusion360/ENU/courses/AP-SOLID-EXTRUDE[[.underline]_Solid modeling basics_], https://help.autodesk.com/view/fusion360/ENU/courses/AP-INTRO-3D-MODELING-OVERVIEW[[.underline]_Introduction to 3D modeling_], and https://help.autodesk.com/view/fusion360/ENU/courses/AP-ADVANCED-MODELING-TECHNIQUES-PART-1[[.underline]_Advanced part modeling techniques_] from the https://help.autodesk.com/view/fusion360/ENU/courses/#d-modeling-3[3D Modeling] series.
 
 Watch the video https://www.autodesk.com/autodesk-university/class/100-Things-Beginners-Should-Learn-Fusion-360-2020[100 Things Beginners Should Learn^].
 
@@ -44,14 +43,13 @@ Fully constrained sketches force you to consider all aspects of the geometry of 
 
 Use construction lines when necessary.  They are sometimes easier than using dimensions for overall positioning.  When a part must mate with another, project only the geometry necessary to align the two parts.
 
-[%notitle]
 === Sketch Exercise {counter:tasknum}
 
 |===
-a| `*Exercise {tasknum}*` 
-a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center.  Do this exercise without downloading the STEP model of the NEO, look at the drawing to find the dimensions.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^]).
+// a| `*Exercise {tasknum}*`
+a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center such that four bolts can be used.  Do this exercise without downloading the STEP model of the NEO, look at the https://revrobotics.com/content/docs/REV-21-1650-V1.1-DR.pdf[NEO drawing] to find the dimensions.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^]).
 
-image::1_MotorMount.png[Motor Mount, align="center"]
+image::1_MotorMount.png[Motor Mount, width=500, align="center"]
 
 a| GOALS: ::
 . Practice making a simple sketch and using constraints.
@@ -72,17 +70,20 @@ Fasteners can also be inserted directly into a design using the `Insert -> Inser
 
 Moving and aligning imported components is done by rotating the component to the proper orientation then using a Point-To-Point move to get the component to the correct X,Y,Z location.  It is usually easiest to select circles (or arc centers) as the source and target "points".
 
-[%notitle]
 === Vendor Exercise {counter:tasknum}
 
 |===
-a| `*Exercise {tasknum}*` 
+// a| `*Exercise {tasknum}*` 
 a| Design a hex rod shaft with a 40 tooth chain sprocket on each end as shown in the drawing below.  Get the FRC specific part files from https://wcproducts.com/[West Coast Products^] and use a `Vendor` folder to store your vendor models.  Use meaningful names for your files within your Vendor folder (see above).  You will need part numbers 217-2753, 217-2637, WCP-0790, WCP-0324, and 217-2592.  You will also need e-clips and bolts from McMaster-Carr.  McMaster-Carr parts can be inserted directly from within Fusion 360.
 
-image::2_HexRodAsmDrawing.png[Hex Rod Asmb, align="center"]
+image::2_HexRodAsmDrawing.png[Hex Rod Asmb, width=500, align="center"]
 
-image::2_HexRodAssembly.png[Hex Rod Asmb, align="center"]
+image::2_HexRodAssembly.png[Hex Rod Asmb, width=500, align="center"]
 
+a| GOALS: ::
+. Learn how to break the link to a Vendor part for modification.
+. Learn how to position inserted designs into the correct location.
+. Learn how to insert McMaster-Carr parts into a design.
 
 a| QUESTIONS: ::
 . What did you have to sketch for this design?
@@ -96,6 +97,9 @@ a| QUESTIONS: ::
 Unless you are making a single part made of a single body you should create components for each part of your design *AND BE SURE TO ACTIVATE* that component when you are working with it.  Most of the advanced functionality of Fusion 360 only works with components such as joints and rigid body constraints.  Activating a component before doing any operations on it will filter the timeline to only those that pertain to that component which makes working with the timeline much easier as designs get complicated.
 
 See https://www.autodesk.com/products/fusion-360/blog/components-bodies-for-new-designers/[Components & Bodies for New Designers^]
+
+== Multi-Component Robot Organization
+Each part of the robot should be designed (CAD and CAM) in its own design file.  The complete robot is then assembled from the individual component design files.  It may make sense for some design files to contain multiple components but generally having a single component per design file makes compartmentalizing the CAD and particularly the CAM elements easier.
 
 == Drive System Design
 
@@ -121,15 +125,18 @@ Once a center-to-center distance is found for a pair of gears, any gears that su
 
 The smallest gears that mount on motors (motor pinions) come with smaller tooth counts but the same center-to-center distance.  This is called addendum modifying the gear (see https://docs.wcproducts.com/frc-build-system/belts-chain-and-gears/gears#addendum-modified-gears[Addendum Modified Gears^]) and it allows several motor pinion gears to be used with the same gearbox without modifying the driven gear that the motor pinion is mating with.
 
-[%notitle]
 === Gearbox Exercise {counter:tasknum}
 
 |===
-a| `*Exercise {tasknum}*` 
+// a| `*Exercise {tasknum}*` 
 a| Design a 2-stage vertical oriented gearbox with a 16:1 ratio that uses a Falcon 500 motor and has a 1/2" Hex output shaft.  Have the gearbox bolt to a 1"x1" tube.  You will need to have the plate spacing at 1-1/8" in order for flange bearing to fit inside the plate.  This design is very similar to the https://wcproducts.com/collections/gearboxes/products/wcp-rotation-ss-gearbox[WCP Rotation SS Gearbox^] but in the vertical orientation.  Don't use the WCP 3D model, start from scratch.
 
-image::3_Gearbox_Hand_Sketch.jpg[Gearbox Sketch, align="center"]
+image::3_Gearbox_Hand_Sketch.jpg[Gearbox Sketch, width=500, align="center"]
 
+a| GOALS: ::
+. Learn how to correctly space gear shafts.
+. Learn about multi-stage gearboxes.
+. Practice creating multiple components and activating them to organized the timeline.
 
 a| QUESTIONS: ::
 . This is a fairly complex design.  What problems did you run into?
@@ -137,7 +144,14 @@ a| QUESTIONS: ::
 |===
 
 == Fasteners
-See xref:Mechanical.adoc#fasteners[Mechanical Sub-Team -- Fasteners]
+Design team members must understand the various fasteners available.  Designs need to take into consideration clearances for fasteners and fastener heads.  Designs also need to specify the correct hole sizes for holes that will be threaded.
+
+Details of fasteners are given in xref:Mechanical.adoc#fasteners[Mechanical Sub-Team -- Fasteners]
+
+== Computer Aided Manufacturing (CAM)
+Making complex designs using a CNC machine (i.e. the ShopBot and the HAAS) requires creating instructions for how the cutting tools must move.  Those instructions are "post processed" into a NC program file that the CNC machines read. Fusion 360 can be used to create the machining tool paths and convert them to NC programs.
+
+A great resource for learning CAM modeling is the https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series].  This series gives both CAD and CAM instructions for creating parts and generating the NC program.  Students in Engineering II sometimes make the https://academy.titansofcnc.com/series/titan-4m[Titan-4M] part.  If you have good CAD skills then it is useful to only look at the drawing PDF and generate the CAD model from the PDF.  Then watch the video on how they created CAD model.  They sometimes use different techniques which gives you an alternative method of doing the same thing.
 
 == Resources
 
@@ -150,7 +164,7 @@ See xref:Mechanical.adoc#fasteners[Mechanical Sub-Team -- Fasteners]
 
 * https://store.ctr-electronics.com/[Cross The Road Electronics^] Falcon 500, Kraken X60
 
-* https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^] (Metric in the https://littlemachineshop.com/images/Gallery/PDF/TapDrillSizes.pdf[Printable Version])
+* https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^] (Metric in the https://littlemachineshop.com/images/Gallery/PDF/TapDrillSizes.pdf[Printable Version^])
 
 * https://www.reca.lc/[ReCalc -- Chain & Belt Calcs, Motor Info^]
 
