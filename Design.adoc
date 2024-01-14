@@ -31,6 +31,8 @@ Watch the video https://www.autodesk.com/autodesk-university/class/100-Things-Be
 
 https://www.autodesk.com/products/fusion-360/blog/components-vs-bodies-tips-fusion-360/[7 Tips for Organizing Bodies & Components^] discusses the key idea of activating a component before doing any operations on the component to make the timeline cleaner and better organized.
 
+There some CAD exercises on https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi] structured like the 24 days of an advent calendar.
+
 Also checkout the https://www.autodesk.com/products/fusion-360/blog#getting-started[Fusion 360 Blog^] for other tips and tricks.
 
 === Sketches are Key
@@ -154,7 +156,8 @@ Making complex designs using a CNC machine (i.e. the ShopBot and the HAAS) requi
 A great resource for learning CAM modeling is the https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series].  This series gives both CAD and CAM instructions for creating parts and generating the NC program.  Students in Engineering II sometimes make the https://academy.titansofcnc.com/series/titan-4m[Titan-4M] part.  If you have good CAD skills then it is useful to only look at the drawing PDF and generate the CAD model from the PDF.  Then watch the video on how they created CAD model.  They sometimes use different techniques which gives you an alternative method of doing the same thing.
 
 == Resources
-
+=== CAD
+* https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi CADvent]
 * https://wcproducts.com/[West Coast Products (WCP)^]
 * https://docs.wcproducts.com/frc-build-system[WCP FRC Build System^]
 
@@ -171,5 +174,8 @@ A great resource for learning CAM modeling is the https://academy.titansofcnc.co
 * https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator^]
 
 * https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator^]
+
+=== CAM
+* https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series]
 
 <<top,TOP>>
