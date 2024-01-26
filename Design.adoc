@@ -155,6 +155,8 @@ Making complex designs using a CNC machine (i.e. the ShopBot and the HAAS) requi
 
 A great resource for learning CAM modeling is the https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series].  This series gives both CAD and CAM instructions for creating parts and generating the NC program.  Students in Engineering II sometimes make the https://academy.titansofcnc.com/series/titan-4m[Titan-4M] part.  If you have good CAD skills then it is useful to only look at the drawing PDF and generate the CAD model from the PDF.  Then watch the video on how they created CAD model.  They sometimes use different techniques which gives you an alternative method of doing the same thing.
 
+See also: xref:Manufacturing.adoc#HAAS-Mill[Manufacturing Sub-Team -- HAAS Mill]
+
 == Resources
 === CAD
 * https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi CADvent]

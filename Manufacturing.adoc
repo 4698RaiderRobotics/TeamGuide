@@ -2,6 +2,7 @@
 :source-highlighter: highlight.js
 :xrefstyle: short
 // :sectnums:
+:imagesdir: img/manufacturing
 :idprefix: 
 :idseparator: -
 :toc:
@@ -15,6 +16,19 @@ toc::[]
 == Overview
 The Manufacturing Sub-Team is responsible for making the custom parts that are needed for the robot using the various tools available in the RAHS Shop.
 
+== Drill Press
+
+== Manual Lathe
+
+== Manual Mill
+
+== 3D Printer
+
+== ShopBot
+
+== HAAS Mill
+.Haas Feeds and Speeds
+image::HaasFeedsSpeeds.png[Haas Feeds and Speeds, align="center"]
 
 == Resources
 
