@@ -27,6 +27,29 @@ The Manufacturing Sub-Team is responsible for making the custom parts that are n
 == ShopBot
 
 == HAAS Mill
+=== G-Code
+G-Code is the computer numerical control (CNC) programming language used to control the Haas Mill.  The G-Code program tells the machine where to move, how fast to move, how fast to spin the spindle, when to do tool changes etc.  G-Code is usually generated automatically using a post-processer from the CAM software used to design a part.  It is however possible to write simple G-Code programs by hand.
+
+=== CNC Coordinate Systems
+G-code programs always use a coordinate system that is relative to some feature on the part being machined or to an edge of the raw stock used.  The CNC machine doesn't know where the part is located in the machine without being told.
+
+The Work Coordinate Systems (WCS) are used to tell the Haas where the part is in the machine.  There are several WCSs available for the G-code program to use but the first one (G54) is the most commonly used.  There are also G55-G59 and some others.  The WCS has X, Y, & Z Offsets that correspond to the location of the part origin point in the Machine Coordinate System (MCS).  When a WCS is selected (using G54 or G55 etc) the Haas adds the WCS offsets to all the coordinates (X,Y,Z) to determine the machine coordinates.
+
+.CNC Coordinate Systems showing the G54 WCS and the Machine Coordate System (MCS)
+image::CNCCoordinateSystems.png[CNC Coordinate Systems, align="center"]
+
+=== Tool Offsets
+The X and Y axes are straight forward, however the Z-axis has the added complication that the CNC machine uses different tools and each tool is a different length.  Each tool used in a G-Code program must have a the correct tool offset associated with it. When a tool offset is enabled (G43 H01 for example) the tool offset value (H value) is added to the Z-coordinate in addition to the WCS Z value.
+
+Tool offsets can be set up using either the top of the part as the datum or a Z-axis setter as the datum.  There are many advantages to using a Z-axis setter and that method should be used.  When a datum other than the part is used to determine the tool offsets, they only need to be determined once.  They would only need to be changed when the tool breaks or it is removed from the machine and the H-value is not remembered.  
+
+.Two methods of using Tool Offsets (H values)
+image::ToolOffsetsFigure.png[CNC Tool Offsets, align="center"]
+
+When the Z-axis setter method is used the distance from the top of the Z-Setter to the Part Z-origin needs to be determined for each new part that is machined (WCS Z).  However, the tool offsets do not need to be redone.  A dial indicator or the Haimer may be used to measure the WCS Z value.
+
+
+=== Feeds and Speeds
 .Haas Feeds and Speeds
 image::HaasFeedsSpeeds.png[Haas Feeds and Speeds, align="center"]
 
