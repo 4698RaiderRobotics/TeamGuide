@@ -51,6 +51,9 @@ There are several things that you must be careful of when putting together PP45 
 . Keep the red and black wires the same length.
 . Insert the contacts into the housings completely until the spring retainer snap under the contact tip. 
 
+.Anderson PowerPole Orientation Used for Power and Brushless Motor Connectors.
+image::PowerPole_Orient.jpg[Anderson PowerPole Orientation, align="center"]
+
 == Dupont / Servo Connectors
 Servo connectors are used with the CAN and PWM wires.  There are male and female contacts and they are both very small which makes them difficult to crimp onto wires without patience and practice.  A veteran team member or a mentor can help show you how to make servo contact crimps.
 
