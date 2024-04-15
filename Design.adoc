@@ -103,7 +103,7 @@ See https://www.autodesk.com/products/fusion-360/blog/components-bodies-for-new-
 == Multi-Component Robot Organization
 Each part of the robot should be designed (CAD and CAM) in its own design file.  The complete robot is then assembled from the individual component design files.  It may make sense for some design files to contain multiple components but generally having a single component per design file makes compartmentalizing the CAD and particularly the CAM elements easier.
 
-== Drive System Design
+== Mechanism Motion Design
 
 Belts, Chains, and Gears are commonly used on FRC robots.  When a design uses these elements it is possible to choose the distance between rotation centers such that exact lengths of belts or chains work correctly.  Gears will not work without precise center-to-center distances.  A great deal of very good information can be found in the https://docs.wcproducts.com/frc-build-system[WCP FRC Build System^] documenation.
 
@@ -145,8 +145,33 @@ a| QUESTIONS: ::
 . Did you create multiple components and activate them to separate out the timeline?
 |===
 
+=== Gear Ratio Calculation
+The gear ratio that is needed for a mechanism can be calculated using the Motor Power Curve for the motor that will be used along with the mass of the mechanism.  The goal is to utilize the more efficient parts of the Motor Power Curve which means keeping the speed of the motor fairly close to the middle of the RPM range (<<NEO_MPC>>).
+
+[[NEO_MPC]]
+.NEO Motor Power Curve showing the peak power at ~2900 RPM.
+image::neo_motor_power_curve.png[NEO Motor Power Curve, align="center"]
+
+Online calculators are very helpful in determining the correct gear ratio for a mechanism.  The https://ambcalc.com[AMB Robotics Calculators^] has a calculator for "Mechanism Ratios" that will determine the best gear ratio for the given mechanism geometry and weight.
+
+=== Mechanism Exercise {counter:tasknum}
+
+|===
+a| Determine the correct gear ratio to use for a Climber mechanism to lift a 145 pound robot with a single NEO Vortex motor.  Use the https://ambcalc.com/mechanism[AMB Robotics Mechanism Calculator^].  The motor should stay below 40 amps.
+
+image::4_Climber_Sketch.jpg[Climber Sketch, width=500, align="center"]
+
+a| GOALS: ::
+. Learn how to use the mechanism ratio calculator.
+. Learn how to read a Motor Power Curve.
+
+a| QUESTIONS: ::
+. How long will a 15" climb take?
+. How could you speed up the climber?
+|===
+
 == Fasteners
-Design team members must understand the various fasteners available.  Designs need to take into consideration clearances for fasteners and fastener heads.  Designs also need to specify the correct hole sizes for holes that will be threaded.
+Design team members must understand the various fasteners available.  Designs need to take into consideration clearances for fasteners and fastener heads.  Designs also need to specify the correct hole sizes for holes that will be threaded or for bolt clearance.
 
 Details of fasteners are given in xref:Mechanical.adoc#fasteners[Mechanical Sub-Team -- Fasteners]
 
@@ -159,23 +184,31 @@ See also: xref:Manufacturing.adoc#HAAS-Mill[Manufacturing Sub-Team -- HAAS Mill]
 
 == Resources
 === CAD
+* https://help.autodesk.com/view/fusion360/ENU/courses/[Fusion 360 Tutorials^]
+** https://help.autodesk.com/view/fusion360/ENU/courses/AP-SKETCH-FUNDAMENTALS[[.underline]_Sketch basics_]
+** https://help.autodesk.com/view/fusion360/ENU/courses/AP-SOLID-EXTRUDE[[.underline]_Solid modeling basics_]
+** https://help.autodesk.com/view/fusion360/ENU/courses/AP-INTRO-3D-MODELING-OVERVIEW[[.underline]_Introduction to 3D modeling_]
+** https://help.autodesk.com/view/fusion360/ENU/courses/AP-ADVANCED-MODELING-TECHNIQUES-PART-1[[.underline]_Advanced part modeling techniques_]
+* https://www.autodesk.com/autodesk-university/class/100-Things-Beginners-Should-Learn-Fusion-360-2020[100 Things Beginners Should Learn^].
+* https://www.autodesk.com/products/fusion-360/blog/components-vs-bodies-tips-fusion-360/[7 Tips for Organizing Bodies & Components^] 
 * https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi CADvent]
+
+=== Suppliers
 * https://wcproducts.com/[West Coast Products (WCP)^]
-* https://docs.wcproducts.com/frc-build-system[WCP FRC Build System^]
-
+** https://docs.wcproducts.com/frc-build-system[WCP FRC Build System^]
 * https://www.andymark.com/[AndyMark^]
-
 * https://www.revrobotics.com/[RevRobotics^] NEO, NEO Vortex
-
+* https://www.vexrobotics.com/pro[VexRobotics^]
 * https://store.ctr-electronics.com/[Cross The Road Electronics^] Falcon 500, Kraken X60
 
+=== Design
 * https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^] (Metric in the https://littlemachineshop.com/images/Gallery/PDF/TapDrillSizes.pdf[Printable Version^])
-
 * https://www.reca.lc/[ReCalc -- Chain & Belt Calcs, Motor Info^]
-
+* https://ambcalc.com[AMB Robotics Calculator^] Mechanism Ratio, Chain/Belt C-C
 * https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator^]
-
 * https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator^]
+* https://www.projectb.net.au/resources/robot-mechanisms/[The Unofficial FRC Mechanism Encyclopedia^]
+* https://team2471.files.wordpress.com/2017/10/manipulators-firstfare-2017.pdf[Manipulators by Team 2471^]
 
 === CAM
 * https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series]

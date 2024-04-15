@@ -64,42 +64,86 @@ Each chapter in https://www.learncpp.com/[LearnCPP^] has several sections and yo
 * Read Chapter 1: https://www.learncpp.com/cpp-tutorial/statements-and-the-structure-of-a-program/[Basic Program Structure^]
 * Read Chapter 2: https://www.learncpp.com/cpp-tutorial/introduction-to-functions/[Functions and Files^]
 
-[cols="a"]
-|===
-| Questions
-| . What is a `void function`?
-  . What is a declaration versus a definition?
-|=== 
+=== Exercise {counter:tasknum}
 
-[cols="a"]
 |===
-| Exercises
-| . Do https://www.learncpp.com/cpp-tutorial/chapter-1-summary-and-quiz/[Question #3 here^] 
+a| Write a program that asks the user to enter a number, and then enter a second number. The program should tell the user what the result of adding and subtracting the two numbers is.
 
-. Write a program that has a function that takes two numbers as parameters and returns the ratio of two numbers.  It's function declaration should be:
-+
+The output of the program should match the following (assuming inputs of 6 and 4):
+
+----
+Enter an integer: 6
+Enter another integer: 4
+6 + 4 is 10.
+6 - 4 is 2.
+----
+
+a| GOALS: ::
+. Create a program that takes input from the user.
+. Send output to the console.
+
+a| QUESTIONS: ::
+. What happens if you enter floating point numbers instead of integers (i.e. 6.5 and 4.2)?
+. What happens if you don't enter a number (just hit enter)?
+. What is a `void function`?
+. What is a declaration versus a definition?
+|===
+
+:ratio_example: {counter:tasknum}
+=== Exercise {ratio_example}
+
+|===
+a| Write a program that has a function that takes two numbers as parameters and returns the ratio of two numbers.  It's function declaration should be:
+
 [source,CPP]
 ----
 double ratio( double numerator, double denominator );
 ----
-Print out the ratio of several numbers.
-+
+Take two numbers as user input and print out the ratio of the numbers.
+
 NOTE: https://www.learncpp.com/cpp-tutorial/introduction-to-function-parameters-and-arguments/[Very similar to Question #5 here^]
+
+----
+Enter a number: 6.0
+Enter another number: 4
+6.00000 / 4 is 1.50000.
+----
+
+a| GOALS: ::
+. Create function that returns a value.
+. Understand integer types and floating point types.
+
+a| QUESTIONS: ::
+. What happens if you change the `ratio()` function to take integer parameters and input integers from the user?
 |=== 
 
 * Read Chapter 4: https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/[Data Types^]
-* Read Chapter 5: https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/[Operators^]
-* Read Chapters 7.1 - 7.10: https://www.learncpp.com/cpp-tutorial/control-flow-introduction/[Control Flow^]
+* Read Chapter 5: https://www.learncpp.com/cpp-tutorial/constant-variables-named-constants/[Constants and Strings^]
+* Read Chapter 6: https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/[Operators^]
+* Read Chapters 8.1 - 8.10: https://www.learncpp.com/cpp-tutorial/control-flow-introduction/[Control Flow^]
+
+=== Exercise {counter:tasknum}
+
+|===
+a| Add an `if` statement to *Exercise {ratio_example}* to check if the denominator is zero to avoid divide by zero errors. Print an error if the denominator is zero.
+
+NOTE: In Chapter 8.2 they show `if .. else` single line statements not inside blocks ({}).  Always use blocks with your `if` statements as it helps prevent errors.
+
+a| GOALS: ::
+. Use an `if` statement to execute code conditionally.
+
+a| QUESTIONS: ::
+. You should never check a floating point number for equality with another number.  To properly check if the denominator is zero you should check if the absolute value of the denominator is smaller than a very small number.  How would you use the `fabs()` function to do this?
+|=== 
+
+=== Exercise {counter:tasknum}
 
 [cols="a"]
 |===
-| Exercises
-| . Some https://en.wikibooks.org/wiki/C%2B%2B_Programming/Exercises/Variables_and_types[Basic Exercises Here^]
+a| Write a program to convert RPM to radians per second with a function `RPMtoRadPerSec()`. Printout the results something like: 
 
-. Write a program to convert RPM to radians per second with a function `RPMtoRadPerSec()`. Printout the results something like: 
-+
 `2000.0000 RPM is 209.43951 rad/s` 
-+
+
 for several different RPMs.
 |===
 
@@ -107,12 +151,45 @@ for several different RPMs.
 
 The real power of *{CPP}* is that it is an object oriented language.  The techniques of Object Oriented Programming (OOP) help organize a program by spliting tasks into logical pieces.  OOP turns out to be a very powerful way of organizing complex software.
 
-* Read Chapter 13: https://www.learncpp.com/cpp-tutorial/welcome-to-object-oriented-programming/[Welcome to OOP^]
-* Read Chapter 16: https://www.learncpp.com/cpp-tutorial/object-relationships/[Object Relationships^]
-* Read Chapter 17: https://www.learncpp.com/cpp-tutorial/introduction-to-inheritance/[Inheritance^] 
+* Read Chapter 14: https://www.learncpp.com/cpp-tutorial/introduction-to-object-oriented-programming/[Intro to Classes^]
+
+=== Exercise {counter:tasknum}
+
+[cols="a"]
+|===
+a| Write a `Point2d` class whose constructor takes two `doubles` as arguments (*x*, *y*).  Write a member function `print()` that displays the points coordinates. The class should have two `private` member variables `m_x` and `m_y` of type `double` that default to 0.0.
+
+The following `main()` function should run and give the following output:
+[source,CPP]
+----
+int main()
+{
+    Point2d first{};
+    Point2d second{ 6.0, 5.0 };
+
+    // Point2d third{ 2.0 }; // error!  no constructor for (double)
+
+    first.print();
+    second.print();
+
+    return 0;
+}
+----
+
+----
+Point2d(0.000, 0.000)
+Point2d(6.000, 5.000)
+----
+
+|===
+
+
+* Read Chapter 15: https://www.learncpp.com/cpp-tutorial/the-hidden-this-pointer-and-member-function-chaining/[More on Classes^]
+* Read Chapter 23: https://www.learncpp.com/cpp-tutorial/object-relationships/[Object Relationships^]
+* Read Chapter 24: https://www.learncpp.com/cpp-tutorial/introduction-to-inheritance/[Inheritance^] 
 
 
 == Types, Templates, and Template Classes
 
-* Read Chapter 8: https://www.learncpp.com/cpp-tutorial/implicit-type-conversion-coercion/[Types and Functions^]
-* Read Chapter 19: https://www.learncpp.com/cpp-tutorial/template-classes/[Template Classes^]
+* Read Chapter 10: https://www.learncpp.com/cpp-tutorial/implicit-type-conversion-coercion/[Types and Functions^]
+* Read Chapter 26: https://www.learncpp.com/cpp-tutorial/template-classes/[Template Classes^]

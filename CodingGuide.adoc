@@ -96,12 +96,12 @@ Brushless motors are much more electrically complex but mechanically simpler.  B
 |  https://www.vexrobotics.com/217-6515.html[Falcon 500^]
 | 6380 rpm | 783 W | 532 rpm/V | 2048 
 
-5+| See also https://www.reca.lc/motors[ReCalc Motors Table^]
+5+| A more complete table is the https://www.reca.lc/motors[ReCalc Motors Table^]
 |===
 
 === Motor Controllers
 
-Motor controllers receive commands from the robot program and talk directly to the motors.  Team 4698 uses *TalonFX*, *TalonSRX*, and *SparkMAX* motor controllers mainly. The *TalonSRX* can only control brushed motors while the *TalonFX* and *SparkMAX* can control brushed or brushless.  The *TalonSRX* must use an external encoder whereas the *TalonFX* and *SparkMAX* can use a brushless motor's built-in encoder or an external encoder.  All three controllers have built-in PID control (see <<smart-controller-pid>>).
+Motor controllers receive commands from the robot program and talk directly to the motors.  Team 4698 uses *TalonFX*, *TalonSRX*, and *SparkMAX* motor controllers mainly. The *TalonSRX* can only control brushed motors while the *SparkMAX* can control brushed or brushless.  The *TalonFX* is the built-in controller for Falcon and Kraken motors which are brushless with integrated encoders.  The *TalonSRX* must use an external encoder whereas the *SparkMAX* can use a brushless motor's built-in encoder or an external encoder.  All three controllers have built-in PID control (see <<smart-controller-pid>>).
 
 === Encoders
 
@@ -165,6 +165,8 @@ One of the more useful aspects of using the Units Library is being able to defin
 ----
 
 Note that the units library uses "turns" for rotations with the suffix "tr".  Also notice that on the last line the wheel diameter is specified in inches but the units library automatically converts inches to meters.
+
+WARNING: The new Phoenix 6 library no longer uses "tics_per_100ms" units so the info below is not as relevant.
 
 Another example is using the *TalonFX* smart motor controller library's `Set()` function. It requires the position or velocity inputs in very awkward units (See <<talon_pid_table>>). The position should be in "encoder tics" and the velocity should be in "encoder tics" per 100 milliseconds. There are 2048 encoder tics per rotation for the *TalonFX* built-in encoder. Custom units can help with converting from these strange units to more physically meaningful units. You could define a custom angular position unit that is ("tics") and a custom angular velocity unit that is ("tics" / 100_ms).
 
@@ -288,29 +290,20 @@ The WPILib `frc2::PIDController` class can use any units the programmer decides 
 Each software vendor uses different units for their PID Controllers.  The table below summarizes the differences between the different vendor libraries.
 
 [cols="1,1,2"]
-.Rev Robotics *SparkMAX* Onboard Controller Units
+.*SparkMAX* and Phoenix 6 *TalonFX* Onboard Controller Units
 |===
-| Control Type | Units | Configurable
+| Control Type | Controller Units | Configurable 
 
-| Duty Cycle | [-1,1] | 
-| Voltage | [0,12] volts | 
-| Position | rotations | setPositionConversionFactor()
-| Velocity | RPM | setVelocityConversionFactor()
-| Current | Amps | 
-3+| *SparkMAX* feed forward `kFF` works the same as `kV` in WPILib. There is also an Arbitrary feed forward mechanism that is similar to `kS` in WPILib or can be customized (e.g. to vary with arm angle to compensate for varying gravity effect).
+| Duty Cycle | [-1,1] | no
+| Voltage | [0,12] volts | no
+| Position | rotations | yes
+| Velocity | RPM | yes
+| Current | Amps | no
 |===
 
-[cols="2,3,4"]
-.CTRE Phoenix *TalonFX* Onboard Controller Units
-[[talon_pid_table]]
-|===
-| Control Type | Units | Conversion (2048 units/rev)
+The way the feed forward values are configured differs between the RevLib and Phoenix libraries.  The RevLib Library (*SparkMAX*) only uses a single feed forward value (`kFF`) which works the same as `kV` in WPILib. There is also an Arbitrary feed forward value that can be used which can act like `kS` in WPILib or can be customized (e.g. to vary with arm angle to compensate for varying gravity effect like `kG`).  The Phoenix 6 Library (*TalonFX*) uses `kS`, `kG`, `kV`, and `kA` for onboard control.  
 
-| Position | "units" (encoder tics)^[1]^ | divide by 2048 for rotations
-| Velocity | "units" (tics) per 100ms^[1]^ | multiply by 600/2048 for RPM
-| Current | Amps | 
-3+| *TalonFX* feed forward `kFF` works the same as `kV` in WPILib. There is also an Arbitrary feed forward mechanism that is similar to `kS` in WPILib or can be customized (e.g. to vary with arm angle to compensate for varying gravity effect).  NOTE [1]: See <<units-library>> and the CTRE Phoenix API in <<resources>>.
-|===
+NOTE: Links to the RevLib and CTRE Phoenix V6 APIs are in <<resources>>.
 
 == NetworkTables
 
@@ -372,9 +365,5 @@ LINKS:
 * https://www.learncpp.com/[LearnCPP^]
 
 * https://hackingcpp.com/cpp/libs/fmt.png[*{fmt}* Cheat Sheet^]
-
-* https://www.projectb.net.au/resources/robot-mechanisms/[The Unofficial FRC Mechanism Encyclopedia^]
-
-* https://team2471.files.wordpress.com/2017/10/manipulators-firstfare-2017.pdf[Manipulators by Team 2471^]
 
 <<top,TOP>>
