@@ -175,6 +175,9 @@ Design team members must understand the various fasteners available.  Designs ne
 
 Details of fasteners are given in xref:Mechanical.adoc#fasteners[Mechanical Sub-Team -- Fasteners]
 
+.Dimensions used in design for commonly used fastener sizes.
+image::FastenerCheatSheet.png[Fastener Cheat Sheet, align="center"]
+
 == Computer Aided Manufacturing (CAM)
 Making complex designs using a CNC machine (i.e. the ShopBot and the HAAS) requires creating instructions for how the cutting tools must move.  Those instructions are "post processed" into a NC program file that the CNC machines read. Fusion 360 can be used to create the machining tool paths and convert them to NC programs.
 
