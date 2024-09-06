@@ -60,7 +60,8 @@ a| GOALS: ::
 
 a| QUESTIONS: ::
 . Is your sketch completely constrained (no blue lines)? Do NOT use locking (green lines).
-. Would this hole pattern work for a Falcon 500 motor with least four bolts attaching the motor?  Kracken motor? If not, what changes would have to be made to be able to use either a NEO, Falcon or a Kracken?
+. Is it important to orient your sketch with respect to the origin?
+. Would this hole pattern work for a Falcon 500 motor with least four bolts attaching the motor?  Kraken motor? If not, what changes would have to be made to be able to use either a NEO, Falcon or a Kraken?
 . Redo this exercise using the STEP model of the NEO and projecting the necessary geometry to the sketch plane.  Position the NEO into the correct location against the mount.
 |===
 

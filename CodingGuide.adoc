@@ -305,6 +305,21 @@ The way the feed forward values are configured differs between the RevLib and Ph
 
 NOTE: Links to the RevLib and CTRE Phoenix V6 APIs are in <<resources>>.
 
+== AdvantageScope Tuning
+
+Using AdvantageScope to tune mechanisms has proven to be the best method we have found.  As an overview, the method consists of plotting the desired and actual positions of the mechanism on the left axis and the desired and actual velocities of the mechanism on the right axis.  A joystick is used to move the mechanism from one position to another using a trapezoidal profile.  The PID and FF constants are tuned so the velocity graphs and the position graphs agree as well as possible.
+
+BREAD 5940 gave a very good workshop at the Capital City Classic in 2023 on tuning mechanisms (https://www.citruscircuits.org/uploads/6/9/3/4/6934550/design_for_autonomous.pdf[Fall 2023 Capital City Classic Workshop on Tuning / Autonomous]). In the workshop they outline the order in which the Feed Forward and Feedback (PID) constants should be tuned (pages 20-34).
+
+
+== Swerve Drive
+
+The swerve drive has three control inputs: Vx, Vy, and omega (angular velocity). Straight forward is positive x direction, straight left is positive y direction, and counter-clockwise is positive omega. The https://github.wpilib.org/allwpilib/docs/release/cpp/structfrc_1_1_chassis_speeds.html[ChassisSpeeds object] stores these three values in one object that is passed to the Swerve Drive control functions. Typically the left joystick determines the Vx and Vy values and the X-axis of the right joystick determines the angular velocity (omega). The ChassisSpeeds values can be either robot relative or field relative.  Robot relative speeds can be thought of as though you are sitting on the robot so positive Vx is forward on the robot. Field relative speeds are relative to the room that the robot is driving in which is essential for swerve drives due to the rapid rotations that can happen while driving.  To obtain field relative control a gyroscope must be used to track the angular orientation of the robot at all times.
+
+The ChassisSpeeds object is used to calculate each swerve module speed (4 of them usually) which are stored in https://github.wpilib.org/allwpilib/docs/release/cpp/structfrc_1_1_swerve_module_state.html[SwerveModuleStates objects] using the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_swerve_drive_kinematics.html[SwerveDriveKinematics class]. These SwerveModuleStates are then used to set each individual swerve module to the correct steering angle and speed.
+
+More information can be found at https://dominik.win/blog/programming-swerve-drive/[this blog] and in https://www.youtube.com/watch?v=0Xi9yb1IMyA[this video].
+
 == NetworkTables
 
 TIP: See https://docs.wpilib.org/en/stable/docs/software/networktables/networktables-intro.html[WPILib Documentation on NetworkTables^]
@@ -312,6 +327,8 @@ TIP: See https://docs.wpilib.org/en/stable/docs/software/networktables/networkta
 Don't use NetworkTables to hold the values of the robot program variables.  Read from and write to the NT when needed.  Preferably only read settings that change the robot behavior in Test Mode or at the very beginning of code execution (`TeleopInit()` or `AutonomousInit()`).
 
 == Autonomous Control
+
+* https://pathplanner.dev/home.html[PathPlanner^]
 
 TODO "Self Driving Robot"
 
@@ -357,6 +374,10 @@ LINKS:
 * https://limelightvision.io/[Limelight^] (https://docs.limelightvision.io[Docs^])
 
 * https://photonvision.org/[PhotonVision^] (https://docs.photonvision.org/[Docs^])
+
+* https://github.com/Mechanical-Advantage/AdvantageScope[AdvantageScope^]
+
+* https://pathplanner.dev/home.html[PathPlanner^]
 
 * https://git-scm.com/[Git Home Page^] (https://git-scm.com/book[Pro Git Book^]) (https://ndpsoftware.com/git-cheatsheet.html[Cheat Sheet^])
 
