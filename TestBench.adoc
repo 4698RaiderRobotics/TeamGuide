@@ -272,7 +272,7 @@ a| QUESTIONS: ::
 == Position Control Exercise
 :tasknum: 0
 
-The Percent Output exercise (<<simple-motor-percent-output>>) above is the most simplistic way of controlling a motor.  Percent output control cannot perform the kinds of control that are needed for almost all robotic systems.  This project will move a motor to a specified position and hold it there.  It will use P-control (position-control) to maintain the desired position which is a *feedback* control algorithm.
+The Percent Output exercise (<<simple-motor-percent-output>>) above is the most simplistic way of controlling a motor.  Percent output control is only used for the simplest mechanisms.  Many robotic mechanisms require either precise position control or velocity control which cannot be achieved with the percent output method.  This project will move a motor to a specified position and try to hold it there.  It will use P-control (position-control) to maintain the desired position which is a *feedback* control algorithm.
 
 If you haven't already, read the xref:README.adoc#motion-control[Motion Control] section and watch the "PID Video, Part 1" in the first part of that section.  This example builds on the project that was created in <<simple-motor-percent-output>> so you will need the code from that project. If you have used the `SetDistancePerPulse()` function as outlined in <<encoder-values>> then comment out the function call so that the encoder reads "counts".
 
@@ -391,7 +391,7 @@ TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduct
 
 === REVLib
 
-We will use the velocity motor ({hw-neo550}) that is connected to the {hw-sparkmax} motor controller for this exercise.  The {hw-sparkmax} uses the CAN bus of the {hw-roboRIO} and requires an external (vendor) library to function. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html#vs-code[Vendor libraries can be added to a project following these instructions^].  You need to add the "RevLIB 2023" library to this project in order to use the {hw-sparkmax} controller.
+We will use the velocity motor ({hw-neo550}) that is connected to the {hw-sparkmax} motor controller for this exercise.  The {hw-sparkmax} uses the CAN bus of the {hw-roboRIO} and requires an external (vendor) library to function. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html#vs-code[Vendor libraries can be added to a project following these instructions^].  You need to add the "REV Robotics REVLib" library to this project in order to use the {hw-sparkmax} controller.
 
 The {rev-CANSparkMax} class is used to communicate with the {hw-sparkmax} controller.  The {rev-CANSparkMax} is not part of the WPILib library and was added when the REVLib vendor library was added to the project in the steps above.  Therefore the documention for the {rev-CANSparkMax} class and other classes that are provided by the REVLib library are located on the RevRobotics website.  The xref:README.adoc#resources[Resources] section of the Coding Guide gives links to the RevLib documentation, RevLib {CPP} API, and RevLib Examples. The xref:README.adoc#resources[Resources] section also has several other useful links.
 
@@ -488,7 +488,7 @@ In the Command Based design pattern, controller buttons and axes are "bound" to 
 
 TIP: See https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html[Command-Based Programming^] and https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html[Functions as Data^] particularly https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html#lambda-expressions-in-c[Lambda Expressions in *{CPP}*^]
 
-Create a blank project using the "Command Robot" template.  Browse the files that are automatically generated.  The directory structure is a bit more complicated than the "Timed Robot" projects that you have been working with so far.  There are still the `Robot.h` and `Robot.cpp` files but there are several more files created.  The Command Based design pattern compartmentalizes the project into several files that each contain code for distinct parts of the project.  The `RobotContainer.cpp` file has all the subsystems in it.  The `subsystems` folder contains all the subsystems for the robot and the `commands folder contains all the commands needed for the robot.
+Create a blank project using the "Command Robot" template.  Browse the files that are automatically generated.  The directory structure is a bit more complicated than the "Timed Robot" projects that you have been working with so far.  There are still the `Robot.h` and `Robot.cpp` files but there are several more files created.  The Command Based design pattern compartmentalizes the project into several files that each contain code for distinct parts of the project.  The `RobotContainer.cpp` file has all the subsystems in it.  The `subsystems` folder contains all the subsystems for the robot and the `commands` folder contains all the commands needed for the robot.
 
 |===
 a| `*TASK {counter:tasknum}*`
@@ -498,7 +498,7 @@ a| QUESTIONS: ::
 . What files in the project are not needed? 
 |===
 
-Commands that are bound to a joystick button only execute when the button is pressed (or held etc).  Usually during TeleOp mode a robot program needs to respond to joystick input at all times (such as driving the robot around).  This is accomplished with the default command of a subsystem.  Each subsystem can have a different default command.
+Commands that are bound to a joystick button only execute when the button is pressed (or held etc).  Usually during TeleOp mode a robot program needs to respond to joystick input at all times (such as driving the robot around).  This is accomplished with the default command of a subsystem.  Each subsystem can have its own default command.
   
 |===
 a| `*TASK {counter:tasknum}*`

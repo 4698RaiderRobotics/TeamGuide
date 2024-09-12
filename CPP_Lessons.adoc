@@ -57,7 +57,7 @@ If all of the above goes correctly then you now have a working *{CPP}* compiler 
 
 == *{CPP}* Syntax, Functions, Data Types
 
-There are several good websites for learning *{CPP}* online.  I will point you in the direction of https://www.learncpp.com/[LearnCPP^] for a lot of these lessons.  If you prefer to learn from a book then you can get _"Programming: Principles and Practice Using C++", by Bjarne Stroustrup_ although it is a bit expensive.
+There are several good websites for learning *{CPP}* online.  I will point you in the direction of https://www.learncpp.com/[LearnCPP^] for a lot of these lessons.  The team has a couple of copies of the book _"C++ for Dummies", by Stephen Davis_ that you can use as a secondary resource.  If you prefer to learn from a book and want your own copy then I suggest you get _"Programming: Principles and Practice Using C++", by Bjarne Stroustrup_.  It is a really good book but it is a bit expensive.
 
 Each chapter in https://www.learncpp.com/[LearnCPP^] has several sections and you need to click on the green NEXT LESSON banner near the bottom of each section.  There are also quizes for most sections and entire chapter summaries and quizes.
 

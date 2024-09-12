@@ -32,7 +32,7 @@ The battery that every FRC robot uses is a single 12-volt, 18Ah (Amp-Hour) seale
 [.float-group]
 --
 image::batterycables.jpg[Battery Cables, width=200, float="left", align="center"]
-The battery connections are a common source of failures and must be carefully connected and periodically inspected.  The hex bolts that come with the batteries should NOT be used.  Stronger #10-32 Socket Head Cap Screws (SHCS) should be used instead.  They should be used with Nord-lock washers and a Nylock washer (see https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/robot-battery.html#battery-lead-lug-to-post-connection[Lug To Post Connection^]).  These bolts need to be very tight.
+The battery connections are a common source of failures and must be carefully connected and periodically inspected.  The hex bolts that come with the batteries should NOT be used.  Stronger #10-32 Socket Head Cap Screws (SHCS) should be used instead.  They should be used with Nord-lock washers and a Nylock washer (see https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/robot-battery.html#battery-lead-lug-to-post-connection[Lug To Post Connection^]).  These bolts need to be torqued to 70 in-lbs.
 --
 
 == 12V Power Distribution
