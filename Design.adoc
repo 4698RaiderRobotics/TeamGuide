@@ -29,6 +29,8 @@ Watch the https://help.autodesk.com/view/fusion360/ENU/courses/[Fusion 360 Tutor
 
 Watch the video https://www.autodesk.com/autodesk-university/class/100-Things-Beginners-Should-Learn-Fusion-360-2020[100 Things Beginners Should Learn^].
 
+Read about https://forums.autodesk.com/t5/fusion-design-validate-document/fusion-r-u-l-e-1-and-2/td-p/6581749[R.U.L.E #1] and practice it almost all the time.  The most common reason you wouldn't use R.U.L.E #1 is when a single sketch will be used to generate more than one component (Exception #1 to R.U.L.E #1).  This happens on intakes and shooters often.
+
 https://www.autodesk.com/products/fusion-360/blog/components-vs-bodies-tips-fusion-360/[7 Tips for Organizing Bodies & Components^] discusses the key idea of activating a component before doing any operations on the component to make the timeline cleaner and better organized.
 
 There some CAD exercises on https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi] structured like the 24 days of an advent calendar.
@@ -182,20 +184,20 @@ image::FastenerCheatSheet.png[Fastener Cheat Sheet, align="center"]
 == Computer Aided Manufacturing (CAM)
 Making complex designs using a CNC machine (i.e. the ShopBot and the HAAS) requires creating instructions for how the cutting tools must move.  Those instructions are "post processed" into a NC program file that the CNC machines read. Fusion 360 can be used to create the machining tool paths and convert them to NC programs.
 
-A great resource for learning CAM modeling is the https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series].  This series gives both CAD and CAM instructions for creating parts and generating the NC program.  Students in Engineering II sometimes make the https://academy.titansofcnc.com/series/titan-4m[Titan-4M] part.  If you have good CAD skills then it is useful to only look at the drawing PDF and generate the CAD model from the PDF.  Then watch the video on how they created CAD model.  They sometimes use different techniques which gives you an alternative method of doing the same thing.
+A great resource for learning CAM modeling is the https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series^].  This series gives both CAD and CAM instructions for creating parts and generating the NC program.  Students in Engineering II sometimes make the https://academy.titansofcnc.com/series/titan-4m[Titan-4M^] part.  If you have good CAD skills then it is useful to only look at the drawing PDF and generate the CAD model from the PDF before watching the CAD video.  Then watch the video on how they created CAD model.  They sometimes use different techniques which gives you an alternative method of doing the same thing.
 
 See also: xref:Manufacturing.adoc#HAAS-Mill[Manufacturing Sub-Team -- HAAS Mill]
 
 == Resources
 === CAD
 * https://help.autodesk.com/view/fusion360/ENU/courses/[Fusion 360 Tutorials^]
-** https://help.autodesk.com/view/fusion360/ENU/courses/AP-SKETCH-FUNDAMENTALS[[.underline]_Sketch basics_]
-** https://help.autodesk.com/view/fusion360/ENU/courses/AP-SOLID-EXTRUDE[[.underline]_Solid modeling basics_]
-** https://help.autodesk.com/view/fusion360/ENU/courses/AP-INTRO-3D-MODELING-OVERVIEW[[.underline]_Introduction to 3D modeling_]
-** https://help.autodesk.com/view/fusion360/ENU/courses/AP-ADVANCED-MODELING-TECHNIQUES-PART-1[[.underline]_Advanced part modeling techniques_]
-* https://www.autodesk.com/autodesk-university/class/100-Things-Beginners-Should-Learn-Fusion-360-2020[100 Things Beginners Should Learn^].
+** https://help.autodesk.com/view/fusion360/ENU/courses/AP-SKETCH-FUNDAMENTALS[[.underline]_Sketch basics_^]
+** https://help.autodesk.com/view/fusion360/ENU/courses/AP-SOLID-EXTRUDE[[.underline]_Solid modeling basics_^]
+** https://help.autodesk.com/view/fusion360/ENU/courses/AP-INTRO-3D-MODELING-OVERVIEW[[.underline]_Introduction to 3D modeling_^]
+** https://help.autodesk.com/view/fusion360/ENU/courses/AP-ADVANCED-MODELING-TECHNIQUES-PART-1[[.underline]_Advanced part modeling techniques_^]
+* https://www.autodesk.com/autodesk-university/class/100-Things-Beginners-Should-Learn-Fusion-360-2020[100 Things Beginners Should Learn^]
 * https://www.autodesk.com/products/fusion-360/blog/components-vs-bodies-tips-fusion-360/[7 Tips for Organizing Bodies & Components^] 
-* https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi CADvent]
+* https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi CADvent^]
 
 === Suppliers
 * https://wcproducts.com/[West Coast Products (WCP)^]
@@ -215,6 +217,6 @@ See also: xref:Manufacturing.adoc#HAAS-Mill[Manufacturing Sub-Team -- HAAS Mill]
 * https://team2471.files.wordpress.com/2017/10/manipulators-firstfare-2017.pdf[Manipulators by Team 2471^]
 
 === CAM
-* https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series]
+* https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series^]
 
 <<top,TOP>>

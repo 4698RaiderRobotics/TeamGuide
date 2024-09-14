@@ -305,11 +305,27 @@ The way the feed forward values are configured differs between the RevLib and Ph
 
 NOTE: Links to the RevLib and CTRE Phoenix V6 APIs are in <<resources>>.
 
-== AdvantageScope Tuning
+== Mechanism Tuning Procedure
 
-Using AdvantageScope to tune mechanisms has proven to be the best method we have found.  As an overview, the method consists of plotting the desired and actual positions of the mechanism on the left axis and the desired and actual velocities of the mechanism on the right axis.  A joystick is used to move the mechanism from one position to another using a trapezoidal profile.  The PID and FF constants are tuned so the velocity graphs and the position graphs agree as well as possible.
+BREAD 5940 gave a very good workshop at the Capital City Classic in the Fall of 2023 on tuning mechanisms (https://www.citruscircuits.org/uploads/6/9/3/4/6934550/design_for_autonomous.pdf[Fall 2023 Capital City Classic Workshop on Tuning / Autonomous]). In the workshop they outlined the order in which the Feed Forward and Feedback (PID) constants should be tuned (pages 20-34). Their basic procedure is outlined here with some information added.
 
-BREAD 5940 gave a very good workshop at the Capital City Classic in 2023 on tuning mechanisms (https://www.citruscircuits.org/uploads/6/9/3/4/6934550/design_for_autonomous.pdf[Fall 2023 Capital City Classic Workshop on Tuning / Autonomous]). In the workshop they outline the order in which the Feed Forward and Feedback (PID) constants should be tuned (pages 20-34).
+. With either Pheonix Tuner or REV Client determine the direction of travel when a positive motor move is made.  This should be done before any control is attempted with a very small percent output value.  If reversing what is consider positive travel makes sense then invert the motor.
+
+. Determine if the above positive motor movement results in a positive change in the position measurement (i.e. encoder).  If a positive movement does not result in a positive change in position then invert the encoder output.  
++
+WARNING: If a positive movement does not result in a positive change in position then the mechanism will move violently and break itself (and maybe other things as well).
+
+. Ensure the the units for the position measurement are correct.  For an arm mechanism make sure the zero angle position is defined correctly (for an arm 0-deg should be when the arm is horizontal).
+
+. Enable the mechanism with full motion control enabled but all coeffients set to zero.  Determine gravity compensation (for elevators and arms).  Increase *kG* until the mechansim no longer sags (note value).  Increase *kG* until mechanism starts to move upward (note value).  Set *kG* to the midpoint value and *kS* to half the difference between the two values.
+
+. Setup two joystick buttons to move between two setpoints using trapezoidal profile moves (either on-board or software based).  Plot the desired position against the actual position and the desired velocity against the actual velocity.  Adjust *kV* until the velocities match.  Position will not yet match.
+
+. (Optionally) Increase *kA* to get better agreement of the plot in the velocity transition regions.
+
+. Add *kP* until you see small oscillations then decrease *kP* a little.  The mechanism should be tracking position very well now.
+
+. Usually don't need *kD* and never use *kI*.
 
 
 == Swerve Drive

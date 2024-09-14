@@ -346,6 +346,14 @@ a| QUESTIONS: ::
 === AdvantageScope
 https://github.com/Mechanical-Advantage/AdvantageScope/[AdvantageScope^] is a NT viewer and a Log File viewer that is much more powerful than Shuffleboard.  It's graphs are far superior and much easier to use.  Do the graphing exercises above using AdvantageScope rather than Shuffleboard.  Explore the https://github.com/Mechanical-Advantage/AdvantageScope/blob/main/docs/INDEX.md[AdvantageScope Docs^] to see all of its available features.
 
+|===
+a| `*TASK {counter:tasknum}*`
+| Repeat the above two Shuffleboard Tasks using AdvantageScope.
+a| QUESTIONS: ::
+. What happens if you pause the AdvantageScope output?
+. How do you zoom in on the graph?
+|===
+
 === Relative Encoder Limitations
 
 Relative encoders consider the "0" position to be wherever the motor was when the encoder was powered on.  Therefore it is not possible to know where the "0" position is and it changes each time the robot is powered on.
