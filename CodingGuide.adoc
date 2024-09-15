@@ -309,7 +309,7 @@ NOTE: Links to the RevLib and CTRE Phoenix V6 APIs are in <<resources>>.
 
 BREAD 5940 gave a very good workshop at the Capital City Classic in the Fall of 2023 on tuning mechanisms (https://www.citruscircuits.org/uploads/6/9/3/4/6934550/design_for_autonomous.pdf[Fall 2023 Capital City Classic Workshop on Tuning / Autonomous]). In the workshop they outlined the order in which the Feed Forward and Feedback (PID) constants should be tuned (pages 20-34). Their basic procedure is outlined here with some information added.
 
-. With either Pheonix Tuner or REV Client determine the direction of travel when a positive motor move is made.  This should be done before any control is attempted with a very small percent output value.  If reversing what is consider positive travel makes sense then invert the motor.
+. With either Pheonix Tuner or REV Client determine the direction of travel when a positive motor move is made.  This should be done before any control is attempted with a very small percent output value.  If reversing what is considered positive travel makes sense then invert the motor.
 
 . Determine if the above positive motor movement results in a positive change in the position measurement (i.e. encoder).  If a positive movement does not result in a positive change in position then invert the encoder output.  
 +
@@ -340,7 +340,7 @@ More information can be found at https://dominik.win/blog/programming-swerve-dri
 
 TIP: See https://docs.wpilib.org/en/stable/docs/software/networktables/networktables-intro.html[WPILib Documentation on NetworkTables^]
 
-Don't use NetworkTables to hold the values of the robot program variables.  Read from and write to the NT when needed.  Preferably only read settings that change the robot behavior in Test Mode or at the very beginning of code execution (`TeleopInit()` or `AutonomousInit()`).
+Don't use NetworkTables to hold the values of the robot program variables.  Read from and write to the NT when needed.  Preferably only read settings that change the robot behavior at the very beginning of code execution (`TeleopInit()` or `AutonomousInit()`).
 
 == Autonomous Control
 

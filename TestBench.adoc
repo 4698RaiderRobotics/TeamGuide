@@ -274,11 +274,11 @@ a| QUESTIONS: ::
 
 The Percent Output exercise (<<simple-motor-percent-output>>) above is the most simplistic way of controlling a motor.  Percent output control is only used for the simplest mechanisms.  Many robotic mechanisms require either precise position control or velocity control which cannot be achieved with the percent output method.  This project will move a motor to a specified position and try to hold it there.  It will use P-control (position-control) to maintain the desired position which is a *feedback* control algorithm.
 
-If you haven't already, read the xref:README.adoc#motion-control[Motion Control] section and watch the "PID Video, Part 1" in the first part of that section.  This example builds on the project that was created in <<simple-motor-percent-output>> so you will need the code from that project. If you have used the `SetDistancePerPulse()` function as outlined in <<encoder-values>> then comment out the function call so that the encoder reads "counts".
+If you haven't already, read the xref:CodingGuide.adoc#motion-control[Motion Control] section and watch the "PID Video, Part 1" in the first part of that section.  This example builds on the project that was created in <<simple-motor-percent-output>> so you will need the code from that project. If you have used the `SetDistancePerPulse()` function as outlined in <<encoder-values>> then comment out the function call so that the encoder reads "counts".
 
 === P-Controller
 
-The video in the first part of the xref:README.adoc#motion-control[Motion Control] section does a good job of describing what a P-controller does but I will reiterate it here.  The idea is to measure the current position of the robot mechanism (*y*) and then take the difference between the desired position (*r*) and the current position (*y*), this is the current position error (*e*).  We then set the motor percent output to the error (*e*) multiplied by a constant (*K~p~*) to scale things correctly.
+The video in the first part of the xref:CodingGuide.adoc#motion-control[Motion Control] section does a good job of describing what a P-controller does but I will reiterate it here.  The idea is to measure the current position of the robot mechanism (*y*) and then take the difference between the desired position (*r*) and the current position (*y*), this is the current position error (*e*).  We then set the motor percent output to the error (*e*) multiplied by a constant (*K~p~*) to scale things correctly.
 
 [.text-center]
 ****
@@ -301,7 +301,7 @@ Add code to hold the position 0 while the *A* Button is held down and then move 
     End If
 ----
 
-This logic will go in the `TeleopPeriodic()` method. A good starting value for *K~p~* is to take the total distance that the motor has to move from one setpoint to the other (500 in this case) and take the inverse of that number ( 1.0 / 500 ).  So as a first guess, the value of *K~p~* should be 0.002. 
+This logic will go in the `TeleopPeriodic()` method. A good starting value for *K~p~* is to take the total distance that the motor has to move from one setpoint to the other (500 in this case) and take the inverse of that number ( 1.0 / 500 ).  So as a first guess, the value of *K~p~* should be 0.002, it will give a motor percent output of 1.0 (500 * 0.002) when the mechanism first starts to move from one setpoint to the other.  This motor output will decrease linearly as the target setpoint gets nearer.
 
 |===
 a| `*TASK {counter:tasknum}*`
@@ -388,6 +388,18 @@ a| `*TASK {counter:tasknum}*`
 | Modify the code to move to locations based on angles in degrees when the *A* and *B* Buttons are pressed.  You will need to determine how to configure the  https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`^] class to return angles in degrees.  It is different than `frc::Encoder`.
 |===
 
+== Absolute Encoder Offsets
+
+Usually an offset is needed for absolute encoders to make the zero point of the encoder a physically meaningful position.  Put a piece of tape or a small bolt+nut in one of the holes on the position motor disc.  
+
+|===
+a| `*TASK {counter:tasknum}*`
+| Use an offset to make the zero degrees position correspond to having the marked hole at the 3-o'clock position.  Don't do any motor control and just view the encoder position on AdvantageScope.
+a| QUESTIONS: ::
+. Restart the robot code with the disc at several different starting positions.  Does the signal roll over?
+. What happens if the disc is rotated more that one rotation?
+|===
+
 == Velocity Control Exercise
 :tasknum: 0
 
@@ -401,17 +413,24 @@ TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduct
 
 We will use the velocity motor ({hw-neo550}) that is connected to the {hw-sparkmax} motor controller for this exercise.  The {hw-sparkmax} uses the CAN bus of the {hw-roboRIO} and requires an external (vendor) library to function. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html#vs-code[Vendor libraries can be added to a project following these instructions^].  You need to add the "REV Robotics REVLib" library to this project in order to use the {hw-sparkmax} controller.
 
-The {rev-CANSparkMax} class is used to communicate with the {hw-sparkmax} controller.  The {rev-CANSparkMax} is not part of the WPILib library and was added when the REVLib vendor library was added to the project in the steps above.  Therefore the documention for the {rev-CANSparkMax} class and other classes that are provided by the REVLib library are located on the RevRobotics website.  The xref:README.adoc#resources[Resources] section of the Coding Guide gives links to the RevLib documentation, RevLib {CPP} API, and RevLib Examples. The xref:README.adoc#resources[Resources] section also has several other useful links.
+The {rev-CANSparkMax} class is used to communicate with the {hw-sparkmax} controller.  The {rev-CANSparkMax} is not part of the WPILib library and was added when the REVLib vendor library was added to the project in the steps above.  Therefore the documention for the {rev-CANSparkMax} class and other classes that are provided by the REVLib library are located on the RevRobotics website.  The xref:CodingGuide.adoc#resources[Resources] section of the Coding Guide gives links to the RevLib documentation, RevLib {CPP} API, and RevLib Examples. The xref:CodingGuide.adoc#resources[Resources] section also has several other useful links.
 
 === Velocity P-Control
 
-NOTE: Read the xref:README.adoc#motion-control[Motion Control] section (again).  
+NOTE: Read the xref:CodingGuide.adoc#motion-control[Motion Control] section (again).  
 
-The {hw-sparkmax} is assigned CAN id #{spark-max-CANid} on the CAN bus. In `Robot.h`, create a variable for the motor using the {rev-CANSparkMax} class.  You will need to determine what header file is needed to use the class.  The {rev-CANSparkMax} `Set()` method will be used to control the motor percent output.  Use the {rev-CANSparkMax} `GetEncoder()` method to access the built-in encoder on the {hw-neo550}. The `GetEncoder()` method returns a https://codedocs.revrobotics.com/cpp/classrev_1_1_spark_max_relative_encoder.html[rev::SparkMaxRelativeEncoder^] class object that can be used to retrieve the motor velocity (what method?).
+The {hw-sparkmax} is assigned CAN id #{spark-max-CANid} on the CAN bus. In `Robot.h`, create a variable for the motor using the {rev-CANSparkMax} class.  You will need to determine what header file is needed to use the class.  The {rev-CANSparkMax} `Set()` method will be used to control the motor percent output.  Use the {rev-CANSparkMax} `GetEncoder()` method to access the built-in encoder on the {hw-neo550}. The `GetEncoder()` method returns a https://codedocs.revrobotics.com/cpp/classrev_1_1_spark_max_relative_encoder.html[rev::SparkMaxRelativeEncoder^] class object that can be used to retrieve the motor velocity (what method?).  Some conversion may be necessary if a gearbox is attached to the {hw-neo550}.
+
+The equation for P-control will be the same as used in the position control exercise <<p-controller>> except velocities will be used.  The error *e* will be calculated as the difference between the setpoint velocity and the current velocity.
+
+[.text-center]
+****
+Motor Output = *K~p~* * *e* = *K~p~* * ( *V~setpoint~* - *V~actual~* )
+****
 
 |===
 a| `*TASK {counter:tasknum}*`
-| Write a program to spin the {hw-neo550} to 9000 RPM when the *A Button* is held down.  Use P-control on the motor velocity. Graph the setpoint and actual velocity in Shuffleboard.
+| Write a program to spin the {hw-neo550} to 2000 RPM when the *A Button* is held down.  Use P-control on the motor velocity. Graph the setpoint and actual velocity in Shuffleboard.
 a| QUESTIONS: ::
 . What value of K~p~ should you start with as a best guess?
 . Does the motor reach the setpoint velocity?
@@ -422,15 +441,24 @@ a| QUESTIONS: ::
 
 TIP: See https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-feedforward.html[Introduction to DC Motor Feedforward^] and https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/feedforward.html[Feedforward Control in WPILib^]
 
-NOTE: Read the xref:README.adoc#feed-forward[Feed Forward] section and, if confused, read the xref:README.adoc#motion-control[Motion Control] section a third time and the above WPILib information. This topic is confusing at first and you may need to re-read these sections several times.
+NOTE: Read the xref:CodingGuide.adoc#feed-forward[Feed Forward] section and, if confused, read the xref:CodingGuide.adoc#motion-control[Motion Control] section a third time and the above WPILib information. This topic is confusing at first and you may need to re-read these sections several times.
 
 Feed forward predictions are typically expressed in units of voltage.  P-control on the otherhand is usually giving you a corrective error in percentage units.  When using feed forward it is most common to use the motor controller class' `SetVoltage()` method if one exists.
 
+The simplified motor feedforward equation that ignores static friction and acceleration effects can be written as:
+
+[.text-center]
+****
+Motor Voltage = *K~v~* * *V~setpoint~*
+****
+
+The *K~v~* value used in the above equation is the inverse of the motor constant that is given in a motors documentation.  Typically the manufacturer will give a *K~v~* value in RPM/Volts but in the above equation we need Volts/RPM so that when we multiply by the setpoint velocity (in RPM) we will get a voltage to apply to the motors.
+
 |===
 a| `*TASK {counter:tasknum}*`
-| Modify your program to spin the {hw-neo550} to 9000 RPM when the *A Button* is held down using velocity based feed forward only.
+| Modify your program to spin the {hw-neo550} to 2000 RPM when the *A Button* is held down using velocity based feed forward only.  Don't use the WPILib classes, just do the math yourself using the equation above like you did with the P-Control exercise.
 a| QUESTIONS: ::
-. How do you determine the value of K~v~ you should start with? (HINT: See xref:README.adoc#motors[Motors Section] and pay attention to units!)
+. How do you determine the value of K~v~ you should start with? (HINT: See xref:CodingGuide.adoc#motors[Motors Section] and pay attention to units!)
 . Can you get the motor to reach the setpoint velocity?  What about a different setpoint velocity?
 |===
 
@@ -463,13 +491,13 @@ The term *goal* is emphasized because it differs from the setpoint that we have 
 .Trapezoid Profile (from CTRE Docs)
 image::https://v5.docs.ctr-electronics.com/en/stable/_images/closedlp-1.png[]
 
-The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_trapezoid_profile.html[`frc::TrapezoidProfile<Distance>`^] class to generate a trapezoidal motion profile.  It is a template class templated on either an angular unit or a distance unit.  The WPI Documenation describes https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/trapezoidal-profiles.html[using trapezoidal motion profiles^]. 
+The WPILib provides the https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_trapezoid_profile.html[`frc::TrapezoidProfile<Distance>`^] class to generate a trapezoidal motion profile.  It is a template class templated on either an angular unit or a distance unit.  The WPI Documenation describes https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/trapezoidal-profiles.html[using trapezoidal motion profiles^].  Start with small values for the constraints (e.g. 100_deg_per_s, 200_deg_per_s_sq).
 
 |===
 a| `*TASK {counter:tasknum}*`
-| Write a program to use a trapezoidal profile to move the position motor disc to a 0 degree position when *Button A* is pressed and 180 degrees when *Button B* is pressed. Use P-control, then add feed forward once P-control works.
+| Write a program to use a trapezoidal profile to move the position motor disc to a 0 degree position when *Button A* is pressed and 180 degrees when *Button B* is pressed. Use feedforward and feedback control and use the steps in the xref:CodingGuide.adoc#mechanism-tuning-procedure[Mechanism Tuning Procedure] to determine the control constants.
 a| QUESTIONS: ::
-. How does the maximum acceleration and maximum velocity affect the speed and accuracy of the motion?
+. Double the constraint velocity and acceleration for the trapezoid profile.  Does the mechanism need to be retuned?  How was the speed and accuracy of the motion affected?  
 |===
 
 == Arm Control Exercise
@@ -479,12 +507,15 @@ A vertical arm mechanism is one of the most complex control problems that is enc
 
 TIP: See https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-feedforward.html#arm-feedforward[Arm Feedforward^] and https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-vertical-arm.html[Tuning a Vertical Arm Position Controller^]
 
+Carefully mount the steel weight blocks to the position motor disc.  Use the absolute encoder for control and make sure it is zeroed when the weights are at the 3-o'clock or 9-o'clock position (i.e. when the weight effect is worst on the mechanism).  Also ensure that positive motor input raises the weight.
+
+Start with all the control constants set to zero.  Use feedforward and feedback control and use the steps in the xref:CodingGuide.adoc#mechanism-tuning-procedure[Mechanism Tuning Procedure] to determine the control constants like was done above.  This time gravity effects will be present so *kG* must be set correctly.
+
 |===
 a| `*TASK {counter:tasknum}*`
 | Write a program to use a trapezoidal profile to move the position motor disc with the added weight blocks to a 0 degree position when *Button A* is pressed, 90 degrees when *Button B* is pressed, and 180 degrees when *Button Y* is pressed. Use both feed forward and PID control. 
 a| QUESTIONS: ::
-. How can K~v~ be fine tuned using graphs?
-. What should the feed forward output be at each position?  Does it achieve those values?
+. How does the gravity feedforward value vary with angle?
 |===
 
 == Command Based Exercise
