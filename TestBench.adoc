@@ -388,7 +388,7 @@ a| `*TASK {counter:tasknum}*`
 | Modify the code to move to locations based on angles in degrees when the *A* and *B* Buttons are pressed.  You will need to determine how to configure the  https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_duty_cycle_encoder.html[`frc::DutyCycleEncoder`^] class to return angles in degrees.  It is different than `frc::Encoder`.
 |===
 
-== Absolute Encoder Offsets
+=== Absolute Encoder Offsets
 
 Usually an offset is needed for absolute encoders to make the zero point of the encoder a physically meaningful position.  Put a piece of tape or a small bolt+nut in one of the holes on the position motor disc.  
 
@@ -525,26 +525,42 @@ So far all the exercises have used the "Timed Robot" design pattern.  When the r
 
 In the Command Based design pattern, controller buttons and axes are "bound" to commands.  When the button (or axis) is pressed the bound command is executed.  The underlying command scheduler takes care of determining if the button is being pressed and calling your command if it is.  One of the more difficult to understand aspects of Command Based programming is the use of Lambda Expressions and the idea of treating "functions as data" (i.e. passing functions as paramters to other functions).  In Command Based programming lambda expressions occur frequently for simple commands that are bound to a controller button.
 
+The other important difference with Command Based programs are the use of subsystems.  A subsystem is a part of the robot hardware that operates together to perform a task, like an intake, climber, or drivetrain. Each subsystem has a `Periodic()` function that is called every 20ms where any processing for the subsystem is done.  This is analogous to the `RobotPeriodic()` function in a Timed Robot program.
+
 TIP: See https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html[Command-Based Programming^] and https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html[Functions as Data^] particularly https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html#lambda-expressions-in-c[Lambda Expressions in *{CPP}*^]
 
 Create a blank project using the "Command Robot" template.  Browse the files that are automatically generated.  The directory structure is a bit more complicated than the "Timed Robot" projects that you have been working with so far.  There are still the `Robot.h` and `Robot.cpp` files but there are several more files created.  The Command Based design pattern compartmentalizes the project into several files that each contain code for distinct parts of the project.  The `RobotContainer.cpp` file has all the subsystems in it.  The `subsystems` folder contains all the subsystems for the robot and the `commands` folder contains all the commands needed for the robot.
 
+=== Command Triggers
+
+Commands are started when an `frc::Trigger` object's conditions are true.  Triggers are usually the buttons on a joystick, but they may also be any arbitrary condition such as when a limit switch is activated.  Look at https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html[Binding Commands to Triggers^] for the syntax used to create the command binding.
+
 |===
 a| `*TASK {counter:tasknum}*`
-| Write a command based program to control the velocity motor. When the `A` button is pressed, stop the motor.  When the `B` button is pressed, set the motor speed to 2000 rpm.  When the `Y` button is pressed, set the motor speed to 6000 rpm.  Use `frc2::InstantCommand` with lambda expressions.
+| Write a command based program to control the velocity motor. When the `A` button is pressed, stop the motor.  When the `B` button is pressed, set the motor speed to 1000 rpm.  When the `Y` button is pressed, set the motor speed to 2000 rpm.  Use `frc2::InstantCommand` with lambda expressions.  You will need to create a subsystem for the velocity motor and provide some methods to set the speed of the motor.  Use the feedforeward and feedback (PID) code from the <<velocity-control-exercise>> in the `Periodic()` function of the subsystem.
 a| QUESTIONS: ::
 . How many subsystems do you need?
 . What files in the project are not needed? 
 |===
 
+=== Default Commands
+
 Commands that are bound to a joystick button only execute when the button is pressed (or held etc).  Usually during TeleOp mode a robot program needs to respond to joystick input at all times (such as driving the robot around).  This is accomplished with the default command of a subsystem.  Each subsystem can have its own default command.
   
 |===
 a| `*TASK {counter:tasknum}*`
-| Modify the command based program to control the velocity motor such that the right trigger varys the speed of the motor from 0 to 6000 rpm.
+| Setup a default command so that the right trigger varys the speed of the motor from 0 to 2000 rpm.
 a| QUESTIONS: ::
-. How many subsystems should the 2023 Charged Up robot have? 
-. Browse the https://github.com/4698RaiderRobotics/FRC-2023[2023 Charged Up Code^] and look at the subsystems and commands that it uses.
+. Why can't this be done with a button binding?
+|===
+
+=== Trapezoid Profiled Position
+
+|===
+a| `*TASK {counter:tasknum}*`
+| Convert the <<trapezoidal-motion-exercise>> to Command Based.  Have the disc subsystem constantly track a goal position with a trapezoidal profile.  Use commands bound to buttons to change the goal position of the subsystem.
+a| QUESTIONS: ::
+. What happens when you disable the test bench and re-enable?
 |===
 
 // == Tank Drive Exercise
