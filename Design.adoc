@@ -198,6 +198,7 @@ See also: xref:Manufacturing.adoc#HAAS-Mill[Manufacturing Sub-Team -- HAAS Mill]
 * https://www.autodesk.com/autodesk-university/class/100-Things-Beginners-Should-Learn-Fusion-360-2020[100 Things Beginners Should Learn^]
 * https://www.autodesk.com/products/fusion-360/blog/components-vs-bodies-tips-fusion-360/[7 Tips for Organizing Bodies & Components^] 
 * https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi CADvent^]
+* https://www.frcdesign.org/[FRCDesign.org (OnShape)^]
 
 === Suppliers
 * https://wcproducts.com/[West Coast Products (WCP)^]
