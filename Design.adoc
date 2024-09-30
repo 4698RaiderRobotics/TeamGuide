@@ -33,7 +33,7 @@ Read about https://forums.autodesk.com/t5/fusion-design-validate-document/fusion
 
 https://www.autodesk.com/products/fusion-360/blog/components-vs-bodies-tips-fusion-360/[7 Tips for Organizing Bodies & Components^] discusses the key idea of activating a component before doing any operations on the component to make the timeline cleaner and better organized.
 
-There some CAD exercises on https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi] structured like the 24 days of an advent calendar.
+There some CAD exercises on https://www.chiefdelphi.com/search?expanded=false&q=CADvent[ChiefDelphi called CADvent] structured like the 24 days of an advent calendar.
 
 Also checkout the https://www.autodesk.com/products/fusion-360/blog#getting-started[Fusion 360 Blog^] for other tips and tricks.
 
@@ -160,9 +160,13 @@ Online calculators are very helpful in determining the correct gear ratio for a 
 === Mechanism Exercise {counter:tasknum}
 
 |===
-a| Determine the correct gear ratio to use for a Climber mechanism to lift a 145 pound robot with a single NEO Vortex motor.  Use the https://ambcalc.com/mechanism[AMB Robotics Mechanism Calculator^].  The motor should stay below 40 amps.
+a| Determine the correct gear ratio to use for a Climber mechanism to lift a 155 pound robot with a single NEO Vortex motor.  Use the https://ambcalc.com/mechanism[AMB Robotics Mechanism Calculator^].  The motor should stay below 40 amps.
 
-image::4_Climber_Sketch.jpg[Climber Sketch, width=500, align="center"]
+Answer Questions 1, 2, and 3.
+
+Design a single stage two motor gearbox that uses two NEO Vortex motors that gives a gear ratio of 9:1.
+
+image::4_Climber_Sketch.png[Climber Sketch, width=500, align="center"]
 
 a| GOALS: ::
 . Learn how to use the mechanism ratio calculator.
@@ -171,6 +175,7 @@ a| GOALS: ::
 a| QUESTIONS: ::
 . How long will a 15" climb take?
 . How could you speed up the climber?
+. Can you make a single stage gearbox for this application or does it need two stages?  What if you add a second motor?
 |===
 
 == Fasteners
@@ -180,6 +185,11 @@ Details of fasteners are given in xref:Mechanical.adoc#fasteners[Mechanical Sub-
 
 .Dimensions used in design for commonly used fastener sizes.
 image::FastenerCheatSheet.png[Fastener Cheat Sheet, align="center"]
+
+== FRC Mechanisms and Manipulators
+
+There are several commonly used mechanisms in FRC.  The https://www.projectb.net.au/resources/robot-mechanisms/[Team 5985 Mechanism Encyclopedia^] has a ton of information about the different types with links to more information.  There is also a set of xref:docs\manipulators-firstfare-2017.pdf[slides by Team 2471] that outlines manipulators (particularly elevators).
+
 
 == Computer Aided Manufacturing (CAM)
 Making complex designs using a CNC machine (i.e. the ShopBot and the HAAS) requires creating instructions for how the cutting tools must move.  Those instructions are "post processed" into a NC program file that the CNC machines read. Fusion 360 can be used to create the machining tool paths and convert them to NC programs.

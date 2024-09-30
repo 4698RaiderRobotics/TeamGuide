@@ -13,14 +13,14 @@ a| image::Team4698Logo.webp[Team 4698, width=100, link=docs/4698TeamHandbook.pdf
 === First Robotics Competition Info
 [cols="1,5"]
 |===
-a| image::CRESCENDO_Logo.jpg[Crescendo, width=100, link=https://www.firstinspires.org/robotics/frc/game-and-season, window=_blank] 
+a| image::frc_reefscape.gif[ReefScape, width=100, link=https://www.firstinspires.org/robotics/frc/game-and-season, window=_blank] 
 <.^| https://www.firstinspires.org/robotics/frc/game-and-season[Game & Season Information^]
 |===
 
 [cols="1,5"]
 |===
-a| image::ChargedUpLogo.png[Charged Up, width=100, link=https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system, window=_blank] 
-<.^| https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system[CHARGED UP 2023 Season Materials^]
+a| image::CRESCENDO_Logo.jpg[CRESCENDO, width=100, link=https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system, window=_blank] 
+<.^| https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system[CRESCENDO 2024 Season Materials^]
 |===
 
 [cols="1,5"]

@@ -3,3 +3,5 @@
 image::img\Team4698Logo.webp[Logo, align="center"]
 
 == Visit the https://4698raiderrobotics.github.io/TeamGuide/[Team Guide Webpage]
+
+// NOTE:  to create a local webpage enter `jekyll serve` at the command prompt.
