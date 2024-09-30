@@ -47,7 +47,7 @@ Fully constrained sketches force you to consider all aspects of the geometry of 
 
 Use construction lines when necessary.  They are sometimes easier than using dimensions for overall positioning.  When a part must mate with another, project only the geometry necessary to align the two parts.
 
-=== Sketch Exercise {counter:tasknum}
+=== Exercise {counter:tasknum}
 
 |===
 // a| `*Exercise {tasknum}*`
@@ -75,7 +75,7 @@ Fasteners can also be inserted directly into a design using the `Insert -> Inser
 
 Moving and aligning imported components is done by rotating the component to the proper orientation then using a Point-To-Point move to get the component to the correct X,Y,Z location.  It is usually easiest to select circles (or arc centers) as the source and target "points".
 
-=== Vendor Exercise {counter:tasknum}
+=== Exercise {counter:tasknum}
 
 |===
 // a| `*Exercise {tasknum}*` 
@@ -130,24 +130,6 @@ Once a center-to-center distance is found for a pair of gears, any gears that su
 
 The smallest gears that mount on motors (motor pinions) come with smaller tooth counts but the same center-to-center distance.  This is called addendum modifying the gear (see https://docs.wcproducts.com/frc-build-system/belts-chain-and-gears/gears#addendum-modified-gears[Addendum Modified Gears^]) and it allows several motor pinion gears to be used with the same gearbox without modifying the driven gear that the motor pinion is mating with.
 
-=== Gearbox Exercise {counter:tasknum}
-
-|===
-// a| `*Exercise {tasknum}*` 
-a| Design a 2-stage vertical oriented gearbox with a 16:1 ratio that uses a Falcon 500 motor and has a 1/2" Hex output shaft.  Have the gearbox bolt to a 1"x1" tube.  You will need to have the plate spacing at 1-1/8" in order for flange bearing to fit inside the plate.  This design is very similar to the https://wcproducts.com/collections/gearboxes/products/wcp-rotation-ss-gearbox[WCP Rotation SS Gearbox^] but in the vertical orientation.  Don't use the WCP 3D model, start from scratch.
-
-image::3_Gearbox_Hand_Sketch.jpg[Gearbox Sketch, width=500, align="center"]
-
-a| GOALS: ::
-. Learn how to correctly space gear shafts.
-. Learn about multi-stage gearboxes.
-. Practice creating multiple components and activating them to organized the timeline.
-
-a| QUESTIONS: ::
-. This is a fairly complex design.  What problems did you run into?
-. Did you create multiple components and activate them to separate out the timeline?
-|===
-
 === Gear Ratio Calculation
 The gear ratio that is needed for a mechanism can be calculated using the Motor Power Curve for the motor that will be used along with the mass of the mechanism.  The goal is to utilize the more efficient parts of the Motor Power Curve which means keeping the speed of the motor fairly close to the middle of the RPM range (<<NEO_MPC>>).
 
@@ -157,7 +139,7 @@ image::neo_motor_power_curve.png[NEO Motor Power Curve, align="center"]
 
 Online calculators are very helpful in determining the correct gear ratio for a mechanism.  The https://ambcalc.com[AMB Robotics Calculators^] has a calculator for "Mechanism Ratios" that will determine the best gear ratio for the given mechanism geometry and weight.
 
-=== Mechanism Exercise {counter:tasknum}
+=== Exercise {counter:tasknum}
 
 |===
 a| Determine the correct gear ratio to use for a Climber mechanism to lift a 155 pound robot with a single NEO Vortex motor.  Use the https://ambcalc.com/mechanism[AMB Robotics Mechanism Calculator^].  The motor should stay below 40 amps.
@@ -185,6 +167,25 @@ Details of fasteners are given in xref:Mechanical.adoc#fasteners[Mechanical Sub-
 
 .Dimensions used in design for commonly used fastener sizes.
 image::FastenerCheatSheet.png[Fastener Cheat Sheet, align="center"]
+
+=== Exercise {counter:tasknum}
+
+|===
+// a| `*Exercise {tasknum}*` 
+a| Design a 2-stage vertical oriented gearbox with a 16:1 ratio that uses a Falcon 500 motor and has a 1/2" Hex output shaft.  Have the gearbox bolt to a 1"x1" tube.  You will need to have the plate spacing at 1-1/8" in order for flange bearing to fit inside the plate.  This design is very similar to the https://wcproducts.com/collections/gearboxes/products/wcp-rotation-ss-gearbox[WCP Rotation SS Gearbox^] but in the vertical orientation.  Don't use the WCP 3D model, start from scratch.
+
+image::3_Gearbox_Hand_Sketch.jpg[Gearbox Sketch, width=500, align="center"]
+
+a| GOALS: ::
+. Learn how to correctly space gear shafts.
+. Learn about multi-stage gearboxes.
+. Practice creating multiple components and activating them to organized the timeline.
+
+a| QUESTIONS: ::
+. This is a fairly complex design.  What problems did you run into?
+. Did you create multiple components and activate them to separate out the timeline?
+|===
+
 
 == FRC Mechanisms and Manipulators
 
