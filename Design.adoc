@@ -4,6 +4,9 @@
 :idprefix: 
 :idseparator: -
 :imagesdir: img/design
+:hw-neo: https://www.revrobotics.com/rev-21-1650/[Rev NEO^]
+:hw-vortex: https://www.revrobotics.com/rev-21-1652/[Rev NEO Vortex^]
+:hw-falcon500: https://www.vexrobotics.com/217-6515.html[Falcon 500^]
 :toc:
 :toc-placement!:
 
@@ -51,7 +54,7 @@ Use construction lines when necessary.  They are sometimes easier than using dim
 
 |===
 // a| `*Exercise {tasknum}*`
-a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a RevRobotics NEO motor in the center such that four bolts can be used.  Do this exercise without downloading the STEP model of the NEO, look at the https://revrobotics.com/content/docs/REV-21-1650-V1.1-DR.pdf[NEO drawing] to find the dimensions.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^]).
+a| Design a plate 4in x 2.5in x 0.25in with the mounting hole pattern for a {hw-neo} motor in the center such that four bolts can be used.  Do this exercise without downloading the STEP model of the NEO, look at the https://revrobotics.com/content/docs/REV-21-1650-V1.1-DR.pdf[NEO drawing] to find the dimensions.  Use a close fit clearance hole size for the motor mount bolts (see <<fasteners>> and https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^]).
 
 image::1_MotorMount.png[Motor Mount, width=500, align="center"]
 
@@ -142,11 +145,11 @@ Online calculators are very helpful in determining the correct gear ratio for a 
 === Exercise {counter:tasknum}
 
 |===
-a| Determine the correct gear ratio to use for a Climber mechanism to lift a 155 pound robot with a single NEO Vortex motor.  Use the https://ambcalc.com/mechanism[AMB Robotics Mechanism Calculator^].  The motor should stay below 40 amps.
+a| Determine the correct gear ratio to use for a Climber mechanism to lift a 155 pound robot with a single {hw-vortex} motor.  Use the https://ambcalc.com/mechanism[AMB Robotics Mechanism Calculator^].  The motor should stay below 40 amps.
 
 Answer Questions 1, 2, and 3.
 
-Design a single stage two motor gearbox that uses two NEO Vortex motors that gives a gear ratio of 9:1.
+Design a single stage two motor gearbox that uses two {hw-vortex} motors that gives a gear ratio of 9:1.
 
 image::4_Climber_Sketch.png[Climber Sketch, width=500, align="center"]
 
@@ -172,7 +175,7 @@ image::FastenerCheatSheet.png[Fastener Cheat Sheet, align="center"]
 
 |===
 // a| `*Exercise {tasknum}*` 
-a| Design a 2-stage vertical oriented gearbox with a 16:1 ratio that uses a Falcon 500 motor and has a 1/2" Hex output shaft.  Have the gearbox bolt to a 1"x1" tube.  You will need to have the plate spacing at 1-1/8" in order for flange bearing to fit inside the plate.  This design is very similar to the https://wcproducts.com/collections/gearboxes/products/wcp-rotation-ss-gearbox[WCP Rotation SS Gearbox^] but in the vertical orientation.  Don't use the WCP 3D model, start from scratch.
+a| Design a 2-stage vertical oriented gearbox with a 16:1 ratio that uses a {hw-falcon500} motor and has a 1/2" Hex output shaft.  Have the gearbox bolt to a 1"x1" tube.  You will need to have the plate spacing at 1-1/8" in order for flange bearing to fit inside the plate.  This design is very similar to the https://wcproducts.com/collections/gearboxes/products/wcp-rotation-ss-gearbox[WCP Rotation SS Gearbox^] but in the vertical orientation.  Don't use the WCP 3D model, start from scratch.
 
 image::3_Gearbox_Hand_Sketch.jpg[Gearbox Sketch, width=500, align="center"]
 
