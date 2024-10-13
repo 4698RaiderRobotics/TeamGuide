@@ -173,6 +173,8 @@ image::FastenerCheatSheet.png[Fastener Cheat Sheet, align="center"]
 
 == Bearings
 
+Bearings come in inch and metric sizes with metric bearings having many more sizes available.  Bearings have a standardized numbering system to determine their size. For example, a 10mm ID x 22mm OD bearing has a number of 6900 which can be looked up in bearing tables (xref:docs/MiniBearingSizes.pdf[Miniature Bearings], xref:docs/BearingSizes.pdf[Standard Bearings]).
+
 .Metric Bearings Grouped by ID and OD.
 image::MetricBearingChart.png[Metric Bearing Chart, align="center"]
 
@@ -233,6 +235,7 @@ See also: xref:Manufacturing.adoc#HAAS-Mill[Manufacturing Sub-Team -- HAAS Mill]
 
 === Design
 * https://littlemachineshop.com/reference/tapdrill.php[Drill/Tap/Clearance Hole Chart^] (Metric in the https://littlemachineshop.com/images/Gallery/PDF/TapDrillSizes.pdf[Printable Version^])
+* Bearing Charts (xref:docs/MiniBearingSizes.pdf[Miniature Bearings], xref:docs/BearingSizes.pdf[Standard Bearings])
 * https://www.reca.lc/[ReCalc -- Chain & Belt Calcs, Motor Info^]
 * https://ambcalc.com[AMB Robotics Calculator^] Mechanism Ratio, Chain/Belt C-C
 * https://wcproducts.com/pages/calculator-gear[WCP Gear Calculator^]
