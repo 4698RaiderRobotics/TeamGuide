@@ -171,6 +171,15 @@ Details of fasteners are given in xref:Mechanical.adoc#fasteners[Mechanical Sub-
 .Dimensions used in design for commonly used fastener sizes.
 image::FastenerCheatSheet.png[Fastener Cheat Sheet, align="center"]
 
+== Bearings
+
+.Metric Bearings Grouped by ID and OD.
+image::MetricBearingChart.png[Metric Bearing Chart, align="center"]
+
+.Inch Bearings Grouped by ID and OD.
+image::InchBearingChart.png[Metric Bearing Chart, align="center"]
+
+
 === Exercise {counter:tasknum}
 
 |===

@@ -147,12 +147,12 @@ a| QUESTIONS: ::
 
 [cols="a"]
 |===
-a| Write a program to convert RPM to radians per second with a function declaration of `double RPMtoRadPerSec(double rpm)`. Use a `for` loop to give the following output: 
+a| Write a program to convert RPMs to radians per second with a function declaration of `double RPMtoRadPerSec(double rpm)`. Use a `for` loop to give the following output: 
 ....
-`500.0000 RPM is 52.3598 rad/s` 
-`1000.0000 RPM is 104.71976 rad/s` 
-`1500.0000 RPM is 157.07963 rad/s` 
-`2000.0000 RPM is 209.43951 rad/s` 
+500.0000 RPM is 52.3598 rad/s
+1000.0000 RPM is 104.71976 rad/s
+1500.0000 RPM is 157.07963 rad/s
+2000.0000 RPM is 209.43951 rad/s
 ....
 |===
 
