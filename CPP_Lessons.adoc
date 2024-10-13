@@ -4,17 +4,23 @@
 // :sectnums:
 :CPP: C++
 :imagesdir: img/software
+:learncpp: https://www.learncpp.com/[LearnCPP^]
+:onlinecpp: https://www.online-cpp.com/[Online CPP^]
 :toc:
 :toc-placement!:
 
 [discrete#top]
-=== *{CPP}* Quick Primer and Practice Lessons
+=== *{CPP}* Quick Primer and Practice Exercises
 
 toc::[]
 
 This document attempts to highlight the parts of the *{CPP}* language that are most helpful for FRC robotics.  Although some of the examples are oriented towards robotics, these lessons do not require any of the FRC software to be installed.
 
 Although there are simpler languages that could be used for robot programming, if you take the time to learn *{CPP}* it will be worth the effort.  https://www.evanmiller.org/you-cant-dig-upwards.html[See this blogpost^] for an excellent argument for learning a lower-level language.
+
+== Compiling {CPP}
+
+The {CPP} language is a compiled language which means that a program (a compiler) processes the source code and converts it into an executable file. This allows most errors to be found before the program is actually run.  It is possible to use either the Visual Studio IDE (next section) or an online compiler ({onlinecpp}) to work on the practice exercises.  Visual Studio allows you to work from your local harddisk which makes it easier to save you work and not lose anything and it works more similarly to the VSCode IDE we use for the robot code.  The online compiler ({onlinecpp}) lets you practice coding from any computer connected to the internet which is great if you use a family computer at home and you don't want to install a (very) large IDE.
 
 == Integrated Development Environment (IDE)
 
@@ -115,6 +121,7 @@ a| GOALS: ::
 
 a| QUESTIONS: ::
 . What happens if you change the `ratio()` function to take integer parameters and input integers from the user?
+. What happens if you enter zero for the denominator?
 |=== 
 
 * Read Chapter 4: https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/[Data Types^]
@@ -133,18 +140,20 @@ a| GOALS: ::
 . Use an `if` statement to execute code conditionally.
 
 a| QUESTIONS: ::
-. You should never check a floating point number for equality with another number.  To properly check if the denominator is zero you should check if the absolute value of the denominator is smaller than a very small number.  How would you use the `fabs()` function to do this?
+. You should never check a floating point number for equality with another number.  To properly check if the denominator is zero you should check if the absolute value of the denominator is smaller than a very small number.  How would you use the `fabs()` function to do this? Search for `std::fabs`.
 |=== 
 
 === Exercise {counter:tasknum}
 
 [cols="a"]
 |===
-a| Write a program to convert RPM to radians per second with a function `RPMtoRadPerSec()`. Printout the results something like: 
-
+a| Write a program to convert RPM to radians per second with a function declaration of `double RPMtoRadPerSec(double rpm)`. Use a `for` loop to give the following output: 
+....
+`500.0000 RPM is 52.3598 rad/s` 
+`1000.0000 RPM is 104.71976 rad/s` 
+`1500.0000 RPM is 157.07963 rad/s` 
 `2000.0000 RPM is 209.43951 rad/s` 
-
-for several different RPMs.
+....
 |===
 
 == Object Orientation
@@ -164,10 +173,10 @@ The following `main()` function should run and give the following output:
 ----
 int main()
 {
-    Point2d first{};
-    Point2d second{ 6.0, 5.0 };
+    Point2d first{};            // Contruct an 'empty' Point2d at the origin
+    Point2d second{ 6.0, 5.0 }; // Construct a Point2d with two doubles
 
-    // Point2d third{ 2.0 }; // error!  no constructor for (double)
+    // Point2d third{ 2.0 };    // error!  no constructor for (double)
 
     first.print();
     second.print();
@@ -193,3 +202,7 @@ Point2d(6.000, 5.000)
 
 * Read Chapter 10: https://www.learncpp.com/cpp-tutorial/implicit-type-conversion-coercion/[Types and Functions^]
 * Read Chapter 26: https://www.learncpp.com/cpp-tutorial/template-classes/[Template Classes^]
+
+== Resources
+* {learncpp}
+* 
