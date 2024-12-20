@@ -29,10 +29,10 @@ The Makerbot Method printers can now use the Ultimaker Cura software starting wi
 == ShopBot
 
 .Shopbot Checklist
-image::ShopbotChecklist.png[Shopbot Checklist, align="center"]
+image::ShopBotChecklist.png[Shopbot Checklist, align="center"]
 
 .Shopbot Feeds and Speeds
-image::ShopbotFeedsSpeeds.png[Shopbot Feeds and Speeds, align="center"]
+image::ShopBotFeedsSpeeds.png[Shopbot Feeds and Speeds, align="center"]
 
 == HAAS Mill
 === G-Code
