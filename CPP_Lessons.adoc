@@ -16,7 +16,7 @@ toc::[]
 
 This document attempts to highlight the parts of the *{CPP}* language that are most helpful for FRC robotics.  Although some of the examples are oriented towards robotics, these lessons do not require any of the FRC software to be installed.
 
-Although there are simpler languages that could be used for robot programming, if you take the time to learn *{CPP}* it will be worth the effort.  https://www.evanmiller.org/you-cant-dig-upwards.html[See this blogpost^] for an excellent argument for learning a lower-level language.
+Although there are simpler languages that could be used for robot programming, if you take the time to learn {CPP} it will be worth the effort.  https://www.evanmiller.org/you-cant-dig-upwards.html[See this blogpost^] for an excellent argument for learning a lower-level language.
 
 == Compiling {CPP}
 
@@ -166,7 +166,7 @@ The real power of *{CPP}* is that it is an object oriented language.  The techni
 
 [cols="a"]
 |===
-a| Write a `Point2d` class whose constructor takes two `doubles` as arguments (*x*, *y*).  Write a member function `print()` that displays the points coordinates. The class should have two `private` member variables `m_x` and `m_y` of type `double` that default to 0.0.
+a| Write a `Point2d` class that has two constructors.  One takes no arguments and defaults to the (0,0) point.  The second takes two `doubles` as arguments (*x*, *y*).  Write a member function `print()` that displays the points coordinates. The class should have two `private` member variables `m_x` and `m_y` of type `double`.
 
 The following `main()` function should run and give the following output:
 [source,CPP]
@@ -203,6 +203,16 @@ Point2d(6.000, 5.000)
 * Read Chapter 10: https://www.learncpp.com/cpp-tutorial/implicit-type-conversion-coercion/[Types and Functions^]
 * Read Chapter 26: https://www.learncpp.com/cpp-tutorial/template-classes/[Template Classes^]
 
+== Standard Library
+{CPP} comes with many built-in classes that implement commonly needed components.  For example, it contains several container classes like `std::vector` that allow for dynamically sized collections of objects (see https://en.cppreference.com/w/cpp/container[Containers Library]). 
+
+The most commonly used components in robot code are:
+
+* https://en.cppreference.com/w/cpp/string[`std::string`] -- Very useful for containing strings.  Strings can be added together etc.
+* https://en.cppreference.com/w/cpp/container/vector[`std::vector`] -- Used to store an unknown number of items (e.g. doubles) in an ordered way.
+* https://en.cppreference.com/w/cpp/utility/optional[`std::optional`] -- Used to provide a way to signal that a variable doesn't contain a valid value.  Used extensively in the Phoenix 6 library and some in WPILib.
+
 == Resources
 * {learncpp}
-* 
+* {onlinecpp}
+* https://en.cppreference.com/[{CPP} Language Reference^]

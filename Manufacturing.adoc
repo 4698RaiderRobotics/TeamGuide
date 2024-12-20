@@ -24,7 +24,15 @@ The Manufacturing Sub-Team is responsible for making the custom parts that are n
 
 == 3D Printer
 
+The Makerbot Method printers can now use the Ultimaker Cura software starting with version 5.7 (https://ultimaker.com/software/ultimaker-cura/[Download Here^]).  This is significantly better way to slice models for printing on the Method and Method X printers.  It is also possible to integrate the launching of Cura from within Fusion 360 when you want to 3D print a model.
+
 == ShopBot
+
+.Shopbot Checklist
+image::ShopbotChecklist.png[Shopbot Checklist, align="center"]
+
+.Shopbot Feeds and Speeds
+image::ShopbotFeedsSpeeds.png[Shopbot Feeds and Speeds, align="center"]
 
 == HAAS Mill
 === G-Code
