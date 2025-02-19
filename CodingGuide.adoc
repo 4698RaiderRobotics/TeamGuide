@@ -137,9 +137,18 @@ There are three modes that the robot can be in: "TeleOperated", "Autonomous", an
 
 When you write a program to control the robot you are actually just writing some subset of the program that is actually running on the RoboRIO. You may have noticed that your robot program doesn't have a `main()` function. The WPILib is actually controlling the control flow of the program and calls your code at certain times during its execution. It basically gives you control every so often and you must do something while you have control and return control back without taking too much time.
 
-WPILib provides two main ways to structure a robot program. One is called "TimedRobot" based and the other is "Command" based.  Both program structures have methods that are called by the WPILib scheduler but when and how those methods are called differ between the two program structures.  A TimedRobot program is given control at a fixed interval of time (20 milliseconds).  A Command based program is only given control when some kind of condition is met (like a button was pressed on an Xbox controller).  Command based programs are structured such that they force the programmer to segment their code into classes that represent they types of Actions that the robot does.
+WPILib provides two main ways to structure a robot program. One is called "TimedRobot" based and the other is "Command" based.  Both program structures have methods that are called by the WPILib scheduler but when and how those methods are called differ between the two program structures.  A TimedRobot program is given control at a fixed interval of time (20 milliseconds).  In a Command based program commands are created that are run when a condition it met (like a button was pressed on an Xbox controller).  Command based programs are structured such that they force the programmer to segment their code into classes that represent they types of Actions that the robot does.
 
 TIP: * See {url-wpilibdocs}docs/software/vscode-overview/creating-robot-program.html[Creating a Robot Program^]
+
+=== Command Based Programming
+
+In the Command Based design pattern, controller buttons and axes are "bound" to commands.  When the button (or axis) is pressed the bound command is executed.  The underlying command scheduler takes care of determining if the button is being pressed and calling your command if it is.  One of the more difficult to understand aspects of Command Based programming is the use of Lambda Expressions and the idea of treating "functions as data" (i.e. passing functions as paramters to other functions).  In Command Based programming lambda expressions occur frequently for simple commands that are bound to a controller button.
+
+The other important difference with Command Based programs are the use of subsystems.  A subsystem is a part of the robot hardware that operates together to perform a task, like an intake, climber, or drivetrain. Each subsystem has a `Periodic()` function that is called every 20ms where any processing for the subsystem is done.  This is analogous to the `RobotPeriodic()` function in a Timed Robot program.
+
+TIP: See https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html[Command-Based Programming^] and https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html[Functions as Data^] particularly https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html#lambda-expressions-in-c[Lambda Expressions in *{CPP}*^]
+
 
 == Units Library
 
@@ -165,80 +174,6 @@ One of the more useful aspects of using the Units Library is being able to defin
 ----
 
 Note that the units library uses "turns" for rotations with the suffix "tr".  Also notice that on the last line the wheel diameter is specified in inches but the units library automatically converts inches to meters.
-
-WARNING: The new Phoenix 6 library no longer uses "tics_per_100ms" units so the info below is not as relevant.
-
-Another example is using the *TalonFX* smart motor controller library's `Set()` function. It requires the position or velocity inputs in very awkward units (See <<talon_pid_table>>). The position should be in "encoder tics" and the velocity should be in "encoder tics" per 100 milliseconds. There are 2048 encoder tics per rotation for the *TalonFX* built-in encoder. Custom units can help with converting from these strange units to more physically meaningful units. You could define a custom angular position unit that is ("tics") and a custom angular velocity unit that is ("tics" / 100_ms).
-
-.Custom Unit for Encoder Tics 
-[source,CPP]
-----
-        // Create a unit called "tics" that represents 1/2048th of a revolution
-        // and make a type qualifier called "tics_t"
-    using tics = units::unit<std::ratio<1,2048>, units::turns>;
-    using tics_t = units::unit_t<tics>;
-
-        // Create a unit called "tics_per_100ms" that represents (tics / 0.1 seconds)
-        // and make a type qualifier called "tics_per_100ms_t"
-    using tics_per_100ms = units::compound_unit<tics, units::inverse<units::deciseconds>>;
-    using tics_per_100ms_t = units::unit_t<tics_per_100ms>;
-
-        // Alternatively "tics_per_100ms" could be defined as:
-        // using tics_per_100ms = units::compound_unit<tics, units::inverse<
-        //           units::unit<std::ratio<1,10>, units::seconds>>>;
-----
-
-Once these types are defined then the programmer doesn't need to worry about converting from `tics` to degrees or from RPM to `tics_per_100ms`. The units types will do all the conversions automatically.  The code below shows how to use these types.
-
-.Automatic Units Conversion
-[source,CPP]
-----
-tics_t talon_position;
-tics_per_100ms_t talon_velocity;
-ctre::phoenix::motorcontrol::can::TalonFX talon{2};
-
-    // This automatically converts from degrees to tics
-talon_position = 45_deg;
-
-    // value() returns the position in tics as a double
-    // which is 256 tics ( 45 * 2048 / 360 )
-talon.Set( ctre::phoenix::motorcontrol::ControlMode::Position,
-            talon_position.value() );
-
-    // This automatically converts from RPM to tics_per_100ms.
-talon_velocity = 2400_rpm;
-
-    // value() returns the velocity in tics_per_100ms as a double
-    // which is 8192 tics_per_100ms ( 2400 * 2048 / 600 )
-talon.Set( ctre::phoenix::motorcontrol::ControlMode::Velocity,
-            talon_velocity.value() );
-
-    // If you need to convert a variable in one unit to another
-    // without creating a variable you can use:
-printf( "Talon Velocity = %7.2f rpm\n", 
-        units::revolutions_per_minute_t(talon_velocity).value() );
-    // This will print "Talon Velocity = 2400.00 rpm"
-----
-
-This choice could be a bit inconvienent as well since in order to print out the value of the `talon_velocity` or to send it to the Network Tables (See <<networktables>>) in RPM you must use the syntax `units::revolutions_per_minute_t(talon_velocity).value()`.  A better approach might be to create a `class` that encapsulates the mechanism that the motor is used in (like a shooter). Then create a member function in that class that sets the velocity of the motor and does the necessary conversion from RPM to `tics_per_100ms`.  So for example if the TalonFX motor was connected to a flywheel that is used to shoot a ball then you might want to create a `Shooter` class that looks like:
-
-.Encapsulating Unit Conversion
-[source,CPP]
-----
-class Shooter {
-public:
-    Shooter( const int canId ) : m_talon{canId} {}
-    void SetVelocity( units::revolutions_per_minute_t rpm ) {
-        m_talon.Set( ctre::phoenix::motorcontrol::ControlMode::Velocity,
-                     rpm.value() * 2048.0 / 600.0 );
-    }
-    void Stop( void ) { m_talon.Set( ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput, 0.0); }
-private:
-    ctre::phoenix::motorcontrol::can::TalonFX m_talon;
-};
-----
-
-The `Shooter` class is then used in the main robot program and can be called with whatever angular velocity units you want (RPM, radians per second, etc) and it will convert them to the correct units for the `Set()` command inside `Shooter::SetVelocity()`.
 
 == Motion Control
 
@@ -379,7 +314,7 @@ LINKS:
 
 * {url-wpilibdocs}[WPILib Documentation^] (https://github.wpilib.org/allwpilib/docs/release/cpp/index.html[*{CPP}* API^]) (https://github.com/wpilibsuite/allwpilib/tree/main/wpilibcExamples/src/main/cpp/examples[Example Code^])
 
-* https://docs.revrobotics.com/sparkmax/software-resources/spark-max-api-information[Rev Robotics REVLib Docs^] 
+* https://docs.revrobotics.com/revlib[Rev Robotics REVLib Docs^] 
 (https://codedocs.revrobotics.com/cpp/namespacerev.html[*{CPP}* API^]) (https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/C%2B%2B[Example Code^])
 
 * https://docs.ctre-phoenix.com/en/stable/[CTRE Phoenix V5 Framework Docs^] 
@@ -394,6 +329,8 @@ LINKS:
 * https://github.com/Mechanical-Advantage/AdvantageScope[AdvantageScope^]
 
 * https://pathplanner.dev/home.html[PathPlanner^]
+
+* https://choreo.autos/[Choreo^]
 
 * https://git-scm.com/[Git Home Page^] (https://git-scm.com/book[Pro Git Book^]) (https://ndpsoftware.com/git-cheatsheet.html[Cheat Sheet^])
 

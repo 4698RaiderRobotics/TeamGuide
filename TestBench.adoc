@@ -16,7 +16,8 @@
 :hw-sparkmax: https://www.revrobotics.com/rev-11-2158/[SparkMAX^]
 :hw-srxmag: https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder^]
 :frc-spark: https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`^]
-:rev-CANSparkMax: https://codedocs.revrobotics.com/cpp/classrev_1_1_c_a_n_spark_max.html[rev::CANSparkMax^]
+:rev-SparkMax: https://codedocs.revrobotics.com/cpp/classrev_1_1spark_1_1_spark_max.html[rev::spark::SparkMax^]
+
 :pos-motor-pwm: 0
 :pos-motor-quadA: 1
 :pos-motor-quadB: 2
@@ -207,7 +208,7 @@ Modify `Robot.cpp` to the following:
 #include <frc/smartdashboard/SmartDashboard.h>
 
 void Robot::RobotInit() {
-  frc::SmartDashboard::PutData( "Velocity Motor", &m_motor );
+  frc::SmartDashboard::PutData( "Motor", &m_motor );
   frc::SmartDashboard::PutNumber( "Encoder Distance", 0.0 );
   frc::SmartDashboard::PutNumber( "Joystick X-axis", 0.0 );
 }
@@ -292,13 +293,13 @@ Add code to hold the position 0 while the *A* Button is held down and then move 
 ----
     If *Button A* is held::
       error = 0 - {encoder position}
-      set motor output to (K~p~ * error)
     Else If *Button B* is held::
       error = 500 - {encoder position}
-      set motor output to (K~p~ * error)
     Else
-      set motor output to zero
+      error = 0
     End If
+
+    set motor output to (K~p~ * error)
 ----
 
 This logic will go in the `TeleopPeriodic()` method. A good starting value for *K~p~* is to take the total distance that the motor has to move from one setpoint to the other (500 in this case) and take the inverse of that number ( 1.0 / 500 ).  So as a first guess, the value of *K~p~* should be 0.002, it will give a motor percent output of 1.0 (500 * 0.002) when the mechanism first starts to move from one setpoint to the other.  This motor output will decrease linearly as the target setpoint gets nearer.
@@ -321,7 +322,7 @@ a| `*TASK {counter:tasknum}*`
 | Change the code so that the value of the *K~p~* constant is read from Shuffleboard and therefore can be set while the robot code is running.
 a| QUESTIONS: ::
 . When we find a good value for K~p~ what should we do to remember it?
-. It is dangerous to allow critical constants to be changed while in `TeleOperated` mode during a competition.  `Test` mode is used to change parameters like this.  How would `Test` mode be used so the K~p~ parameter cannot be changed during `TeleOperated` mode?
+. It is dangerous to allow critical constants to be changed while in `TeleOperated` mode during a competition.  Competition robot code does not allow the user to change the gain constants.
 |===
 
 === Shuffleboard Graphs
@@ -413,13 +414,13 @@ TIP: https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduct
 
 We will use the velocity motor ({hw-neo550}) that is connected to the {hw-sparkmax} motor controller for this exercise.  The {hw-sparkmax} uses the CAN bus of the {hw-roboRIO} and requires an external (vendor) library to function. https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html#vs-code[Vendor libraries can be added to a project following these instructions^].  You need to add the "REV Robotics REVLib" library to this project in order to use the {hw-sparkmax} controller.
 
-The {rev-CANSparkMax} class is used to communicate with the {hw-sparkmax} controller.  The {rev-CANSparkMax} is not part of the WPILib library and was added when the REVLib vendor library was added to the project in the steps above.  Therefore the documention for the {rev-CANSparkMax} class and other classes that are provided by the REVLib library are located on the RevRobotics website.  The xref:CodingGuide.adoc#resources[Resources] section of the Coding Guide gives links to the RevLib documentation, RevLib {CPP} API, and RevLib Examples. The xref:CodingGuide.adoc#resources[Resources] section also has several other useful links.
+The {rev-SparkMax} class is used to communicate with the {hw-sparkmax} controller.  The {rev-SparkMax} is not part of the WPILib library and was added when the REVLib vendor library was added to the project in the steps above.  Therefore the documention for the {rev-SparkMax} class and other classes that are provided by the REVLib library are located on the RevRobotics website.  The xref:CodingGuide.adoc#resources[Resources] section of the Coding Guide gives links to the RevLib documentation, RevLib {CPP} API, and RevLib Examples. The xref:CodingGuide.adoc#resources[Resources] section also has several other useful links.
 
 === Velocity P-Control
 
 NOTE: Read the xref:CodingGuide.adoc#motion-control[Motion Control] section (again).  
 
-The {hw-sparkmax} is assigned CAN id #{spark-max-CANid} on the CAN bus. In `Robot.h`, create a variable for the motor using the {rev-CANSparkMax} class.  You will need to determine what header file is needed to use the class.  The {rev-CANSparkMax} `Set()` method will be used to control the motor percent output.  Use the {rev-CANSparkMax} `GetEncoder()` method to access the built-in encoder on the {hw-neo550}. The `GetEncoder()` method returns a https://codedocs.revrobotics.com/cpp/classrev_1_1_spark_max_relative_encoder.html[rev::SparkMaxRelativeEncoder^] class object that can be used to retrieve the motor velocity (what method?).  Some conversion may be necessary if a gearbox is attached to the {hw-neo550}.
+The {hw-sparkmax} is assigned CAN id #{spark-max-CANid} on the CAN bus. In `Robot.h`, create a variable for the motor using the {rev-SparkMax} class.  You will need to determine what header file is needed to use the class.  The {rev-SparkMax} `Set()` method will be used to control the motor percent output.  Use the {rev-SparkMax} `GetEncoder()` method to access the built-in encoder on the {hw-neo550}. The `GetEncoder()` method returns a https://codedocs.revrobotics.com/cpp/classrev_1_1spark_1_1_spark_relative_encoder[rev::SparkRelativeEncoder^] class object that can be used to retrieve the motor velocity (what method?).  Some conversion may be necessary if a gearbox is attached to the {hw-neo550}.
 
 The equation for P-control will be the same as used in the position control exercise <<p-controller>> except velocities will be used.  The error *e* will be calculated as the difference between the setpoint velocity and the current velocity.
 
@@ -537,7 +538,7 @@ Commands are started when an `frc::Trigger` object's conditions are true.  Trigg
 
 |===
 a| `*TASK {counter:tasknum}*`
-| Write a command based program to control the velocity motor. When the `A` button is pressed, stop the motor.  When the `B` button is pressed, set the motor speed to 1000 rpm.  When the `Y` button is pressed, set the motor speed to 2000 rpm.  Use `frc2::InstantCommand` with lambda expressions.  You will need to create a subsystem for the velocity motor and provide some methods to set the speed of the motor.  Use the feedforeward and feedback (PID) code from the <<velocity-control-exercise>> in the `Periodic()` function of the subsystem.
+| Write a command based program to control the velocity motor. When the `A` button is pressed, stop the motor.  When the `B` button is pressed, set the motor speed to 1000 rpm.  When the `Y` button is pressed, set the motor speed to 2000 rpm.  Use `frc2::cmd::Run` with lambda expressions.  You will need to create a subsystem for the velocity motor and provide some methods to set the speed of the motor.  Use the feedforward and feedback (PID) code from the <<velocity-control-exercise>> in the `Periodic()` function of the subsystem.
 a| QUESTIONS: ::
 . How many subsystems do you need?
 . What files in the project are not needed? 
