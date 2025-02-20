@@ -315,7 +315,7 @@ LINKS:
 * {url-wpilibdocs}[WPILib Documentation^] (https://github.wpilib.org/allwpilib/docs/release/cpp/index.html[*{CPP}* API^]) (https://github.com/wpilibsuite/allwpilib/tree/main/wpilibcExamples/src/main/cpp/examples[Example Code^])
 
 * https://docs.revrobotics.com/revlib[Rev Robotics REVLib Docs^] 
-(https://codedocs.revrobotics.com/cpp/namespacerev.html[*{CPP}* API^]) (https://github.com/REVrobotics/SPARK-MAX-Examples/tree/master/C%2B%2B[Example Code^])
+(https://codedocs.revrobotics.com/cpp/namespacerev.html[*{CPP}* API^]) (https://github.com/REVrobotics/REVLib-Examples/tree/main/C%2B%2B/SPARK[Example Code^])
 
 * https://docs.ctre-phoenix.com/en/stable/[CTRE Phoenix V5 Framework Docs^] 
 (https://api.ctr-electronics.com/phoenix/release/cpp/namespaces.html[V5 *{CPP}* API^]) (https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages[V5 Example Code^])
