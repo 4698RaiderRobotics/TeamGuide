@@ -76,7 +76,7 @@ Most of the FRC parts the are used on the robot have 3D model files of the item 
 
 Fasteners can also be inserted directly into a design using the `Insert -> Insert McMaster-Carr Component` command.  Search for the item you need on the McMaster-Carr website that pops up and then select "*3D STEP*" as the file type and click *Download*.  McMaster-Carr has many types of fasteners including nuts, bolts, washers, e-clips, hex keys, etc.
 
-Moving and aligning imported components is done by rotating the component to the proper orientation then using a Point-To-Point move to get the component to the correct X,Y,Z location.  It is usually easiest to select circles (or arc centers) as the source and target "points".
+Moving and aligning imported components is done by using joints between components.
 
 === Exercise {counter:tasknum}
 
@@ -90,7 +90,7 @@ image::2_HexRodAssembly.png[Hex Rod Asmb, width=500, align="center"]
 
 a| GOALS: ::
 . Learn how to break the link to a Vendor part for modification.
-. Learn how to position inserted designs into the correct location.
+. Learn how to position inserted designs into the correct location using joints.
 . Learn how to insert McMaster-Carr parts into a design.
 
 a| QUESTIONS: ::
@@ -242,6 +242,7 @@ See also: xref:Manufacturing.adoc#HAAS-Mill[Manufacturing Sub-Team -- HAAS Mill]
 * https://wcproducts.com/pages/calculator-belt[WCP Belt Calculator^]
 * https://www.projectb.net.au/resources/robot-mechanisms/[The Unofficial FRC Mechanism Encyclopedia^]
 * https://team2471.files.wordpress.com/2017/10/manipulators-firstfare-2017.pdf[Manipulators by Team 2471^]
+* https://robotics.nasa.gov/nasa-rap-robotics-design-guide/[NASA RAP Robotics Design Guide^]
 
 === CAM
 * https://academy.titansofcnc.com/category/mill-building-blocks[Titans of CNC Building Blocks Series^]

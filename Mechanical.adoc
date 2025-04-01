@@ -34,6 +34,9 @@ image::Screw_Threads.png[Screw Threads, align="center"]
 
 If you are working with a #10-32 bolt then <<drill_and_tap>> will tell you that the major diameter of the bolt will be 0.1900", the minor diameter is 0.1517" (not really used much), the drill size needed to tap threads is a #21 drill bit (0.1590"), and a close fit hole would be drilled with a #9 drill bit (0.1960").  The chart also shows both the coarse and fine thread sizes for each screw size and the maximum torque for both socket head screws and button head screws.  For example, a 1/4" screw comes in either a 1/4-20 UNC thread (coarse thread) or a 1/4-28 UNF thread (fine thread).  You would drill a #7 hole for a 1/4-20 bolt and a #3 drill for a 1/4-28 bolt.  You would also drill a #F drill size for a close fit and you can torque a 1/4" socket head screw to 16.7 ft-lbs and a 1/4" button head screw to 10.4 ft-lbs.
 
+== Bolt/Wrench Color Codes
+image::Bolt-WrenchColorCodes.png[Color Codes, align="center"]
+
 
 == Thread Locker (LOC__**TITE**__)
 Thread locker is basically modified super glue that is applied to the threads of a fastener before it is assembled and then hardens to prevent the fastener from coming loose due to vibration.  Thread locker comes in three main colors that indicate how strong it is.  
