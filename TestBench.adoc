@@ -17,7 +17,6 @@
 :hw-srxmag: https://store.ctr-electronics.com/srx-mag-encoder/[SRX Mag Encoder^]
 :frc-spark: https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_spark.html[`frc::Spark`^]
 :rev-SparkMax: https://codedocs.revrobotics.com/cpp/classrev_1_1spark_1_1_spark_max.html[rev::spark::SparkMax^]
-
 :pos-motor-pwm: 0
 :pos-motor-quadA: 1
 :pos-motor-quadB: 2
